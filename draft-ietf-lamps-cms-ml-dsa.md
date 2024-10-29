@@ -58,7 +58,7 @@ normative:
 informative:
   FIPS202: DOI.10.6028/NIST.FIPS.202
   FIPS203: DOI.10.6028/NIST.FIPS.203
-  RFC5911:
+  RFC5912:
   X680:
     target: https://www.itu.int/rec/T-REC-X.680
     title: "Information Technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation. ITU-T Recommendation X.680 (2021) | ISO/IEC 8824-1:2021."
@@ -69,7 +69,7 @@ informative:
 
 --- abstract
 
-The Module-Lattice-Based Digital Signature Algorithm (ML-DSA), as defined in FIPS 204, is a post-quantum digital signature scheme that aims to be secure against an adversary in posession of a Cryptographically Relevant Quantum Computer (CRQC).
+The Module-Lattice-Based Digital Signature Algorithm (ML-DSA), as defined in FIPS 204 {{FIPS204}}, is a post-quantum digital signature scheme that aims to be secure against an adversary in possession of a Cryptographically Relevant Quantum Computer (CRQC).
 This document specifies the conventions for using the ML-DSA signature algorithm with the Cryptographic Message Syntax (CMS).
 In addition, the algorithm identifier and public key syntax are provided.
 
@@ -79,6 +79,7 @@ In addition, the algorithm identifier and public key syntax are provided.
 # Introduction
 
 The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a digital signature algorithm standardised by NIST as part of their post-quantum cryptography standardization process.
+Prior to standardization, the algorithm was known as Dilithium.  ML-DSA and Dilithium are not compatible.
 It is intended to be secure against both "traditional" cryptographic attacks, as well as attacks utilising a quantum computer.
 It offers smaller signatures and significantly faster runtimes than SLH-DSA {{FIPS203}}, an alternative post-quantum signature algorithm also standardised by NIST.
 
@@ -121,7 +122,7 @@ AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
         }
 ~~~
 
-The above syntax is from {{?RFC5911}} and is compatible with the 2021 ASN.1 syntax {{X680}}.
+The above syntax is from {{?RFC5912}} and is compatible with the 2021 ASN.1 syntax {{X680}}.
 See {{?RFC5280}} for the 1988 ASN.1 syntax.
 
 The fields in the AlgorithmIdentifier type have the following meanings:
@@ -249,10 +250,10 @@ To ensure collision resistance, the identified message digest algorithm SHOULD p
 The SHAKE hash functions defined in {{FIPS202}} are used internally by ML-DSA, and hence the combinations in {{tab-digests}} are RECOMMENDED for use with ML-DSA.
 {{?RFC8702}} describes how SHAKE128 and SHAKE256 are used in CMS. The id-shake128 and id-shake256 digest algorithm identifiers are used and the parameters field MUST be omitted.
 
-| Signature algorithm | Message digest algorithm |
-| ML-DSA-44           | SHAKE128                 |
-| ML-DSA-65           | SHAKE256                 |
-| ML-DSA-87           | SHAKE256                 |
+| Signature algorithm | Message digest algorithm     |
+| ML-DSA-44           | SHAKE128 with 256 bit output |
+| ML-DSA-65           | SHAKE256 with 512 bit output |
+| ML-DSA-87           | SHAKE256 with 512 bit output |
 {: #tab-digests title="Recommended message digest algorithms for ML-DSA signature algorithms"}
 
 signatureAlgorithm:
