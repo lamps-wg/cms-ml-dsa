@@ -10,18 +10,18 @@ date:
 consensus: true
 v: 3
 area: "Security"
-workgroup: "LAMPS"
+workgroup: "Limited Additional Mechanisms for PKIX and SMIME"
 keyword:
   - cms
   - ml-dsa
   - dilithium
 venue:
-  # group: "Limited Additional Mechanisms for PKIX and SMIME"
-  # type: "Working Group"
-  # mail: "spasm@ietf.org"
-  # arch: "https://mailarchive.ietf.org/arch/browse/spasm/"
-  # github: "lamps-wg/cms-ml-dsa"
-  # latest: "https://lamps-wg.github.io/cms-ml-dsa/draft-ietf-lamps-cms-ml-dsa.html"
+  group: "Limited Additional Mechanisms for PKIX and SMIME"
+  type: "Working Group"
+  mail: "spasm@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/spasm/"
+  github: "lamps-wg/cms-ml-dsa"
+  latest: "https://lamps-wg.github.io/cms-ml-dsa/draft-ietf-lamps-cms-ml-dsa.html"
 
 author:
   -
