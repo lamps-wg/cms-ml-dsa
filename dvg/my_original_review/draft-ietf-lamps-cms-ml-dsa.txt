@@ -17,8 +17,8 @@ Expires: 2 May 2025                                         D. Van Geest
 Abstract
 
    The Module-Lattice-Based Digital Signature Algorithm (ML-DSA), as
-   defined in FIPS 204, is a post-quantum digital signature scheme that
-   aims to be secure against an adversary in posession of a
+   defined in FIPS 204 [FIPS204], is a post-quantum digital signature
+   scheme that aims to be secure against an adversary in possession of a
    Cryptographically Relevant Quantum Computer (CRQC).  This document
    specifies the conventions for using the ML-DSA signature algorithm
    with the Cryptographic Message Syntax (CMS).  In addition, the
@@ -96,12 +96,13 @@ Table of Contents
 
    The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a
    digital signature algorithm standardised by NIST as part of their
-   post-quantum cryptography standardization process.  It is intended to
-   be secure against both "traditional" cryptographic attacks, as well
-   as attacks utilising a quantum computer.  It offers smaller
-   signatures and significantly faster runtimes than SLH-DSA [FIPS203],
-   an alternative post-quantum signature algorithm also standardised by
-   NIST.
+   post-quantum cryptography standardization process.  Prior to
+   standardization, the algorithm was known as Dilithium.  ML-DSA and
+   Dilithium are not compatible.  It is intended to be secure against
+   both "traditional" cryptographic attacks, as well as attacks
+   utilising a quantum computer.  It offers smaller signatures and
+   significantly faster runtimes than SLH-DSA [FIPS203], an alternative
+   post-quantum signature algorithm also standardised by NIST.
 
    Prior to standardisation, the algorithm was known as Dilithium.  ML-
    DSA and Dilithium are not compatible.
@@ -153,7 +154,7 @@ Table of Contents
                       &Params({AlgorithmSet}{@algorithm}) OPTIONAL
            }
 
-   The above syntax is from [RFC5911] and is compatible with the 2021
+   The above syntax is from [RFC5912] and is compatible with the 2021
    ASN.1 syntax [X680].  See [RFC5280] for the 1988 ASN.1 syntax.
 
    The fields in the AlgorithmIdentifier type have the following
@@ -333,18 +334,18 @@ Table of Contents
       algorithm identifiers are used and the parameters field MUST be
       omitted.
 
-            +=====================+==========================+
-            | Signature algorithm | Message digest algorithm |
-            +=====================+==========================+
-            | ML-DSA-44           | SHAKE128                 |
-            +---------------------+--------------------------+
-            | ML-DSA-65           | SHAKE256                 |
-            +---------------------+--------------------------+
-            | ML-DSA-87           | SHAKE256                 |
-            +---------------------+--------------------------+
+          +=====================+==============================+
+          | Signature algorithm | Message digest algorithm     |
+          +=====================+==============================+
+          | ML-DSA-44           | SHAKE128 with 256 bit output |
+          +---------------------+------------------------------+
+          | ML-DSA-65           | SHAKE256 with 512 bit output |
+          +---------------------+------------------------------+
+          | ML-DSA-87           | SHAKE256 with 512 bit output |
+          +---------------------+------------------------------+
 
-              Table 1: Recommended message digest algorithms
-                     for ML-DSA signature algorithms
+            Table 1: Recommended message digest algorithms for
+                       ML-DSA signature algorithms
 
    signatureAlgorithm:  When signing a signed-data using ML-DSA, the
       signatureAlgorithm field MUST contain one of the ML-DSA signature
@@ -471,10 +472,10 @@ Table of Contents
               (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
               <https://www.rfc-editor.org/rfc/rfc5280>.
 
-   [RFC5911]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for
-              Cryptographic Message Syntax (CMS) and S/MIME", RFC 5911,
-              DOI 10.17487/RFC5911, June 2010,
-              <https://www.rfc-editor.org/rfc/rfc5911>.
+   [RFC5912]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for the
+              Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
+              DOI 10.17487/RFC5912, June 2010,
+              <https://www.rfc-editor.org/rfc/rfc5912>.
 
    [RFC5958]  Turner, S., "Asymmetric Key Packages", RFC 5958,
               DOI 10.17487/RFC5958, August 2010,
@@ -512,7 +513,7 @@ Appendix A.  ASN.1 Module
    EXPORTS ALL;
 
    IMPORTS PUBLIC-KEY, SIGNATURE-ALGORITHM, SMIME-CAPS
-     FROM AlgorithmInformation-2009 -- in [RFC5911]
+     FROM AlgorithmInformation-2009 -- in [RFC5912]
      { iso(1) identified-organization(3) dod(6) internet(1)
        security(5) mechanisms(5) pkix(7) id-mod(0)
        id-mod-algorithmInformation-02(58) } ;
@@ -583,7 +584,7 @@ Appendix A.  ASN.1 Module
 
 
    --
-   -- Expand the signature algorithm set used by CMS [RFC5911]
+   -- Expand the signature algorithm set used by CMS [RFC5912]
    --
 
    SignatureAlgorithmSet SIGNATURE-ALGORITHM ::= {
