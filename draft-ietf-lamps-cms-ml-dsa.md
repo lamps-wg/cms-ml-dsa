@@ -6,8 +6,7 @@ category: std
 docname: draft-ietf-lamps-cms-ml-dsa-latest
 submissiontype: IETF
 number:
-# date: 
-date: 2024-10-14
+date:
 consensus: true
 v: 3
 area: "Security"
