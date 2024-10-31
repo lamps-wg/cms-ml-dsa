@@ -1,0 +1,170 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2024-10-31T00:56:45.560255+00:00",
+  "repo": "lamps-wg/cms-ml-dsa",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDONFRYgM6brDDb",
+      "title": "Specify SHA2 as the hash function rather than SHAKE",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/1",
+      "state": "OPEN",
+      "author": "danvangeest",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/spasm/aWaBnRcrYGlDHTxqj9u72QEPm-E/\r\n\r\nIf we keep actual digestAlgorithms (not id-digest-none) for non-SignedAttributes, add similar text as RFC 8419 to make it explicit that a prehash isn't generated. And in this case we set the digestAlgorithm as whatever digest is used internally to ML-DSA.\r\n\r\n```\r\nWhen signing with Ed448, the\r\ndigestAlgorithm MUST be id-shake256, and the algorithm parameters\r\nfield MUST be absent.\r\n\r\n  NOTE: Either id-sha512 or id-shake256 is used as part to the\r\n  private key signing operation.  However, the private key signing\r\n  operation does not take a message digest computed with one of\r\n  these algorithms as an input.\r\n```",
+      "createdAt": "2024-10-24T14:18:49Z",
+      "updatedAt": "2024-10-28T15:03:55Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Something like id-digest-none (id-hashIdentity) was proposed for draft-ietf-curdle-cms-eddsa-signatures (RFC 8419).  There wasn't much discussion, the decision was to avoid the extra identifier: https://mailarchive.ietf.org/arch/msg/curdle/HG4ED83kc2mf9n4j-O_zL3PGGKg/\r\n\r\n",
+          "createdAt": "2024-10-28T15:03:54Z",
+          "updatedAt": "2024-10-28T15:03:54Z"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "I_kwDONFRYgM6brDY_",
+      "title": "To use context string or not to use context string?",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/2",
+      "state": "OPEN",
+      "author": "danvangeest",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/spasm/aWaBnRcrYGlDHTxqj9u72QEPm-E/",
+      "createdAt": "2024-10-24T14:19:24Z",
+      "updatedAt": "2024-10-24T14:19:24Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 3,
+      "id": "I_kwDONFRYgM6brDqu",
+      "title": "Update FIPS 204 reference to DOI.10.6028/NIST.FIPS.204",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/3",
+      "state": "OPEN",
+      "author": "danvangeest",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Update FIPS 204 reference to DOI.10.6028/NIST.FIPS.204",
+      "createdAt": "2024-10-24T14:19:51Z",
+      "updatedAt": "2024-10-24T14:19:51Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDONFRYgM6brD7N",
+      "title": "Should the digest algorithms be bumped from RECOMMENDED to REQUIRED?",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/4",
+      "state": "OPEN",
+      "author": "danvangeest",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Should the digest algorithms be bumped from RECOMMENDED to REQUIRED? This guarantees a minimum level of interoperability.\r\n\r\nhttps://mailarchive.ietf.org/arch/msg/spasm/yM8kS1kCoizWCMjS8pdcV3IFaDg/",
+      "createdAt": "2024-10-24T14:20:17Z",
+      "updatedAt": "2024-10-24T14:20:17Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 5,
+      "id": "I_kwDONFRYgM6brFUq",
+      "title": "Can we address UEF-CMA issues?",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/5",
+      "state": "OPEN",
+      "author": "danvangeest",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See whole thread: https://mailarchive.ietf.org/arch/msg/spasm/yM8kS1kCoizWCMjS8pdcV3IFaDg/ and https://mailarchive.ietf.org/arch/msg/spasm/uAwmfFDCP2gAggqYSu4ykRCk4mU/\r\n\r\nPossible solutions:\r\n\r\n- (pure) ML-DSA for SignedArtifacts, HashML-DSA for non-signed artifacts.\r\n- Use context string, \"CMW-with-SignedAttributes\" and \"CMS-without-SignedAttributes\" (see also #2 ).\r\n- ML-DSA MUST be used with SignedAttributes.",
+      "createdAt": "2024-10-24T14:22:36Z",
+      "updatedAt": "2024-10-24T14:22:36Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 6,
+      "id": "PR_kwDONFRYgM6AP3KA",
+      "title": "Comments from my initial review",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/6",
+      "state": "OPEN",
+      "author": "danvangeest",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-29T13:53:18Z",
+      "updatedAt": "2024-10-29T13:53:18Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "a4d5d77f754b7d2ada8d517967268ad5694f90fa",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "dvg/my_original_review",
+      "headRefOid": "354b2be0a99915a9000f52ee543404224885fe2c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
