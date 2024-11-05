@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-03T00:59:53.026234+00:00",
+  "timestamp": "2024-11-05T00:54:50.806418+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -62,7 +62,7 @@
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/spasm/aWaBnRcrYGlDHTxqj9u72QEPm-E/\r\n\r\nIf we keep actual digestAlgorithms (not id-digest-none) for non-SignedAttributes, add similar text as RFC 8419 to make it explicit that a prehash isn't generated. And in this case we set the digestAlgorithm as whatever digest is used internally to ML-DSA.\r\n\r\n```\r\nWhen signing with Ed448, the\r\ndigestAlgorithm MUST be id-shake256, and the algorithm parameters\r\nfield MUST be absent.\r\n\r\n  NOTE: Either id-sha512 or id-shake256 is used as part to the\r\n  private key signing operation.  However, the private key signing\r\n  operation does not take a message digest computed with one of\r\n  these algorithms as an input.\r\n```",
       "createdAt": "2024-10-24T14:18:49Z",
-      "updatedAt": "2024-10-28T15:03:55Z",
+      "updatedAt": "2024-11-04T16:58:19Z",
       "closedAt": null,
       "comments": [
         {
@@ -71,6 +71,13 @@
           "body": "Something like id-digest-none (id-hashIdentity) was proposed for draft-ietf-curdle-cms-eddsa-signatures (RFC 8419).  There wasn't much discussion, the decision was to avoid the extra identifier: https://mailarchive.ietf.org/arch/msg/curdle/HG4ED83kc2mf9n4j-O_zL3PGGKg/\r\n\r\n",
           "createdAt": "2024-10-28T15:03:54Z",
           "updatedAt": "2024-10-28T15:03:54Z"
+        },
+        {
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "body": "For ML-DSA-44 we've also got a choice of whether to specify SHA-512 or SHA-256. [FIPS 204](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf) describes SHA256 and SHA512 as examples of valid pre-hash algorithms (as well as SHAKE128), but the [NIST OID assignments for pre-hash ML-DSA](https://csrc.nist.gov/projects/computer-security-objects-register/algorithm-registration) only include SHA512, which would imply a preference on NIST's part for SHA512 as a pre-hash algorithm for all ML-DSA variants.",
+          "createdAt": "2024-11-04T16:58:18Z",
+          "updatedAt": "2024-11-04T16:58:18Z"
         }
       ]
     },
