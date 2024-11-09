@@ -191,7 +191,7 @@ When used in a SubjectPublicKeyInfo type, the subjectPublicKey BIT STRING contai
 When an ML-DSA public key appears outside of a SubjectPublicKeyInfo type in an environment that uses ASN.1 encoding, the ML-DSA public key can be encoded as an OCTET STRING by using the ML-DSA-PublicKey type.
 
 {{?RFC5958}} describes the Asymmetric Key Package CMS content type, and the OneAsymmetricKey type for encoding asymmetric keypairs.
-When an ML-DSA private key or keypair is encoded as a OneAsymmetricKey, it follows the description in {{Section 6 of !I-D.ietf-lamps-dilithium-certificates}}.
+When an ML-DSA private key or keypair is encoded as a OneAsymmetricKey, it follows the description in {{Section 6 of I-D.ietf-lamps-dilithium-certificates}}.
 
 When the ML-DSA private key appears outside of an Asymmetric Key Package in an environment that uses ASN.1 encoding, the ML-DSA private key can be encoded as an OCTET STRING by using the ML-DSA-PrivateKey type.
 
@@ -202,11 +202,10 @@ When the ML-DSA private key appears outside of an Asymmetric Key Package in an e
 
 {{RFC5652}} specifies that digital signatures for CMS are produced using a digest of the message to be signed, and the signer's private key.
 At the time of publication of that RFC, all signature algorithms supported in CMS required a message digest to be calculated externally to that algorithm, which would then be supplied to the algorithm implementation when calculating and verifying signatures.
-Since then, EdDSA {{?RFC8032}}, SLH-DSA {{FIPS205}} have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
+Since then, EdDSA {{?RFC8032}} and SLH-DSA {{FIPS205}} have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
 In the pre-hash mode, a message digest (the "pre-hash") is calculated separately and supplied to the signature algorithm as described above.
 In the pure mode, the message to be signed or verified is instead supplied directly to the signature algorithm.
-ML-DSA also supports a pre-hash and pure mode, though we follow the convention set by EdDSA in CMS {{?RFC8419}} and SLH-DSA in CMS {{?I-D.ietf-lamps-cms-sphincs-plus}} in that only the pure mode of ML-DSA is used in CMS.
-That is, the pre-hash mode of ML-DSA MUST NOT be used in CMS.
+ML-DSA also supports a pre-hash and pure mode, though this document follows the convention set by EdDSA in CMS {{?RFC8419}} and SLH-DSA in CMS {{?I-D.ietf-lamps-cms-sphincs-plus}} and only specifies use of the pure mode of ML-DSA in CMS.
 
 ## Signature generation and verification
 
