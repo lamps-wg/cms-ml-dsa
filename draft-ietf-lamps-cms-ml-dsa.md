@@ -51,7 +51,7 @@ normative:
 
 informative:
   FIPS202: DOI.10.6028/NIST.FIPS.202
-  FIPS203: DOI.10.6028/NIST.FIPS.203
+  FIPS205: DOI.10.6028/NIST.FIPS.205
   RFC5911:
   X680:
     target: https://www.itu.int/rec/T-REC-X.680
@@ -74,7 +74,7 @@ In addition, the algorithm identifier and public key syntax are provided.
 
 The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a digital signature algorithm standardised by NIST as part of their post-quantum cryptography standardization process.
 It is intended to be secure against both "traditional" cryptographic attacks, as well as attacks utilising a quantum computer.
-It offers smaller signatures and significantly faster runtimes than SLH-DSA {{FIPS203}}, an alternative post-quantum signature algorithm also standardised by NIST.
+It offers smaller signatures and significantly faster runtimes than SLH-DSA {{FIPS205}}, an alternative post-quantum signature algorithm also standardised by NIST.
 This document specifies the use of the ML-DSA in CMS at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See {{Appendix B of I-D.ietf-lamps-dilithium-certificates}} for more information on the security levels and keys sizes of ML-DSA.
 
 Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and Dilithium are not compatible.
@@ -202,7 +202,7 @@ When the ML-DSA private key appears outside of an Asymmetric Key Package in an e
 
 {{RFC5652}} specifies that digital signatures for CMS are produced using a digest of the message to be signed, and the signer's private key.
 At the time of publication of that RFC, all signature algorithms supported in CMS required a message digest to be calculated externally to that algorithm, which would then be supplied to the algorithm implementation when calculating and verifying signatures.
-Since then, EdDSA {{?RFC8032}}, SLH-DSA {{FIPS203}} have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
+Since then, EdDSA {{?RFC8032}}, SLH-DSA {{FIPS205}} have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
 In the pre-hash mode, a message digest (the "pre-hash") is calculated separately and supplied to the signature algorithm as described above.
 In the pure mode, the message to be signed or verified is instead supplied directly to the signature algorithm.
 ML-DSA also supports a pre-hash and pure mode, though we follow the convention set by EdDSA in CMS {{?RFC8419}} and SLH-DSA in CMS {{?I-D.ietf-lamps-cms-sphincs-plus}} in that only the pure mode of ML-DSA is used in CMS.
