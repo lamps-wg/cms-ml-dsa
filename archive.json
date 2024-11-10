@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-07T00:55:06.257259+00:00",
+  "timestamp": "2024-11-10T00:58:22.660765+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -62,7 +62,7 @@
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/spasm/aWaBnRcrYGlDHTxqj9u72QEPm-E/\r\n\r\nIf we keep actual digestAlgorithms (not id-digest-none) for non-SignedAttributes, add similar text as RFC 8419 to make it explicit that a prehash isn't generated. And in this case we set the digestAlgorithm as whatever digest is used internally to ML-DSA.\r\n\r\n```\r\nWhen signing with Ed448, the\r\ndigestAlgorithm MUST be id-shake256, and the algorithm parameters\r\nfield MUST be absent.\r\n\r\n  NOTE: Either id-sha512 or id-shake256 is used as part to the\r\n  private key signing operation.  However, the private key signing\r\n  operation does not take a message digest computed with one of\r\n  these algorithms as an input.\r\n```",
       "createdAt": "2024-10-24T14:18:49Z",
-      "updatedAt": "2024-11-04T16:58:19Z",
+      "updatedAt": "2024-11-08T13:56:37Z",
       "closedAt": null,
       "comments": [
         {
@@ -78,6 +78,13 @@
           "body": "For ML-DSA-44 we've also got a choice of whether to specify SHA-512 or SHA-256. [FIPS 204](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf) describes SHA256 and SHA512 as examples of valid pre-hash algorithms (as well as SHAKE128), but the [NIST OID assignments for pre-hash ML-DSA](https://csrc.nist.gov/projects/computer-security-objects-register/algorithm-registration) only include SHA512, which would imply a preference on NIST's part for SHA512 as a pre-hash algorithm for all ML-DSA variants.",
           "createdAt": "2024-11-04T16:58:18Z",
           "updatedAt": "2024-11-04T16:58:18Z"
+        },
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "My question to the list, linked in the issue description, asked if we should just use SHA512.  The only response to this was from Deirde in favour of that: https://mailarchive.ietf.org/arch/msg/spasm/tFMKlZMjDI9npKugf6_Mg23_01o/\r\nSo let's do that.",
+          "createdAt": "2024-11-08T13:56:36Z",
+          "updatedAt": "2024-11-08T13:56:36Z"
         }
       ]
     },
@@ -121,13 +128,23 @@
       "state": "OPEN",
       "author": "danvangeest",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "danvangeest"
+      ],
       "labels": [],
       "body": "Should the digest algorithms be bumped from RECOMMENDED to REQUIRED? This guarantees a minimum level of interoperability.\r\n\r\nhttps://mailarchive.ietf.org/arch/msg/spasm/yM8kS1kCoizWCMjS8pdcV3IFaDg/",
       "createdAt": "2024-10-24T14:20:17Z",
-      "updatedAt": "2024-10-24T14:20:17Z",
+      "updatedAt": "2024-11-08T14:09:14Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is the text from draft-ietf-lamps-cms-sphincs-plus, do something similar.\r\n\r\n>The digestAlgorithm MUST identify a one-way hash function.  To\r\nensure collision resistance, the identified hash function SHOULD\r\nproduce a hash value that is at least twice the size of the hash\r\nfunction used in the SLH-DSA tree.  The hash functions defined in\r\n[FIPS180] and [FIPS202] MUST be supported for use with the\r\nvariants of SLH-DSA as shown below; however, other hash functions\r\nMAY also be supported:",
+          "createdAt": "2024-11-08T13:05:53Z",
+          "updatedAt": "2024-11-08T13:05:53Z"
+        }
+      ]
     },
     {
       "number": 5,
@@ -150,7 +167,7 @@
     {
       "number": 6,
       "id": "PR_kwDONFRYgM6AP3KA",
-      "title": "Comments from my initial review",
+      "title": "Mostly public key encoding stuff, plus some cleanup.",
       "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/6",
       "state": "OPEN",
       "author": "danvangeest",
@@ -159,13 +176,78 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-10-29T13:53:18Z",
-      "updatedAt": "2024-10-29T13:53:18Z",
+      "updatedAt": "2024-11-09T16:17:32Z",
       "baseRepository": "lamps-wg/cms-ml-dsa",
       "baseRefName": "main",
       "baseRefOid": "a4d5d77f754b7d2ada8d517967268ad5694f90fa",
       "headRepository": "lamps-wg/cms-ml-dsa",
       "headRefName": "dvg/my_original_review",
-      "headRefOid": "354b2be0a99915a9000f52ee543404224885fe2c",
+      "headRefOid": "73d0089d6ff495d6f1b16e480b9892c823cfe2a0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6Qkb_z",
+          "commit": {
+            "abbreviatedOid": "73d0089"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Comments for other reviewers.",
+          "createdAt": "2024-11-09T16:13:10Z",
+          "updatedAt": "2024-11-09T16:16:14Z",
+          "comments": [
+            {
+              "originalPosition": 76,
+              "body": "ietf-lamps-dilithium-certificates refers to use for public key encoding and ANS.1, so I added more text.",
+              "createdAt": "2024-11-09T16:13:11Z",
+              "updatedAt": "2024-11-09T16:16:14Z"
+            },
+            {
+              "originalPosition": 128,
+              "body": "I removed this line because it's not in the other PQ documents, and if it's ever added in the future this makes that easier maybe?",
+              "createdAt": "2024-11-09T16:14:15Z",
+              "updatedAt": "2024-11-09T16:16:14Z"
+            },
+            {
+              "originalPosition": 137,
+              "body": "I think no, at least to align with cms-sphincs-plus. The CMS-EUF-CMA work can address this.  If that determines we need more text here and in cms-sphincs-plus we can do that then.",
+              "createdAt": "2024-11-09T16:15:40Z",
+              "updatedAt": "2024-11-09T16:16:14Z"
+            },
+            {
+              "originalPosition": 148,
+              "body": "see previous comment",
+              "createdAt": "2024-11-09T16:15:50Z",
+              "updatedAt": "2024-11-09T16:16:14Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDONFRYgM6BZZnL",
+      "title": "Digest algorithm cleanup",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/7",
+      "state": "OPEN",
+      "author": "danvangeest",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #1 and #4.",
+      "createdAt": "2024-11-09T13:02:14Z",
+      "updatedAt": "2024-11-09T13:02:15Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "a4d5d77f754b7d2ada8d517967268ad5694f90fa",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "dvg/digest_alg_text",
+      "headRefOid": "4aeff6c633b08cb69b112aec23fff2995714f53e",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
