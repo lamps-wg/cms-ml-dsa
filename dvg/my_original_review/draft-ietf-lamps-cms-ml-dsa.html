@@ -1424,8 +1424,7 @@ The tag and length octets are not included.<a href="#section-4.2-2" class="pilcr
 As described in <span><a href="https://rfc-editor.org/rfc/rfc5652#section-5.4" class="relref">Section 5.4</a> of [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>, this encoding does include the tag and length octets, but an EXPLICIT SET OF tag is used rather than the IMPLICIT [0] tag that appears in the final message.
 The signedAttrs field <span class="bcp14">MUST</span> at minimum include a content-type attribute and a message-digest attribute.
 The message-digest attribute contains a hash of the content of the signed-data, where the content is as described for the absent signed attributes case above.
-Recalculation of the hash value by the recipient is an important step in signature verification.
-Choice of digest algorithm is up to the signer; algorithms for each parameter set are recommended below.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+Recalculation of the hash value by the recipient is an important step in signature verification.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <p id="section-4.2-4"><span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-cms-sphincs-plus-12#section-4" class="relref">Section 4</a> of [<a href="#I-D.ietf-lamps-cms-sphincs-plus" class="cite xref">I-D.ietf-lamps-cms-sphincs-plus</a>]</span> describes how, when the content of a signed-data is large, performance may be improved by including signed attributes.
 This is as true for ML-DSA as it is for SLH-DSA, although ML-DSA signature generation and verification is significantly faster than SLH-DSA.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
 <p id="section-4.2-5">ML-DSA has a context string input that can be used to ensure that different signatures are generated for different application contexts.
@@ -1442,51 +1441,20 @@ When using ML-DSA as described in this document, the context string is not used.
           <dt id="section-4.3-2.1">digestAlgorithm:</dt>
           <dd style="margin-left: 1.5em" id="section-4.3-2.2">
             <p id="section-4.3-2.2.1">Per <span><a href="https://rfc-editor.org/rfc/rfc5652#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>, the digestAlgorithm field identifies the message digest algorithm used by the signer, and any associated parameters.
-To ensure collision resistance, the identified message digest algorithm <span class="bcp14">SHOULD</span> produce a hash value of a size that is at least twice the collision strength of the internal commitment hash used by ML-DSA.<br>
-The SHAKE hash functions defined in <span>[<a href="#FIPS202" class="cite xref">FIPS202</a>]</span> are used internally by ML-DSA, and hence the combinations in <a href="#tab-digests" class="auto internal xref">Table 1</a> are <span class="bcp14">RECOMMENDED</span> for use with ML-DSA.
-<span>[<a href="#RFC8702" class="cite xref">RFC8702</a>]</span> describes how SHAKE128 and SHAKE256 are used in CMS. The id-shake128 and id-shake256 digest algorithm identifiers are used and the parameters field <span class="bcp14">MUST</span> be omitted.<a href="#section-4.3-2.2.1" class="pilcrow">¶</a></p>
+To ensure collision resistance, the identified message digest algorithm <span class="bcp14">SHOULD</span> produce a hash value of a size that is at least twice the collision strength of the internal commitment hash used by ML-DSA.
+SHA-512 <span>[<a href="#FIPS180" class="cite xref">FIPS180</a>]</span> <span class="bcp14">MUST</span> be supported for use with the variants of SLH-DSA in this document; however, other hash functions <span class="bcp14">MAY</span> also be supported.  When SHA-512 is used, the id-sha512 <span>[<a href="#RFC8017" class="cite xref">RFC8017</a>]</span> digest algorithm identifier is used and the parameters field <span class="bcp14">MUST</span> be omitted.<a href="#section-4.3-2.2.1" class="pilcrow">¶</a></p>
 </dd>
-        <dd class="break"></dd>
-</dl>
-<span id="name-recommended-message-digest-"></span><div id="tab-digests">
-<table class="center" id="table-1">
-          <caption>
-<a href="#table-1" class="selfRef">Table 1</a>:
-<a href="#name-recommended-message-digest-" class="selfRef">Recommended message digest algorithms for ML-DSA signature algorithms</a>
-          </caption>
-<thead>
-            <tr>
-              <th class="text-left" rowspan="1" colspan="1">Signature algorithm</th>
-              <th class="text-left" rowspan="1" colspan="1">Message digest algorithm</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">ML-DSA-44</td>
-              <td class="text-left" rowspan="1" colspan="1">SHAKE128</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">ML-DSA-65</td>
-              <td class="text-left" rowspan="1" colspan="1">SHAKE256</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">ML-DSA-87</td>
-              <td class="text-left" rowspan="1" colspan="1">SHAKE256</td>
-            </tr>
-          </tbody>
-        </table>
-</div>
-<span class="break"></span><dl class="dlParallel" id="section-4.3-4">
-          <dt id="section-4.3-4.1">signatureAlgorithm:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.3-4.2">
-            <p id="section-4.3-4.2.1">When signing a signed-data using ML-DSA, the signatureAlgorithm field <span class="bcp14">MUST</span> contain one of the ML-DSA signature algorithm OIDs, and the parameters field <span class="bcp14">MUST</span> be absent. The algorithm OID <span class="bcp14">MUST</span> be one of the following OIDs described in <a href="#ml-dsa-algorithm-identifiers" class="auto internal xref">Section 2</a>:<a href="#section-4.3-4.2.1" class="pilcrow">¶</a></p>
+          <dd class="break"></dd>
+<dt id="section-4.3-2.3">signatureAlgorithm:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.3-2.4">
+            <p id="section-4.3-2.4.1">When signing a signed-data using ML-DSA, the signatureAlgorithm field <span class="bcp14">MUST</span> contain one of the ML-DSA signature algorithm OIDs, and the parameters field <span class="bcp14">MUST</span> be absent. The algorithm OID <span class="bcp14">MUST</span> be one of the following OIDs described in <a href="#ml-dsa-algorithm-identifiers" class="auto internal xref">Section 2</a>:<a href="#section-4.3-2.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
 <span id="name-signature-algorithm-identif"></span><div id="tab-oids">
-<table class="center" id="table-2">
+<table class="center" id="table-1">
           <caption>
-<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#table-1" class="selfRef">Table 1</a>:
 <a href="#name-signature-algorithm-identif" class="selfRef">Signature algorithm identifier OIDs for ML-DSA</a>
           </caption>
 <thead>
@@ -1511,12 +1479,12 @@ The SHAKE hash functions defined in <span>[<a href="#FIPS202" class="cite xref">
           </tbody>
         </table>
 </div>
-<span class="break"></span><dl class="dlParallel" id="section-4.3-6">
-          <dt id="section-4.3-6.1">signature:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.3-6.2">
-            <p id="section-4.3-6.2.1">The signature field contains the signature value resulting from the use of the ML-DSA signature algorithm identified by the signatureAlgorithm field.
+<span class="break"></span><dl class="dlParallel" id="section-4.3-4">
+          <dt id="section-4.3-4.1">signature:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.3-4.2">
+            <p id="section-4.3-4.2.1">The signature field contains the signature value resulting from the use of the ML-DSA signature algorithm identified by the signatureAlgorithm field.
  The ML-DSA (pure mode) signature generation operation is specified in Section 5.2 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>, and the signature verification operation is specified in Section 5.3 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
- Note that <span><a href="https://rfc-editor.org/rfc/rfc5652#section-5.6" class="relref">Section 5.6</a> of [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> places further requirements on the successful verification of a signature.<a href="#section-4.3-6.2.1" class="pilcrow">¶</a></p>
+ Note that <span><a href="https://rfc-editor.org/rfc/rfc5652#section-5.6" class="relref">Section 5.6</a> of [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> places further requirements on the successful verification of a signature.<a href="#section-4.3-4.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1592,6 +1560,10 @@ This should be allocated in the "SMI Security for S/MIME Module Identifier" regi
         <dd>
 <span class="refAuthor">Housley, R.</span>, <span class="refTitle">"Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">STD 70</span>, <span class="seriesInfo">RFC 5652</span>, <span class="seriesInfo">DOI 10.17487/RFC5652</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5652">https://www.rfc-editor.org/rfc/rfc5652</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8017">[RFC8017]</dt>
+        <dd>
+<span class="refAuthor">Moriarty, K., Ed.</span>, <span class="refAuthor">Kaliski, B.</span>, <span class="refAuthor">Jonsson, J.</span>, and <span class="refAuthor">A. Rusch</span>, <span class="refTitle">"PKCS #1: RSA Cryptography Specifications Version 2.2"</span>, <span class="seriesInfo">RFC 8017</span>, <span class="seriesInfo">DOI 10.17487/RFC8017</span>, <time datetime="2016-11" class="refDate">November 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8017">https://www.rfc-editor.org/rfc/rfc8017</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
       <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
@@ -1605,9 +1577,9 @@ This should be allocated in the "SMI Security for S/MIME Module Identifier" regi
 <a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
-<dt id="FIPS202">[FIPS202]</dt>
+<dt id="FIPS180">[FIPS180]</dt>
         <dd>
-<span class="refTitle">"SHA-3 standard :: permutation-based hash and extendable-output functions"</span>, <span class="refContent">National Institute of Standards and Technology (U.S.)</span>, <span class="seriesInfo">DOI 10.6028/nist.fips.202</span>, <time datetime="2015" class="refDate">2015</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.fips.202">https://doi.org/10.6028/nist.fips.202</a>&gt;</span>. </dd>
+<span class="refTitle">"Secure hash standard"</span>, <span class="refContent">National Institute of Standards and Technology (U.S.)</span>, <span class="seriesInfo">DOI 10.6028/nist.fips.180</span>, <time datetime="1993" class="refDate">1993</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.fips.180">https://doi.org/10.6028/nist.fips.180</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="FIPS205">[FIPS205]</dt>
         <dd>
@@ -1636,10 +1608,6 @@ This should be allocated in the "SMI Security for S/MIME Module Identifier" regi
 <dt id="RFC8419">[RFC8419]</dt>
         <dd>
 <span class="refAuthor">Housley, R.</span>, <span class="refTitle">"Use of Edwards-Curve Digital Signature Algorithm (EdDSA) Signatures in the Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 8419</span>, <span class="seriesInfo">DOI 10.17487/RFC8419</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8419">https://www.rfc-editor.org/rfc/rfc8419</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8702">[RFC8702]</dt>
-        <dd>
-<span class="refAuthor">Kampanakis, P.</span> and <span class="refAuthor">Q. Dang</span>, <span class="refTitle">"Use of the SHAKE One-Way Hash Functions in the Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 8702</span>, <span class="seriesInfo">DOI 10.17487/RFC8702</span>, <time datetime="2020-01" class="refDate">January 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8702">https://www.rfc-editor.org/rfc/rfc8702</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="X680">[X680]</dt>
       <dd>
