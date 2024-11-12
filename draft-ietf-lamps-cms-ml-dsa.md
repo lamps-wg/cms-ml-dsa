@@ -50,7 +50,7 @@ normative:
   RFC5652:
 
 informative:
-  FIPS202: DOI.10.6028/NIST.FIPS.202
+  FIPS180: DOI.10.6028/NIST.FIPS.180
   FIPS205: DOI.10.6028/NIST.FIPS.205
   RFC5911:
   X680:
@@ -223,7 +223,6 @@ As described in {{Section 5.4 of RFC5652}}, this encoding does include the tag a
 The signedAttrs field MUST at minimum include a content-type attribute and a message-digest attribute.
 The message-digest attribute contains a hash of the content of the signed-data, where the content is as described for the absent signed attributes case above.
 Recalculation of the hash value by the recipient is an important step in signature verification.
-Choice of digest algorithm is up to the signer; algorithms for each parameter set are recommended below.
 
 {{Section 4 of ?I-D.ietf-lamps-cms-sphincs-plus}} describes how, when the content of a signed-data is large, performance may be improved by including signed attributes.
 This is as true for ML-DSA as it is for SLH-DSA, although ML-DSA signature generation and verification is significantly faster than SLH-DSA.
@@ -238,15 +237,8 @@ When using ML-DSA, the fields of a SignerInfo are used as follows:
 digestAlgorithm:
 
 : Per {{Section 5.3 of RFC5652}}, the digestAlgorithm field identifies the message digest algorithm used by the signer, and any associated parameters.
-To ensure collision resistance, the identified message digest algorithm SHOULD produce a hash value of a size that is at least twice the collision strength of the internal commitment hash used by ML-DSA.\\
-The SHAKE hash functions defined in {{FIPS202}} are used internally by ML-DSA, and hence the combinations in {{tab-digests}} are RECOMMENDED for use with ML-DSA.
-{{?RFC8702}} describes how SHAKE128 and SHAKE256 are used in CMS. The id-shake128 and id-shake256 digest algorithm identifiers are used and the parameters field MUST be omitted.
-
-| Signature algorithm | Message digest algorithm |
-| ML-DSA-44           | SHAKE128                 |
-| ML-DSA-65           | SHAKE256                 |
-| ML-DSA-87           | SHAKE256                 |
-{: #tab-digests title="Recommended message digest algorithms for ML-DSA signature algorithms"}
+To ensure collision resistance, the identified message digest algorithm SHOULD produce a hash value of a size that is at least twice the collision strength of the internal commitment hash used by ML-DSA.
+SHA-512 {{FIPS180}} MUST be supported for use with the variants of SLH-DSA in this document; however, other hash functions MAY also be supported.  When SHA-512 is used, the id-sha512 {{!RFC8017}} digest algorithm identifier is used and the parameters field MUST be omitted.
 
 signatureAlgorithm:
 
