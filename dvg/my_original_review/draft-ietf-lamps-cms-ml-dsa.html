@@ -1382,7 +1382,7 @@ ML-DSA-PublicKey ::= OCTET STRING
 ML-DSA-PrivateKey ::= OCTET STRING
 </pre><a href="#section-3-5" class="pilcrow">¶</a>
 </div>
-<p id="section-3-6">Algorithm 22 in Section 7.2 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> defines the raw octet string encoding of an ML-DSA public key.
+<p id="section-3-6">Algorithm 22 in Section 7.2 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> defines the raw byte string encoding of an ML-DSA public key.
 When used in a SubjectPublicKeyInfo type, the subjectPublicKey BIT STRING contains the raw octet string encoding of the public key.<a href="#section-3-6" class="pilcrow">¶</a></p>
 <p id="section-3-7">When an ML-DSA public key appears outside of a SubjectPublicKeyInfo type in an environment that uses ASN.1 encoding, the ML-DSA public key can be encoded as an OCTET STRING by using the ML-DSA-PublicKey type.<a href="#section-3-7" class="pilcrow">¶</a></p>
 <p id="section-3-8"><span>[<a href="#RFC5958" class="cite xref">RFC5958</a>]</span> describes the Asymmetric Key Package CMS content type, and the OneAsymmetricKey type for encoding asymmetric keypairs.

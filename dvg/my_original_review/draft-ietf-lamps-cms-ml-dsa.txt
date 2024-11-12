@@ -213,7 +213,7 @@ Table of Contents
    ML-DSA-PublicKey ::= OCTET STRING
    ML-DSA-PrivateKey ::= OCTET STRING
 
-   Algorithm 22 in Section 7.2 of [FIPS204] defines the raw octet string
+   Algorithm 22 in Section 7.2 of [FIPS204] defines the raw byte string
    encoding of an ML-DSA public key.  When used in a
    SubjectPublicKeyInfo type, the subjectPublicKey BIT STRING contains
    the raw octet string encoding of the public key.
