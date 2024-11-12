@@ -5,9 +5,9 @@
 Limited Additional Mechanisms for PKIX and SMIME               B. Salter
 Internet-Draft                                                  A. Raine
 Intended status: Standards Track       UK National Cyber Security Centre
-Expires: 2 May 2025                                         D. Van Geest
+Expires: 16 May 2025                                        D. Van Geest
                                                      CryptoNext Security
-                                                         29 October 2024
+                                                        12 November 2024
 
 
    Use of the ML-DSA Signature Algorithm in the Cryptographic Message
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 May 2025.
+   This Internet-Draft will expire on 16 May 2025.
 
 Copyright Notice
 
@@ -294,9 +294,7 @@ Table of Contents
    attribute contains a hash of the content of the signed-data, where
    the content is as described for the absent signed attributes case
    above.  Recalculation of the hash value by the recipient is an
-   important step in signature verification.  Choice of digest algorithm
-   is up to the signer; algorithms for each parameter set are
-   recommended below.
+   important step in signature verification.
 
    Section 4 of [I-D.ietf-lamps-cms-sphincs-plus] describes how, when
    the content of a signed-data is large, performance may be improved by
@@ -325,26 +323,11 @@ Table of Contents
       and any associated parameters.  To ensure collision resistance,
       the identified message digest algorithm SHOULD produce a hash
       value of a size that is at least twice the collision strength of
-      the internal commitment hash used by ML-DSA.
-      The SHAKE hash functions defined in [FIPS202] are used internally
-      by ML-DSA, and hence the combinations in Table 1 are RECOMMENDED
-      for use with ML-DSA.  [RFC8702] describes how SHAKE128 and
-      SHAKE256 are used in CMS.  The id-shake128 and id-shake256 digest
-      algorithm identifiers are used and the parameters field MUST be
-      omitted.
-
-            +=====================+==========================+
-            | Signature algorithm | Message digest algorithm |
-            +=====================+==========================+
-            | ML-DSA-44           | SHAKE128                 |
-            +---------------------+--------------------------+
-            | ML-DSA-65           | SHAKE256                 |
-            +---------------------+--------------------------+
-            | ML-DSA-87           | SHAKE256                 |
-            +---------------------+--------------------------+
-
-              Table 1: Recommended message digest algorithms
-                     for ML-DSA signature algorithms
+      the internal commitment hash used by ML-DSA.  SHA-512 [FIPS180]
+      MUST be supported for use with the variants of SLH-DSA in this
+      document; however, other hash functions MAY also be supported.
+      When SHA-512 is used, the id-sha512 [RFC8017] digest algorithm
+      identifier is used and the parameters field MUST be omitted.
 
    signatureAlgorithm:  When signing a signed-data using ML-DSA, the
       signatureAlgorithm field MUST contain one of the ML-DSA signature
@@ -362,7 +345,7 @@ Table of Contents
             | ML-DSA-87           | id-ml-dsa-87             |
             +---------------------+--------------------------+
 
-               Table 2: Signature algorithm identifier OIDs
+               Table 1: Signature algorithm identifier OIDs
                                 for ML-DSA
 
    signature:  The signature field contains the signature value
@@ -425,8 +408,9 @@ Table of Contents
               Westerbaan, "Internet X.509 Public Key Infrastructure:
               Algorithm Identifiers for ML-DSA", Work in Progress,
               Internet-Draft, draft-ietf-lamps-dilithium-certificates-
-              04, 22 July 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-lamps-dilithium-certificates-04>.
+              05, 4 November 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
+              dilithium-certificates-05>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -437,16 +421,20 @@ Table of Contents
               RFC 5652, DOI 10.17487/RFC5652, September 2009,
               <https://www.rfc-editor.org/rfc/rfc5652>.
 
+   [RFC8017]  Moriarty, K., Ed., Kaliski, B., Jonsson, J., and A. Rusch,
+              "PKCS #1: RSA Cryptography Specifications Version 2.2",
+              RFC 8017, DOI 10.17487/RFC8017, November 2016,
+              <https://www.rfc-editor.org/rfc/rfc8017>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
 8.2.  Informative References
 
-   [FIPS202]  "SHA-3 standard :: permutation-based hash and extendable-
-              output functions", National Institute of Standards and
-              Technology (U.S.), DOI 10.6028/nist.fips.202, 2015,
-              <https://doi.org/10.6028/nist.fips.202>.
+   [FIPS180]  "Secure hash standard", National Institute of Standards
+              and Technology (U.S.), DOI 10.6028/nist.fips.180, 1993,
+              <https://doi.org/10.6028/nist.fips.180>.
 
    [FIPS203]  "Module-Lattice-Based Key-Encapsulation Mechanism
               Standard", National Institute of Standards and Technology,
@@ -457,9 +445,9 @@ Table of Contents
               Housley, R., Fluhrer, S., Kampanakis, P., and B.
               Westerbaan, "Use of the SLH-DSA Signature Algorithm in the
               Cryptographic Message Syntax (CMS)", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-cms-sphincs-plus-09, 21
-              August 2024, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-lamps-cms-sphincs-plus-09>.
+              Internet-Draft, draft-ietf-lamps-cms-sphincs-plus-12, 4
+              November 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-cms-sphincs-plus-12>.
 
    [RFC5272]  Schaad, J. and M. Myers, "Certificate Management over CMS
               (CMC)", RFC 5272, DOI 10.17487/RFC5272, June 2008,
@@ -489,11 +477,6 @@ Table of Contents
               Algorithm (EdDSA) Signatures in the Cryptographic Message
               Syntax (CMS)", RFC 8419, DOI 10.17487/RFC8419, August
               2018, <https://www.rfc-editor.org/rfc/rfc8419>.
-
-   [RFC8702]  Kampanakis, P. and Q. Dang, "Use of the SHAKE One-Way Hash
-              Functions in the Cryptographic Message Syntax (CMS)",
-              RFC 8702, DOI 10.17487/RFC8702, January 2020,
-              <https://www.rfc-editor.org/rfc/rfc8702>.
 
    [X680]     ITU-T, "Information Technology - Abstract Syntax Notation
               One (ASN.1): Specification of basic notation. ITU-T
