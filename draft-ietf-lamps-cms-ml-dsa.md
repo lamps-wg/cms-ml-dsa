@@ -39,13 +39,7 @@ author:
     email: daniel.vangeest@cryptonext-security.com
 
 normative:
-  FIPS204:
-    target: https://csrc.nist.gov/pubs/fips/204/final
-    title: Module-Lattice-Based Digital Signature Standard
-    author:
-      name: National Institute of Standards and Technology
-      ins: NIST
-    date: 2024-08-13
+  FIPS204: DOI.10.6028/NIST.FIPS.204
   CSOR:
     target: https://csrc.nist.gov/projects/computer-security-objects-register/algorithm-registration
     title: Computer Security Objects Register
@@ -57,7 +51,7 @@ normative:
 
 informative:
   FIPS180: DOI.10.6028/NIST.FIPS.180
-  FIPS203: DOI.10.6028/NIST.FIPS.203
+  FIPS205: DOI.10.6028/NIST.FIPS.205
   RFC5911:
   X680:
     target: https://www.itu.int/rec/T-REC-X.680
@@ -69,7 +63,7 @@ informative:
 
 --- abstract
 
-The Module-Lattice-Based Digital Signature Algorithm (ML-DSA), as defined in FIPS 204, is a post-quantum digital signature scheme that aims to be secure against an adversary in posession of a Cryptographically Relevant Quantum Computer (CRQC).
+The Module-Lattice-Based Digital Signature Algorithm (ML-DSA), as defined in FIPS 204, is a post-quantum digital signature scheme that aims to be secure against an adversary in possession of a Cryptographically Relevant Quantum Computer (CRQC).
 This document specifies the conventions for using the ML-DSA signature algorithm with the Cryptographic Message Syntax (CMS).
 In addition, the algorithm identifier and public key syntax are provided.
 
@@ -80,18 +74,10 @@ In addition, the algorithm identifier and public key syntax are provided.
 
 The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a digital signature algorithm standardised by NIST as part of their post-quantum cryptography standardization process.
 It is intended to be secure against both "traditional" cryptographic attacks, as well as attacks utilising a quantum computer.
-It offers smaller signatures and significantly faster runtimes than SLH-DSA {{FIPS203}}, an alternative post-quantum signature algorithm also standardised by NIST.
+It offers smaller signatures and significantly faster runtimes than SLH-DSA {{FIPS205}}, an alternative post-quantum signature algorithm also standardised by NIST.
+This document specifies the use of the ML-DSA in CMS at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See {{Appendix B of I-D.ietf-lamps-dilithium-certificates}} for more information on the security levels and key sizes of ML-DSA.
 
-Prior to standardisation, the algorithm was known as Dilithium.  ML-DSA and Dilithium are not compatible.
-
-ML-DSA offers parameter sets that meet three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.
-ML-DSA-44 is intended to meet NIST's level 2 security category, ML-DSA-65 is intended to meet level 3, and ML-DSA-87 is intended to meet level 5.
-Each category requires that algorithms be as resistant to attack as a particular cryptographic algorithm.
-Attacks on algorithms in the level 2 category are intended to be at least as hard as performing a collision search on SHA256.
-Attacks on algorithms in the level 3 category are intended to be at least as hard as performing an exhaustive key search on AES192.
-Attacks on algorithms in the level 5 category are intended to be at least as hard as performing an exhaustive key search on AES256.
-
-EDNOTE: Appendix B of draft-ietf-lamps-dilithium-certificates describes this well, if it's easier just to refer to that.
+Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and Dilithium are not compatible.
 
 For each of the ML-DSA parameter sets, an algorithm identifier OID has been specified.
 
@@ -121,8 +107,10 @@ AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
         }
 ~~~
 
-The above syntax is from {{?RFC5911}} and is compatible with the 2021 ASN.1 syntax {{X680}}.
-See {{?RFC5280}} for the 1988 ASN.1 syntax.
+<aside markdown="block">
+  NOTE: The above syntax is from {{RFC5911}} and is compatible with the
+  2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
+</aside>
 
 The fields in the AlgorithmIdentifier type have the following meanings:
 
@@ -153,19 +141,23 @@ id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
 
 # ML-DSA Key Encoding
 
-{{Section 4 of !I-D.ietf-lamps-dilithium-certificates}} describes the format of ML-DSA public keys when encoded as a part of the SubjectPublicKeyInfo type.
-The signed-data content type as described in {{RFC5652}} does not encode public keys directly, but CMS content types defined by other documents do.
-For example, {{?RFC5272}} describes Certificate Management over CMS, and its PKIData content utilises the SubjectPublicKeyInfo type to encode public keys for certificate requests.
-When the SubjectPublicKeyInfo type is used in CMS, ML-DSA public keys MUST be encoded as described in {{!I-D.ietf-lamps-dilithium-certificates}}
+{{!RFC5280}} defines the SubjectPublicKeyInfo ASN.1 type.
+In X.509 certificates {{RFC5280}} and Certificate Management over CMS {{?RFC5272}}, the SubjectPublicKeyInfo type is used to encode public keys.
+It has the following syntax:
 
-{{?RFC5958}} describes the Asymmetric Key Package CMS content type, and the OneAsymmetricKey type for encoding asymmetric keypairs.
-When an ML-DSA private key or keypair is encoded as a OneAsymmetricKey, it follows the description in {{Section 6 of !I-D.ietf-lamps-dilithium-certificates}}.
+~~~ asn1
+  SubjectPublicKeyInfo {PUBLIC-KEY: IOSet} ::= SEQUENCE {
+      algorithm        AlgorithmIdentifier {PUBLIC-KEY, {IOSet}},
+      subjectPublicKey BIT STRING
+  }
+~~~
 
-The ASN.1 descriptions of ML-DSA keys are repeated below for convenience.
+<aside markdown="block">
+  NOTE: The above syntax is from {{RFC5911}} and is compatible with the
+  2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
+</aside>
 
-EDNOTE: This section should reflect the content of draft-ietf-lamps-dilithium-certificates.
-The ASN.1 public key definitions in that document are not yet fully expanded, so the below is a best guess based on the equivalent SLH-DSA keys.
-Alternatively, draft-ietf-lamps-dilithium-certificates could reflect this document, as is the case for the SLH-DSA X.509/CMS drafts.
+The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:
 
 ~~~ asn.1
 pk-ml-dsa-44 PUBLIC-KEY ::= {
@@ -193,17 +185,27 @@ ML-DSA-PublicKey ::= OCTET STRING
 ML-DSA-PrivateKey ::= OCTET STRING
 ~~~
 
+Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string encoding of an ML-DSA public key.
+When used in a SubjectPublicKeyInfo type, the subjectPublicKey BIT STRING contains the raw byte string encoding of the public key.
+
+When an ML-DSA public key appears outside of a SubjectPublicKeyInfo type in an environment that uses ASN.1 encoding, the ML-DSA public key can be encoded as an OCTET STRING by using the ML-DSA-PublicKey type.
+
+{{?RFC5958}} describes the Asymmetric Key Package CMS content type, and the OneAsymmetricKey type for encoding asymmetric keypairs.
+When an ML-DSA private key or keypair is encoded as a OneAsymmetricKey, it follows the description in {{Section 6 of I-D.ietf-lamps-dilithium-certificates}}.
+
+When the ML-DSA private key appears outside of an Asymmetric Key Package in an environment that uses ASN.1 encoding, the ML-DSA private key can be encoded as an OCTET STRING by using the ML-DSA-PrivateKey type.
+
+
 # Signed-data Conventions
 
 ## Pure mode vs pre-hash mode
 
 {{RFC5652}} specifies that digital signatures for CMS are produced using a digest of the message to be signed, and the signer's private key.
 At the time of publication of that RFC, all signature algorithms supported in CMS required a message digest to be calculated externally to that algorithm, which would then be supplied to the algorithm implementation when calculating and verifying signatures.
-Since then, EdDSA {{?RFC8032}}, SLH-DSA {{FIPS203}} have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
+Since then, EdDSA {{?RFC8032}} and SLH-DSA {{FIPS205}} have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
 In the pre-hash mode, a message digest (the "pre-hash") is calculated separately and supplied to the signature algorithm as described above.
 In the pure mode, the message to be signed or verified is instead supplied directly to the signature algorithm.
-ML-DSA also supports a pre-hash and pure mode, though we follow the convention set by EdDSA in CMS {{?RFC8419}} and SLH-DSA in CMS {{?I-D.ietf-lamps-cms-sphincs-plus}} in that only the pure mode of ML-DSA is used in CMS.
-That is, the pre-hash mode of ML-DSA MUST NOT be used in CMS.
+ML-DSA also supports a pre-hash and pure mode, though this document follows the convention set by EdDSA in CMS {{?RFC8419}} and SLH-DSA in CMS {{?I-D.ietf-lamps-cms-sphincs-plus}} and only specifies use of the pure mode of ML-DSA in CMS.
 
 ## Signature generation and verification
 
@@ -211,10 +213,6 @@ That is, the pre-hash mode of ML-DSA MUST NOT be used in CMS.
 One method is used when signed attributes are present in the signedAttrs field of the relevant SignerInfo, and another is used when signed attributes are absent.
 Each method produces a different "message digest" to be supplied to the signature algorithm in question, but because the pure mode of ML-DSA is used, the "message digest" is in fact the entire message.
 Use of signed attributes is preferred, but the conventions for signed-data without signed attributes is also described below for completeness.
-
-EDNOTE: Would it make sense to make a stronger statement here?
-For instance, that CMS implements MAY reject signatures if they don't contain signed attributes, or that generation/verification of signed-data without signed attributes SHOULD NOT be supported?
-Some of the discussion around the use of context strings for new signature algorithms has highlighted the dangers here, as has Falko's paper here: https://eprint.iacr.org/2023/1801
 
 When signed attributes are absent, ML-DSA (pure mode) signatures are computed over the content of the signed-data.
 As described in {{Section 5.4 of RFC5652}}, the "content" of a signed-data is the value of the encapContentInfo eContent OCTET STRING.
@@ -231,11 +229,6 @@ This is as true for ML-DSA as it is for SLH-DSA, although ML-DSA signature gener
 
 ML-DSA has a context string input that can be used to ensure that different signatures are generated for different application contexts.
 When using ML-DSA as described in this document, the context string is not used.
-
-EDNOTE: It's been suggested that the context string could be used to separate content-only/signed attributes signatures.
-SLH-DSA and ML-DSA should stay in alignment here.
-If not specified here, are there other ways the context string could be used, e.g. with a different algorithm identifier or a signed attribute?
-If so, we could add a note to signpost that this is could appear in a future standard.
 
 ## SignerInfo content
 
@@ -282,7 +275,7 @@ The signer SHOULD NOT use the deterministic variant of ML-DSA on platforms where
 # IANA Considerations
 
 IANA is requested to assign an object identifier for id-mod-ml-dsa-2024, for the ASN.1 module identifier found in {{asn1}}.
-This should be allocated in the "SMI Security for PKIX Module Identifier" registry (1.3.6.1.5.5.7.0).
+This should be allocated in the "SMI Security for S/MIME Module Identifier" registry (1.2.840.113549.1.9.16.0).
 
 
 # Acknowledgments
