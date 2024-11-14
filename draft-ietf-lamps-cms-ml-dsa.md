@@ -238,7 +238,7 @@ digestAlgorithm:
 
 : Per {{Section 5.3 of RFC5652}}, the digestAlgorithm field identifies the message digest algorithm used by the signer, and any associated parameters.
 To ensure collision resistance, the identified message digest algorithm SHOULD produce a hash value of a size that is at least twice the collision strength of the internal commitment hash used by ML-DSA.
-SHA-512 {{FIPS180}} MUST be supported for use with the variants of SLH-DSA in this document; however, other hash functions MAY also be supported.  When SHA-512 is used, the id-sha512 {{!RFC8017}} digest algorithm identifier is used and the parameters field MUST be omitted.
+SHA-512 {{FIPS180}} MUST be supported for use with the variants of SLH-DSA in this document; however, other hash functions MAY also be supported.  When SHA-512 is used, the id-sha512 {{!RFC5754}} digest algorithm identifier is used and the parameters field MUST be omitted.
 
 signatureAlgorithm:
 
