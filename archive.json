@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-12T00:54:15.780248+00:00",
+  "timestamp": "2024-11-14T00:55:25.410491+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -55,15 +55,15 @@
       "id": "I_kwDONFRYgM6brDDb",
       "title": "Specify SHA2 as the hash function rather than SHAKE",
       "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/1",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "danvangeest",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/spasm/aWaBnRcrYGlDHTxqj9u72QEPm-E/\r\n\r\nIf we keep actual digestAlgorithms (not id-digest-none) for non-SignedAttributes, add similar text as RFC 8419 to make it explicit that a prehash isn't generated. And in this case we set the digestAlgorithm as whatever digest is used internally to ML-DSA.\r\n\r\n```\r\nWhen signing with Ed448, the\r\ndigestAlgorithm MUST be id-shake256, and the algorithm parameters\r\nfield MUST be absent.\r\n\r\n  NOTE: Either id-sha512 or id-shake256 is used as part to the\r\n  private key signing operation.  However, the private key signing\r\n  operation does not take a message digest computed with one of\r\n  these algorithms as an input.\r\n```",
       "createdAt": "2024-10-24T14:18:49Z",
-      "updatedAt": "2024-11-08T13:56:37Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-12T14:32:36Z",
+      "closedAt": "2024-11-12T14:32:35Z",
       "comments": [
         {
           "author": "danvangeest",
@@ -161,6 +161,37 @@
       "updatedAt": "2024-10-24T14:22:36Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 8,
+      "id": "I_kwDONFRYgM6eGwvw",
+      "title": "SHA-512 reference",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/8",
+      "state": "OPEN",
+      "author": "adam-r-ncsc",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "RFC 8017 is used as a reference for SHA-512 as a message digest algorithm - I'd have expected RFC 5754.",
+      "createdAt": "2024-11-12T15:41:15Z",
+      "updatedAt": "2024-11-12T16:38:32Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is a good point.  This came from text copied from the cms-sphincs-plus draft.  I can update our draft.  Would you like to bring this up on the list and/or direct to Russ for cms-sphincs-plus?  If not, I can.",
+          "createdAt": "2024-11-12T16:22:42Z",
+          "updatedAt": "2024-11-12T16:22:42Z"
+        },
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "On the other hand, RFC 8017 is the update of RFC 3447 which brought id-sha512 into the IETF, so maybe RFC 8017 is appropriate.  RFC 5754 brought it into CMS though.",
+          "createdAt": "2024-11-12T16:38:31Z",
+          "updatedAt": "2024-11-12T16:38:31Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -176,13 +207,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-10-29T13:53:18Z",
-      "updatedAt": "2024-11-09T16:17:32Z",
+      "updatedAt": "2024-11-12T16:11:29Z",
       "baseRepository": "lamps-wg/cms-ml-dsa",
       "baseRefName": "main",
-      "baseRefOid": "a4d5d77f754b7d2ada8d517967268ad5694f90fa",
+      "baseRefOid": "6955afcfb0299ba70ff1288f09296c31142b1ad9",
       "headRepository": "lamps-wg/cms-ml-dsa",
       "headRefName": "dvg/my_original_review",
-      "headRefOid": "73d0089d6ff495d6f1b16e480b9892c823cfe2a0",
+      "headRefOid": "19671f4a4d984dce2511d2fdd2555772576fac53",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -226,6 +257,130 @@
               "updatedAt": "2024-11-09T16:16:14Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDONFRYgM6QyKWs",
+          "commit": {
+            "abbreviatedOid": "73d0089"
+          },
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-12T09:39:10Z",
+          "updatedAt": "2024-11-12T09:56:13Z",
+          "comments": [
+            {
+              "originalPosition": 29,
+              "body": "IIRC idnits has previously complained when we included a reference in the abstract, although I note that it isn't complaining currently. Not sure what's different in this case",
+              "createdAt": "2024-11-12T09:39:10Z",
+              "updatedAt": "2024-11-12T09:56:13Z"
+            },
+            {
+              "originalPosition": 41,
+              "body": "s/keys sizes/key sizes/",
+              "createdAt": "2024-11-12T09:40:34Z",
+              "updatedAt": "2024-11-12T09:56:13Z"
+            },
+            {
+              "originalPosition": 137,
+              "body": "I know the WG wanted a quick turnaround on this draft - are we expecting it to wait on the CMS-EUF-CMA work (the interim for which will likely be in the new year)?",
+              "createdAt": "2024-11-12T09:55:55Z",
+              "updatedAt": "2024-11-12T09:56:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONFRYgM6Q0trj",
+          "commit": {
+            "abbreviatedOid": "73d0089"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-12T14:19:33Z",
+          "updatedAt": "2024-11-12T14:19:33Z",
+          "comments": [
+            {
+              "originalPosition": 137,
+              "body": "I will post a summary of the EUF-CMA mitigations to the list since the presentation was cut short.  Hopefully responses to that will give an indication of where the WG wants to go from there.\r\n\r\ncms-sphincs-plus has gone through WGLC, so I don't think the EUF-CMA stuff would prevent this draft from doing the same.  If the WG determines that the EUF-CMA issue needs to be solved immediately, both drafts would need to be updated.  But there is a more general EUF-CMA solution that also allows these drafts to proceed now.",
+              "createdAt": "2024-11-12T14:19:33Z",
+              "updatedAt": "2024-11-12T14:19:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONFRYgM6Q0zCd",
+          "commit": {
+            "abbreviatedOid": "73d0089"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-12T14:26:59Z",
+          "updatedAt": "2024-11-12T14:26:59Z",
+          "comments": [
+            {
+              "originalPosition": 29,
+              "body": "https://ietf.github.io/id-guidelines/ still says to avoid citations in the abstract so I'll remove it.",
+              "createdAt": "2024-11-12T14:26:59Z",
+              "updatedAt": "2024-11-12T14:26:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONFRYgM6Q1XM8",
+          "commit": {
+            "abbreviatedOid": "c827c12"
+          },
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-12T15:18:05Z",
+          "updatedAt": "2024-11-12T15:31:05Z",
+          "comments": [
+            {
+              "originalPosition": 137,
+              "body": "Makes sense to me. There are mitigations that can be applied in the interim for the EUF-CMA issue (e.g. only accepting one of signed attributes/no signed attributes, not both), so it's not like implementers have no options if they're worried about it prior to a separate RFC addressing the problem.\r\n\r\nI'm happy with the text you've suggested - it could be worth noting the issue in the Security Considerations perhaps, and that future CMS RFCs may address this. On the other hand, I guess it's not an issue that's specific to ML-DSA.\r\n",
+              "createdAt": "2024-11-12T15:18:05Z",
+              "updatedAt": "2024-11-12T15:31:05Z"
+            },
+            {
+              "originalPosition": 107,
+              "body": "\"octet string\" versus \"OCTET STRING\" might be a bit confusing - FIPS 204 describes the output of Algorithm 22 as a byte string, so that could be an alternative. Alternatively, something like \"the subjectPublicKey BIT STRING contains the raw octet string encoding of the public key, i.e. without any additional ASN.1 wrapping\". I do think it makes sense as currently written, it just took me a second read to check that the lack of capital letters was deliberate.",
+              "createdAt": "2024-11-12T15:25:11Z",
+              "updatedAt": "2024-11-12T15:31:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONFRYgM6Q1zgy",
+          "commit": {
+            "abbreviatedOid": "56de0a0"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-12T15:59:50Z",
+          "updatedAt": "2024-11-12T16:00:07Z",
+          "comments": [
+            {
+              "originalPosition": 106,
+              "body": "```suggestion\r\nAlgorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string encoding of an ML-DSA public key.\r\n```",
+              "createdAt": "2024-11-12T15:59:51Z",
+              "updatedAt": "2024-11-12T16:00:07Z"
+            },
+            {
+              "originalPosition": 107,
+              "body": "```suggestion\r\nWhen used in a SubjectPublicKeyInfo type, the subjectPublicKey BIT STRING contains the raw byte string encoding of the public key.\r\n```",
+              "createdAt": "2024-11-12T16:00:01Z",
+              "updatedAt": "2024-11-12T16:00:07Z"
+            }
+          ]
         }
       ]
     },
@@ -234,26 +389,42 @@
       "id": "PR_kwDONFRYgM6BZZnL",
       "title": "Digest algorithm cleanup",
       "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/7",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danvangeest",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #1 and #4.",
       "createdAt": "2024-11-09T13:02:14Z",
-      "updatedAt": "2024-11-09T13:02:15Z",
+      "updatedAt": "2024-11-12T14:32:35Z",
       "baseRepository": "lamps-wg/cms-ml-dsa",
       "baseRefName": "main",
       "baseRefOid": "a4d5d77f754b7d2ada8d517967268ad5694f90fa",
       "headRepository": "lamps-wg/cms-ml-dsa",
       "headRefName": "dvg/digest_alg_text",
       "headRefOid": "4aeff6c633b08cb69b112aec23fff2995714f53e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-11-12T14:32:34Z",
+      "mergedAt": "2024-11-12T14:32:34Z",
+      "mergedBy": "danvangeest",
+      "mergeCommit": {
+        "oid": "6955afcfb0299ba70ff1288f09296c31142b1ad9"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6Qyd43",
+          "commit": {
+            "abbreviatedOid": "4aeff6c"
+          },
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-12T10:10:54Z",
+          "updatedAt": "2024-11-12T10:10:54Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
