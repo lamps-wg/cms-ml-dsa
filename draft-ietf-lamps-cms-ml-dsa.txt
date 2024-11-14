@@ -130,8 +130,8 @@ Table of Contents
    used to identify ML-DSA signatures in the signed-data content type.
    They may also appear in X.509 certificates used to verify those
    signatures.  [I-D.ietf-lamps-dilithium-certificates] describes the
-   use of ML-DSA in X.509 certificates.  The AlgorithmIdentifier type,
-   which is included herein for convenience, is defined as follows:
+   use of ML-DSA in X.509 certificates.  The AlgorithmIdentifier type is
+   defined as follows:
 
    AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
            SEQUENCE {
@@ -364,10 +364,11 @@ Table of Contents
 
 6.  IANA Considerations
 
-   IANA is requested to assign an object identifier for id-mod-ml-dsa-
-   2024, for the ASN.1 module identifier found in Appendix A.  This
-   should be allocated in the "SMI Security for S/MIME Module
-   Identifier" registry (1.2.840.113549.1.9.16.0).
+   For the ASN.1 module found in Appendix A, IANA is requested to assign
+   an object identifier for the module identifier (TBD) with a
+   description of "id-mod-ml-dsa-2024".  This should be allocated in the
+   "SMI Security for S/MIME Module Identifier" registry
+   (1.2.840.113549.1.9.16.0).
 
 7.  Acknowledgments
 
