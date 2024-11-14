@@ -308,7 +308,7 @@ Table of Contents
       the internal commitment hash used by ML-DSA.  SHA-512 [FIPS180]
       MUST be supported for use with the variants of SLH-DSA in this
       document; however, other hash functions MAY also be supported.
-      When SHA-512 is used, the id-sha512 [RFC8017] digest algorithm
+      When SHA-512 is used, the id-sha512 [RFC5754] digest algorithm
       identifier is used and the parameters field MUST be omitted.
 
    signatureAlgorithm:  When signing a signed-data using ML-DSA, the
@@ -411,10 +411,9 @@ Table of Contents
               RFC 5652, DOI 10.17487/RFC5652, September 2009,
               <https://www.rfc-editor.org/rfc/rfc5652>.
 
-   [RFC8017]  Moriarty, K., Ed., Kaliski, B., Jonsson, J., and A. Rusch,
-              "PKCS #1: RSA Cryptography Specifications Version 2.2",
-              RFC 8017, DOI 10.17487/RFC8017, November 2016,
-              <https://www.rfc-editor.org/rfc/rfc8017>.
+   [RFC5754]  Turner, S., "Using SHA2 Algorithms with Cryptographic
+              Message Syntax", RFC 5754, DOI 10.17487/RFC5754, January
+              2010, <https://www.rfc-editor.org/rfc/rfc5754>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -435,9 +434,9 @@ Table of Contents
               Housley, R., Fluhrer, S., Kampanakis, P., and B.
               Westerbaan, "Use of the SLH-DSA Signature Algorithm in the
               Cryptographic Message Syntax (CMS)", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-cms-sphincs-plus-12, 4
+              Internet-Draft, draft-ietf-lamps-cms-sphincs-plus-13, 14
               November 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-lamps-cms-sphincs-plus-12>.
+              draft-ietf-lamps-cms-sphincs-plus-13>.
 
    [RFC5272]  Schaad, J. and M. Myers, "Certificate Management over CMS
               (CMC)", RFC 5272, DOI 10.17487/RFC5272, June 2008,
