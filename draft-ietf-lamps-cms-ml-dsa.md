@@ -274,7 +274,7 @@ The signer SHOULD NOT use the deterministic variant of ML-DSA on platforms where
 
 # IANA Considerations
 
-IANA is requested to assign an object identifier for id-mod-ml-dsa-2024, for the ASN.1 module identifier found in {{asn1}}.
+For the ASN.1 module found in {{asn1}}, IANA is requested to assign an object identifier for the module identifier (TBD) with a description of "id-mod-ml-dsa-2024".
 This should be allocated in the "SMI Security for S/MIME Module Identifier" registry (1.2.840.113549.1.9.16.0).
 
 
