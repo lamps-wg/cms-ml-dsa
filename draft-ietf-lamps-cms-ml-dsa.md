@@ -96,7 +96,7 @@ Many ASN.1 data structure types use the AlgorithmIdentifier type to identify cry
 In CMS, AlgorithmIdentifiers are used to identify ML-DSA signatures in the signed-data content type.
 They may also appear in X.509 certificates used to verify those signatures.
 {{?I-D.ietf-lamps-dilithium-certificates}} describes the use of ML-DSA in X.509 certificates.
-The AlgorithmIdentifier type, which is included herein for convenience, is defined as follows:
+The AlgorithmIdentifier type is defined as follows:
 
 ~~~ asn.1
 AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
