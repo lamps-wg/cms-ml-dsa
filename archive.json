@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-14T00:55:25.410491+00:00",
+  "timestamp": "2024-11-17T01:01:54.754329+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -109,23 +109,31 @@
       "id": "I_kwDONFRYgM6brDqu",
       "title": "Update FIPS 204 reference to DOI.10.6028/NIST.FIPS.204",
       "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "danvangeest",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Update FIPS 204 reference to DOI.10.6028/NIST.FIPS.204",
       "createdAt": "2024-10-24T14:19:51Z",
-      "updatedAt": "2024-10-24T14:19:51Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-11-14T23:22:37Z",
+      "closedAt": "2024-11-14T23:22:37Z",
+      "comments": [
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed with #6 ",
+          "createdAt": "2024-11-14T23:22:37Z",
+          "updatedAt": "2024-11-14T23:22:37Z"
+        }
+      ]
     },
     {
       "number": 4,
       "id": "I_kwDONFRYgM6brD7N",
       "title": "Should the digest algorithms be bumped from RECOMMENDED to REQUIRED?",
       "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "danvangeest",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -134,8 +142,8 @@
       "labels": [],
       "body": "Should the digest algorithms be bumped from RECOMMENDED to REQUIRED? This guarantees a minimum level of interoperability.\r\n\r\nhttps://mailarchive.ietf.org/arch/msg/spasm/yM8kS1kCoizWCMjS8pdcV3IFaDg/",
       "createdAt": "2024-10-24T14:20:17Z",
-      "updatedAt": "2024-11-08T14:09:14Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-14T23:23:11Z",
+      "closedAt": "2024-11-14T23:23:11Z",
       "comments": [
         {
           "author": "danvangeest",
@@ -158,24 +166,32 @@
       "labels": [],
       "body": "See whole thread: https://mailarchive.ietf.org/arch/msg/spasm/yM8kS1kCoizWCMjS8pdcV3IFaDg/ and https://mailarchive.ietf.org/arch/msg/spasm/uAwmfFDCP2gAggqYSu4ykRCk4mU/\r\n\r\nPossible solutions:\r\n\r\n- (pure) ML-DSA for SignedArtifacts, HashML-DSA for non-signed artifacts.\r\n- Use context string, \"CMW-with-SignedAttributes\" and \"CMS-without-SignedAttributes\" (see also #2 ).\r\n- ML-DSA MUST be used with SignedAttributes.",
       "createdAt": "2024-10-24T14:22:36Z",
-      "updatedAt": "2024-10-24T14:22:36Z",
+      "updatedAt": "2024-11-14T13:32:12Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "body": "As discussed in https://github.com/lamps-wg/cms-ml-dsa/pull/6#discussion_r1838288342, if we don't address the issue directly in the draft (as is looking likely), it could be mentioned in the Security Considerations alongside any interim mitigations prior to the issue being addressed for CMS more generally.",
+          "createdAt": "2024-11-14T13:32:11Z",
+          "updatedAt": "2024-11-14T13:32:11Z"
+        }
+      ]
     },
     {
       "number": 8,
       "id": "I_kwDONFRYgM6eGwvw",
       "title": "SHA-512 reference",
       "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/8",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "adam-r-ncsc",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "RFC 8017 is used as a reference for SHA-512 as a message digest algorithm - I'd have expected RFC 5754.",
       "createdAt": "2024-11-12T15:41:15Z",
-      "updatedAt": "2024-11-12T16:38:32Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-14T23:24:18Z",
+      "closedAt": "2024-11-14T23:24:18Z",
       "comments": [
         {
           "author": "danvangeest",
@@ -190,6 +206,20 @@
           "body": "On the other hand, RFC 8017 is the update of RFC 3447 which brought id-sha512 into the IETF, so maybe RFC 8017 is appropriate.  RFC 5754 brought it into CMS though.",
           "createdAt": "2024-11-12T16:38:31Z",
           "updatedAt": "2024-11-12T16:38:31Z"
+        },
+        {
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Seems a bit trivial for the list so long as cms-sphincs-plus and this draft are aligned - I'll email Russ directly. ",
+          "createdAt": "2024-11-14T12:59:51Z",
+          "updatedAt": "2024-11-14T12:59:51Z"
+        },
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed with a commit fa06e8",
+          "createdAt": "2024-11-14T23:24:18Z",
+          "updatedAt": "2024-11-14T23:24:18Z"
         }
       ]
     }
@@ -200,25 +230,35 @@
       "id": "PR_kwDONFRYgM6AP3KA",
       "title": "Mostly public key encoding stuff, plus some cleanup.",
       "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/6",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danvangeest",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-10-29T13:53:18Z",
-      "updatedAt": "2024-11-12T16:11:29Z",
+      "updatedAt": "2024-11-14T15:37:45Z",
       "baseRepository": "lamps-wg/cms-ml-dsa",
       "baseRefName": "main",
       "baseRefOid": "6955afcfb0299ba70ff1288f09296c31142b1ad9",
       "headRepository": "lamps-wg/cms-ml-dsa",
       "headRefName": "dvg/my_original_review",
       "headRefOid": "19671f4a4d984dce2511d2fdd2555772576fac53",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2024-11-14T15:35:07Z",
+      "mergedAt": "2024-11-14T15:35:06Z",
+      "mergedBy": "danvangeest",
+      "mergeCommit": {
+        "oid": "36e356be24c1592f102c6c72ee956e1df31f7c86"
+      },
+      "comments": [
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Requesting approval so I can merge, if there are no other comments and I didn't miss anything.",
+          "createdAt": "2024-11-14T13:45:22Z",
+          "updatedAt": "2024-11-14T13:45:22Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDONFRYgM6Qkb_z",
@@ -381,6 +421,19 @@
               "updatedAt": "2024-11-12T16:00:07Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDONFRYgM6RNGzZ",
+          "commit": {
+            "abbreviatedOid": "19671f4"
+          },
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-14T13:46:59Z",
+          "updatedAt": "2024-11-14T13:46:59Z",
+          "comments": []
         }
       ]
     },
@@ -396,7 +449,7 @@
       "labels": [],
       "body": "Fixes #1 and #4.",
       "createdAt": "2024-11-09T13:02:14Z",
-      "updatedAt": "2024-11-12T14:32:35Z",
+      "updatedAt": "2024-11-14T13:37:32Z",
       "baseRepository": "lamps-wg/cms-ml-dsa",
       "baseRefName": "main",
       "baseRefOid": "a4d5d77f754b7d2ada8d517967268ad5694f90fa",
