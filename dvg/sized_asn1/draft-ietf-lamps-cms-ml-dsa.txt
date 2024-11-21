@@ -210,9 +210,8 @@ Table of Contents
        { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
      -- PRIVATE-KEY no ASN.1 wrapping -- }
 
-   ML-DSA-44-PublicKey ::= OCTET STRING (SIZE (1312))
-   ML-DSA-65-PublicKey ::= OCTET STRING (SIZE (1952))
-   ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2592))
+   ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
+
    ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
 
    Algorithm 22 in Section 7.2 of [FIPS204] defines the raw byte string
@@ -221,9 +220,8 @@ Table of Contents
    the raw byte string encoding of the public key.
 
    When an ML-DSA public key appears outside of a SubjectPublicKeyInfo
-   type in an environment that uses ASN.1 encoding, the ML-DSA public
-   key can be encoded as an OCTET STRING by using one of the ML-
-   DSA-*-PublicKey types.
+   type in an environment that uses ASN.1 encoding, it can be encoded as
+   an OCTET STRING by using the ML-DSA-PublicKey type.
 
    [RFC5958] describes the Asymmetric Key Package CMS content type, and
    the OneAsymmetricKey type for encoding asymmetric keypairs.  When an
@@ -232,9 +230,8 @@ Table of Contents
    [I-D.ietf-lamps-dilithium-certificates].
 
    When the ML-DSA private key appears outside of an Asymmetric Key
-   Package in an environment that uses ASN.1 encoding, the ML-DSA
-   private key can be encoded as an OCTET STRING by using the ML-DSA-
-   PrivateKey type.
+   Package in an environment that uses ASN.1 encoding, it can be encoded
+   as an OCTET STRING by using the ML-DSA-PrivateKey type.
 
 4.  Signed-data Conventions
 
@@ -545,12 +542,9 @@ Appendix A.  ASN.1 Module
        { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
      -- PRIVATE-KEY no ASN.1 wrapping -- }
 
-   ML-DSA-44-PublicKey ::= OCTET STRING (SIZE (1312))
-   ML-DSA-65-PublicKey ::= OCTET STRING (SIZE (1952))
-   ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2592))
+   ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
 
-   ML-DSA-PrivateKey ::= OCTET STRING
-
+   ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
 
    --
    -- Expand the signature algorithm set used by CMS [RFC5911]
