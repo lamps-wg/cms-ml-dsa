@@ -59,6 +59,36 @@ informative:
     author:
       org: ITU-T
     date: February 2021
+  KPLG2024:
+    target: https://ia.cr/2024/138
+    title: "Correction Fault Attacks on Randomized CRYSTALS-Dilithium"
+    author:
+      -
+        ins: E. Krahmer
+      -
+        ins: P. Pessl
+      -
+        ins: G. Land
+      -
+        ins: T. Güneysu
+    date: 2024
+    format:
+      PDF: https://eprint.iacr.org/2024/138.pdf
+  WNGD2023:
+    target: https://ia.cr/2023/1931
+    title: "Single-Trace Side-Channel Attacks on CRYSTALS-Dilithium: Myth or Reality?"
+    author:
+      -
+        ins: R. Wang
+      -
+        ins: K. Ngo
+      -
+        ins: J. Gärtner
+      -
+        ins: E. Dubrova
+    date: 2023
+    format:
+      PDF: https://eprint.iacr.org/2023/1931.pdf
 ---
 
 --- abstract
@@ -264,14 +294,30 @@ The security considerations {{RFC5652}} and {{!I-D.ietf-lamps-dilithium-certific
 Security of the ML-DSA private key is critical.
 Compromise of the private key will enable an adversary to forge arbitrary signatures.
 
+ML-DSA depends on high quality random numbers that are suitable for use in cryptography.
+The use of inadequate pseudo-random number generators (PRNGs) to generate such values can significantly undermine the security properties offered by a cryptographic algorithm.
+For instance, an attacker may find it much easier to reproduce the PRNG environment that produced any private keys, searching the resulting small set of possibilities, rather than brute force searching the whole key space.
+The generation of random numbers of a sufficient level of quality for use in cryptography is difficult, and {{?RFC4086}} offers important guidance in this area.
+
 By default ML-DSA signature generation uses randomness from two sources: fresh random data generated during signature generation, and precomputed random data included in the signer's private key.
 This is referred to as the "hedged" variant of ML-DSA.
-Inclusion of both sources of random can help mitigate against faulty random number generators and side-channel attacks.
+Inclusion of both sources of random can help mitigate against faulty random number generators, side-channel attacks and fault attacks.
 {{FIPS204}} also permits creating deterministic signatures using just the precomputed random data in the signer's private key.
 The same verification algorithm is used to verify both hedged and deterministic signatures, so this choice does not affect interoperability.
-The signer SHOULD NOT use the deterministic variant of ML-DSA on platforms where side-channel attacks are a concern.
+The signer SHOULD NOT use the deterministic variant of ML-DSA on platforms where side-channel attacks or fault attacks are a concern.
+Side channel attacks and fault attacks against ML-DSA are an active area of research {{WNGD2023}} {{KPLG2024}}.
+Future protection against these styles of attack may involve interoperable changes to the implementation of ML-DSA's internal functions.
+Implementers SHOULD consider implementing such protection measures if it would be beneficial for their particular use cases.
 
 To avoid algorithm substitution attacks, the CMSAlgorithmProtection attribute defined in {{!RFC6211}} SHOULD be included in signed attributes.
+
+# Operational Considerations
+If ML-DSA signing is implemented in a hardware device such as hardware security module (HSM) or portable cryptographic token, implementers might want to avoid sending the full content to the device for performance reasons.
+By including signed attributes, which necessarily include the message-digest attribute and the content-type attribute as described in Section 5.3 of {{RFC5652}}, the much smaller set of signed attributes are sent to the device for signing.
+
+This approach addresses the use case for HashML-DSA, and is one reason why HashML-DSA is not specified for use with CMS in this document.
+Additionally, the pure variant of ML-DSA does support a form of pre-hash via the *mu* "message representative" value described in Section 6.2 of {{FIPS204}}.
+This value may "optionally be computed in a different cryptographic module" and supplied to the hardware device, rather than requiring the entire message to be transmitted.
 
 # IANA Considerations
 
