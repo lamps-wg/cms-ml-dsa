@@ -59,6 +59,36 @@ informative:
     author:
       org: ITU-T
     date: February 2021
+  KPLG2024:
+    target: https://ia.cr/2024/138
+    title: "Correction Fault Attacks on Randomized CRYSTALS-Dilithium"
+    author:
+      -
+        ins: E. Krahmer
+      -
+        ins: P. Pessl
+      -
+        ins: G. Land
+      -
+        ins: T. Güneysu
+    date: 2024
+    format:
+      PDF: https://eprint.iacr.org/2024/138.pdf
+  WNGD2023:
+    target: https://ia.cr/2023/1931
+    title: "Single-Trace Side-Channel Attacks on CRYSTALS-Dilithium: Myth or Reality?"
+    author:
+      -
+        ins: R. Wang
+      - 
+        ins: K. Ngo
+      - 
+        ins: J. Gärtner
+      -
+        ins: E. Dubrova
+    date: 2023
+    format:
+      PDF: https://eprint.iacr.org/2023/1931.pdf
 ---
 
 --- abstract
@@ -266,10 +296,13 @@ Compromise of the private key will enable an adversary to forge arbitrary signat
 
 By default ML-DSA signature generation uses randomness from two sources: fresh random data generated during signature generation, and precomputed random data included in the signer's private key.
 This is referred to as the "hedged" variant of ML-DSA.
-Inclusion of both sources of random can help mitigate against faulty random number generators and side-channel attacks.
+Inclusion of both sources of random can help mitigate against faulty random number generators, side-channel attacks and fault attacks.
 {{FIPS204}} also permits creating deterministic signatures using just the precomputed random data in the signer's private key.
 The same verification algorithm is used to verify both hedged and deterministic signatures, so this choice does not affect interoperability.
-The signer SHOULD NOT use the deterministic variant of ML-DSA on platforms where side-channel attacks are a concern.
+The signer SHOULD NOT use the deterministic variant of ML-DSA on platforms where side-channel attacks or fault attacks are a concern.
+Side channel attacks and fault attacks against ML-DSA are an active area of research {{WNGD2023}} {{KPLG2024}}.
+Future protection against these styles of attack may involve interoperable changes to the implementation of ML-DSA's internal functions.
+Implementers SHOULD consider implementing such protection measures if it would be beneficial for their particular use cases.
 
 To avoid algorithm substitution attacks, the CMSAlgorithmProtection attribute defined in {{!RFC6211}} SHOULD be included in signed attributes.
 
