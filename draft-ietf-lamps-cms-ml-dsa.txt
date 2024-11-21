@@ -84,11 +84,12 @@ Table of Contents
      4.2.  Signature generation and verification
      4.3.  SignerInfo content
    5.  Security Considerations
-   6.  IANA Considerations
-   7.  Acknowledgments
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+   6.  Operational Considerations
+   7.  IANA Considerations
+   8.  Acknowledgments
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Appendix A.  ASN.1 Module
    Authors' Addresses
 
@@ -359,24 +360,61 @@ Table of Contents
    Security of the ML-DSA private key is critical.  Compromise of the
    private key will enable an adversary to forge arbitrary signatures.
 
+   ML-DSA depends on high quality random numbers that are suitable for
+   use in cryptography.  The use of inadequate pseudo-random number
+   generators (PRNGs) to generate such values can significantly
+   undermine the security properties offered by a cryptographic
+   algorithm.  For instance, an attacker may find it much easier to
+   reproduce the PRNG environment that produced any private keys,
+   searching the resulting small set of possibilities, rather than brute
+   force searching the whole key space.  The generation of random
+   numbers of a sufficient level of quality for use in cryptography is
+   difficult, and [RFC4086] offers important guidance in this area.
+
    By default ML-DSA signature generation uses randomness from two
    sources: fresh random data generated during signature generation, and
    precomputed random data included in the signer's private key.  This
    is referred to as the "hedged" variant of ML-DSA.  Inclusion of both
    sources of random can help mitigate against faulty random number
-   generators and side-channel attacks.  [FIPS204] also permits creating
-   deterministic signatures using just the precomputed random data in
-   the signer's private key.  The same verification algorithm is used to
-   verify both hedged and deterministic signatures, so this choice does
-   not affect interoperability.  The signer SHOULD NOT use the
-   deterministic variant of ML-DSA on platforms where side-channel
-   attacks are a concern.
+   generators, side-channel attacks and fault attacks.  [FIPS204] also
+   permits creating deterministic signatures using just the precomputed
+   random data in the signer's private key.  The same verification
+   algorithm is used to verify both hedged and deterministic signatures,
+   so this choice does not affect interoperability.  The signer SHOULD
+   NOT use the deterministic variant of ML-DSA on platforms where side-
+   channel attacks or fault attacks are a concern.  Side channel attacks
+   and fault attacks against ML-DSA are an active area of research
+   [WNGD2023] [KPLG2024].  Future protection against these styles of
+   attack may involve interoperable changes to the implementation of ML-
+   DSA's internal functions.  Implementers SHOULD consider implementing
+   such protection measures if it would be beneficial for their
+   particular use cases.
 
    To avoid algorithm substitution attacks, the CMSAlgorithmProtection
    attribute defined in [RFC6211] SHOULD be included in signed
    attributes.
 
-6.  IANA Considerations
+6.  Operational Considerations
+
+   If ML-DSA signing is implemented in a hardware device such as
+   hardware security module (HSM) or portable cryptographic token,
+   implementers might want to avoid sending the full content to the
+   device for performance reasons.  By including signed attributes,
+   which necessarily include the message-digest attribute and the
+   content-type attribute as described in Section 5.3 of [RFC5652], the
+   much smaller set of signed attributes are sent to the device for
+   signing.
+
+   This approach addresses the use case for HashML-DSA, and is one
+   reason why HashML-DSA is not specified for use with CMS in this
+   document.  Additionally, the pure variant of ML-DSA does support a
+   form of pre-hash via the _mu_ "message representative" value
+   described in Section 6.2 of [FIPS204].  This value may "optionally be
+   computed in a different cryptographic module" and supplied to the
+   hardware device, rather than requiring the entire message to be
+   transmitted.
+
+7.  IANA Considerations
 
    For the ASN.1 module found in Appendix A, IANA is requested to assign
    an object identifier for the module identifier (TBD) with a
@@ -384,16 +422,16 @@ Table of Contents
    "SMI Security for S/MIME Module Identifier" registry
    (1.2.840.113549.1.9.16.0).
 
-7.  Acknowledgments
+8.  Acknowledgments
 
    This document was heavily influenced by [RFC8419],
    [I-D.ietf-lamps-cms-sphincs-plus], and
    [I-D.ietf-lamps-dilithium-certificates].  Thanks go to the authors of
    those documents.
 
-8.  References
+9.  References
 
-8.1.  Normative References
+9.1.  Normative References
 
    [CSOR]     NIST, "Computer Security Objects Register", 20 August
               2024, <https://csrc.nist.gov/projects/computer-security-
@@ -441,7 +479,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-8.2.  Informative References
+9.2.  Informative References
 
    [FIPS180]  "Secure hash standard", National Institute of Standards
               and Technology (U.S.), DOI 10.6028/nist.fips.180, 1993,
@@ -459,6 +497,15 @@ Table of Contents
               Internet-Draft, draft-ietf-lamps-cms-sphincs-plus-16, 18
               November 2024, <https://datatracker.ietf.org/doc/html/
               draft-ietf-lamps-cms-sphincs-plus-16>.
+
+   [KPLG2024] Krahmer, E., Pessl, P., Land, G., and T. Güneysu,
+              "Correction Fault Attacks on Randomized CRYSTALS-
+              Dilithium", 2024, <https://ia.cr/2024/138>.
+
+   [RFC4086]  Eastlake 3rd, D., Schiller, J., and S. Crocker,
+              "Randomness Requirements for Security", BCP 106, RFC 4086,
+              DOI 10.17487/RFC4086, June 2005,
+              <https://www.rfc-editor.org/rfc/rfc4086>.
 
    [RFC5272]  Schaad, J. and M. Myers, "Certificate Management over CMS
               (CMC)", RFC 5272, DOI 10.17487/RFC5272, June 2008,
@@ -482,6 +529,10 @@ Table of Contents
               Algorithm (EdDSA) Signatures in the Cryptographic Message
               Syntax (CMS)", RFC 8419, DOI 10.17487/RFC8419, August
               2018, <https://www.rfc-editor.org/rfc/rfc8419>.
+
+   [WNGD2023] Wang, R., Ngo, K., Gärtner, J., and E. Dubrova, "Single-
+              Trace Side-Channel Attacks on CRYSTALS-Dilithium: Myth or
+              Reality?", 2023, <https://ia.cr/2023/1931>.
 
    [X680]     ITU-T, "Information Technology - Abstract Syntax Notation
               One (ASN.1): Specification of basic notation. ITU-T

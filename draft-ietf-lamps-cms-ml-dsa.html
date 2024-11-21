@@ -1189,27 +1189,30 @@ In addition, the algorithm identifier and public key syntax are provided.<a href
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-operational-considerations" class="internal xref">Operational Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-asn1-module" class="internal xref">ASN.1 Module</a></p>
-</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-asn1-module" class="internal xref">ASN.1 Module</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1464,41 +1467,60 @@ SHA-512 <span>[<a href="#FIPS180" class="cite xref">FIPS180</a>]</span> <span cl
 <p id="section-5-1">The security considerations <span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> and <span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> apply to this specification as well.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">Security of the ML-DSA private key is critical.
 Compromise of the private key will enable an adversary to forge arbitrary signatures.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">By default ML-DSA signature generation uses randomness from two sources: fresh random data generated during signature generation, and precomputed random data included in the signer's private key.
+<p id="section-5-3">ML-DSA depends on high quality random numbers that are suitable for use in cryptography.
+The use of inadequate pseudo-random number generators (PRNGs) to generate such values can significantly undermine the security properties offered by a cryptographic algorithm.
+For instance, an attacker may find it much easier to reproduce the PRNG environment that produced any private keys, searching the resulting small set of possibilities, rather than brute force searching the whole key space.
+The generation of random numbers of a sufficient level of quality for use in cryptography is difficult, and <span>[<a href="#RFC4086" class="cite xref">RFC4086</a>]</span> offers important guidance in this area.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">By default ML-DSA signature generation uses randomness from two sources: fresh random data generated during signature generation, and precomputed random data included in the signer's private key.
 This is referred to as the "hedged" variant of ML-DSA.
-Inclusion of both sources of random can help mitigate against faulty random number generators and side-channel attacks.
+Inclusion of both sources of random can help mitigate against faulty random number generators, side-channel attacks and fault attacks.
 <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> also permits creating deterministic signatures using just the precomputed random data in the signer's private key.
 The same verification algorithm is used to verify both hedged and deterministic signatures, so this choice does not affect interoperability.
-The signer <span class="bcp14">SHOULD NOT</span> use the deterministic variant of ML-DSA on platforms where side-channel attacks are a concern.<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">To avoid algorithm substitution attacks, the CMSAlgorithmProtection attribute defined in <span>[<a href="#RFC6211" class="cite xref">RFC6211</a>]</span> <span class="bcp14">SHOULD</span> be included in signed attributes.<a href="#section-5-4" class="pilcrow">¶</a></p>
+The signer <span class="bcp14">SHOULD NOT</span> use the deterministic variant of ML-DSA on platforms where side-channel attacks or fault attacks are a concern.
+Side channel attacks and fault attacks against ML-DSA are an active area of research <span>[<a href="#WNGD2023" class="cite xref">WNGD2023</a>]</span> <span>[<a href="#KPLG2024" class="cite xref">KPLG2024</a>]</span>.
+Future protection against these styles of attack may involve interoperable changes to the implementation of ML-DSA's internal functions.
+Implementers <span class="bcp14">SHOULD</span> consider implementing such protection measures if it would be beneficial for their particular use cases.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">To avoid algorithm substitution attacks, the CMSAlgorithmProtection attribute defined in <span>[<a href="#RFC6211" class="cite xref">RFC6211</a>]</span> <span class="bcp14">SHOULD</span> be included in signed attributes.<a href="#section-5-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="operational-considerations">
+<section id="section-6">
+      <h2 id="name-operational-considerations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
+      </h2>
+<p id="section-6-1">If ML-DSA signing is implemented in a hardware device such as hardware security module (HSM) or portable cryptographic token, implementers might want to avoid sending the full content to the device for performance reasons.
+By including signed attributes, which necessarily include the message-digest attribute and the content-type attribute as described in Section 5.3 of <span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>, the much smaller set of signed attributes are sent to the device for signing.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">This approach addresses the use case for HashML-DSA, and is one reason why HashML-DSA is not specified for use with CMS in this document.
+Additionally, the pure variant of ML-DSA does support a form of pre-hash via the <em>mu</em> "message representative" value described in Section 6.2 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
+This value may "optionally be computed in a different cryptographic module" and supplied to the hardware device, rather than requiring the entire message to be transmitted.<a href="#section-6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-6">
+<section id="section-7">
       <h2 id="name-iana-considerations">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-6-1">For the ASN.1 module found in <a href="#asn1" class="auto internal xref">Appendix A</a>, IANA is requested to assign an object identifier for the module identifier (TBD) with a description of "id-mod-ml-dsa-2024".
-This should be allocated in the "SMI Security for S/MIME Module Identifier" registry (1.2.840.113549.1.9.16.0).<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">For the ASN.1 module found in <a href="#asn1" class="auto internal xref">Appendix A</a>, IANA is requested to assign an object identifier for the module identifier (TBD) with a description of "id-mod-ml-dsa-2024".
+This should be allocated in the "SMI Security for S/MIME Module Identifier" registry (1.2.840.113549.1.9.16.0).<a href="#section-7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgments">
-<section id="section-7">
+<section id="section-8">
       <h2 id="name-acknowledgments">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="section-7-1">This document was heavily influenced by <span>[<a href="#RFC8419" class="cite xref">RFC8419</a>]</span>, <span>[<a href="#I-D.ietf-lamps-cms-sphincs-plus" class="cite xref">I-D.ietf-lamps-cms-sphincs-plus</a>]</span>, and <span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span>.  Thanks go to the authors of those documents.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">This document was heavily influenced by <span>[<a href="#RFC8419" class="cite xref">RFC8419</a>]</span>, <span>[<a href="#I-D.ietf-lamps-cms-sphincs-plus" class="cite xref">I-D.ietf-lamps-cms-sphincs-plus</a>]</span>, and <span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span>.  Thanks go to the authors of those documents.<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-8">
+<section id="section-9">
       <h2 id="name-references">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-8.1">
+<section id="section-9.1">
         <h3 id="name-normative-references">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="CSOR">[CSOR]</dt>
@@ -1541,9 +1563,9 @@ This should be allocated in the "SMI Security for S/MIME Module Identifier" regi
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-8.2">
+<section id="section-9.2">
         <h3 id="name-informative-references">
-<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
 <dt id="FIPS180">[FIPS180]</dt>
@@ -1557,6 +1579,14 @@ This should be allocated in the "SMI Security for S/MIME Module Identifier" regi
 <dt id="I-D.ietf-lamps-cms-sphincs-plus">[I-D.ietf-lamps-cms-sphincs-plus]</dt>
         <dd>
 <span class="refAuthor">Housley, R.</span>, <span class="refAuthor">Fluhrer, S.</span>, <span class="refAuthor">Kampanakis, P.</span>, and <span class="refAuthor">B. Westerbaan</span>, <span class="refTitle">"Use of the SLH-DSA Signature Algorithm in the Cryptographic Message Syntax (CMS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-cms-sphincs-plus-16</span>, <time datetime="2024-11-18" class="refDate">18 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-cms-sphincs-plus-16">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-cms-sphincs-plus-16</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="KPLG2024">[KPLG2024]</dt>
+        <dd>
+<span class="refAuthor">Krahmer, E.</span>, <span class="refAuthor">Pessl, P.</span>, <span class="refAuthor">Land, G.</span>, and <span class="refAuthor">T. Güneysu</span>, <span class="refTitle">"Correction Fault Attacks on Randomized CRYSTALS-Dilithium"</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://ia.cr/2024/138">https://ia.cr/2024/138</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC4086">[RFC4086]</dt>
+        <dd>
+<span class="refAuthor">Eastlake 3rd, D.</span>, <span class="refAuthor">Schiller, J.</span>, and <span class="refAuthor">S. Crocker</span>, <span class="refTitle">"Randomness Requirements for Security"</span>, <span class="seriesInfo">BCP 106</span>, <span class="seriesInfo">RFC 4086</span>, <span class="seriesInfo">DOI 10.17487/RFC4086</span>, <time datetime="2005-06" class="refDate">June 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4086">https://www.rfc-editor.org/rfc/rfc4086</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5272">[RFC5272]</dt>
         <dd>
@@ -1577,6 +1607,10 @@ This should be allocated in the "SMI Security for S/MIME Module Identifier" regi
 <dt id="RFC8419">[RFC8419]</dt>
         <dd>
 <span class="refAuthor">Housley, R.</span>, <span class="refTitle">"Use of Edwards-Curve Digital Signature Algorithm (EdDSA) Signatures in the Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 8419</span>, <span class="seriesInfo">DOI 10.17487/RFC8419</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8419">https://www.rfc-editor.org/rfc/rfc8419</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="WNGD2023">[WNGD2023]</dt>
+        <dd>
+<span class="refAuthor">Wang, R.</span>, <span class="refAuthor">Ngo, K.</span>, <span class="refAuthor">Gärtner, J.</span>, and <span class="refAuthor">E. Dubrova</span>, <span class="refTitle">"Single-Trace Side-Channel Attacks on CRYSTALS-Dilithium: Myth or Reality?"</span>, <time datetime="2023" class="refDate">2023</time>, <span>&lt;<a href="https://ia.cr/2023/1931">https://ia.cr/2023/1931</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="X680">[X680]</dt>
       <dd>
