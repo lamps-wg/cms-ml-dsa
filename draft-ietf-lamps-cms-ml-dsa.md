@@ -181,14 +181,16 @@ pk-ml-dsa-87 PUBLIC-KEY ::= {
     { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
   -- PRIVATE-KEY no ASN.1 wrapping -- }
 
-ML-DSA-PublicKey ::= OCTET STRING
-ML-DSA-PrivateKey ::= OCTET STRING
+ML-DSA-44-PublicKey ::= OCTET STRING (SIZE (1312))
+ML-DSA-65-PublicKey ::= OCTET STRING (SIZE (1952))
+ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2592))
+ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
 ~~~
 
 Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string encoding of an ML-DSA public key.
 When used in a SubjectPublicKeyInfo type, the subjectPublicKey BIT STRING contains the raw byte string encoding of the public key.
 
-When an ML-DSA public key appears outside of a SubjectPublicKeyInfo type in an environment that uses ASN.1 encoding, the ML-DSA public key can be encoded as an OCTET STRING by using the ML-DSA-PublicKey type.
+When an ML-DSA public key appears outside of a SubjectPublicKeyInfo type in an environment that uses ASN.1 encoding, the ML-DSA public key can be encoded as an OCTET STRING by using one of the ML-DSA-*-PublicKey types.
 
 {{?RFC5958}} describes the Asymmetric Key Package CMS content type, and the OneAsymmetricKey type for encoding asymmetric keypairs.
 When an ML-DSA private key or keypair is encoded as a OneAsymmetricKey, it follows the description in {{Section 6 of I-D.ietf-lamps-dilithium-certificates}}.
