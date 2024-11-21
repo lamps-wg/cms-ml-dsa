@@ -95,6 +95,7 @@ HashML-DSA is not used in CMS.
 Many ASN.1 data structure types use the AlgorithmIdentifier type to identify cryptographic algorithms.
 In CMS, AlgorithmIdentifiers are used to identify ML-DSA signatures in the signed-data content type.
 They may also appear in X.509 certificates used to verify those signatures.
+The same AlgorithmIdentifiers are used to identify ML-DSA public keys and signature algorithms.
 {{?I-D.ietf-lamps-dilithium-certificates}} describes the use of ML-DSA in X.509 certificates.
 The AlgorithmIdentifier type is defined as follows:
 
@@ -218,8 +219,8 @@ When signed attributes are absent, ML-DSA (pure mode) signatures are computed ov
 As described in {{Section 5.4 of RFC5652}}, the "content" of a signed-data is the value of the encapContentInfo eContent OCTET STRING.
 The tag and length octets are not included.
 
-When signed attributes are included, ML-DSA (pure mode) signatures are computed over a DER encoding of the SignerInfo's signedAttrs field.
-As described in {{Section 5.4 of RFC5652}}, this encoding does include the tag and length octets, but an EXPLICIT SET OF tag is used rather than the IMPLICIT \[0\] tag that appears in the final message.
+When signed attributes are included, ML-DSA (pure mode) signatures are computed over the complete DER encoding of the SignedAttrs value contained in the SignerInfo's signedAttrs field.
+As described in {{Section 5.4 of RFC5652}}, this encoding includes the tag and length octets, but an EXPLICIT SET OF tag is used rather than the IMPLICIT \[0\] tag that appears in the final message.
 The signedAttrs field MUST at minimum include a content-type attribute and a message-digest attribute.
 The message-digest attribute contains a hash of the content of the signed-data, where the content is as described for the absent signed attributes case above.
 Recalculation of the hash value by the recipient is an important step in signature verification.
@@ -238,7 +239,7 @@ digestAlgorithm:
 
 : Per {{Section 5.3 of RFC5652}}, the digestAlgorithm field identifies the message digest algorithm used by the signer, and any associated parameters.
 To ensure collision resistance, the identified message digest algorithm SHOULD produce a hash value of a size that is at least twice the collision strength of the internal commitment hash used by ML-DSA.
-SHA-512 {{FIPS180}} MUST be supported for use with the variants of SLH-DSA in this document; however, other hash functions MAY also be supported.  When SHA-512 is used, the id-sha512 {{!RFC5754}} digest algorithm identifier is used and the parameters field MUST be omitted.
+SHA-512 {{FIPS180}} MUST be supported for use with the variants of SLH-DSA in this document; however, other hash functions MAY also be supported.  When SHA-512 is used, the id-sha512 {{!RFC5754}} digest algorithm identifier is used and the parameters field MUST be omitted. When signing using ML-DSA without including signed attributes, the algorithm specified in the digestAlgorithm field has no meaning, as ML-DSA computes signatures over entire messages rather than externally computed digests. Nonetheless, it SHOULD specify a digest algorithm that otherwise would have been used if signed attributes were present, such as SHA-512. When processing a SignerInfo signed using ML-DSA, if no signed attributes are present, implementatons MUST ignore the content of the digestAlgorithm field.
 
 signatureAlgorithm:
 
@@ -258,9 +259,7 @@ signatureAlgorithm:
 
 # Security Considerations
 
-The relevant security considerations from {{RFC5652}} apply to this document as well.
-
-The security considerations for {{!I-D.ietf-lamps-dilithium-certificates}} are equally applicable to this document.
+The security considerations {{RFC5652}} and {{!I-D.ietf-lamps-dilithium-certificates}} apply to this specification as well.
 
 Security of the ML-DSA private key is critical.
 Compromise of the private key will enable an adversary to forge arbitrary signatures.
@@ -269,8 +268,10 @@ By default ML-DSA signature generation uses randomness from two sources: fresh r
 This is referred to as the "hedged" variant of ML-DSA.
 Inclusion of both sources of random can help mitigate against faulty random number generators and side-channel attacks.
 {{FIPS204}} also permits creating deterministic signatures using just the precomputed random data in the signer's private key.
+The same verification algorithm is used to verify both hedged and deterministic signatures, so this choice does not affect interoperability.
 The signer SHOULD NOT use the deterministic variant of ML-DSA on platforms where side-channel attacks are a concern.
 
+To avoid algorithm substitution attacks, the CMSAlgorithmProtection attribute defined in {{!RFC6211}} SHOULD be included in signed attributes.
 
 # IANA Considerations
 
@@ -280,7 +281,7 @@ This should be allocated in the "SMI Security for S/MIME Module Identifier" regi
 
 # Acknowledgments
 
-TODO acknowledgements.
+This document was heavily influenced by {{?RFC8419}}, {{?I-D.ietf-lamps-cms-sphincs-plus}}, and {{?I-D.ietf-lamps-dilithium-certificates}}.  Thanks go to the authors of those documents.
 
 
 --- back
