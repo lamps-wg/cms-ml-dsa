@@ -259,9 +259,7 @@ signatureAlgorithm:
 
 # Security Considerations
 
-The relevant security considerations from {{RFC5652}} apply to this document as well.
-
-The security considerations for {{!I-D.ietf-lamps-dilithium-certificates}} are equally applicable to this document.
+The security considerations {{RFC5652}} and {{!I-D.ietf-lamps-dilithium-certificates}} apply to this specification as well.
 
 Security of the ML-DSA private key is critical.
 Compromise of the private key will enable an adversary to forge arbitrary signatures.
@@ -270,6 +268,7 @@ By default ML-DSA signature generation uses randomness from two sources: fresh r
 This is referred to as the "hedged" variant of ML-DSA.
 Inclusion of both sources of random can help mitigate against faulty random number generators and side-channel attacks.
 {{FIPS204}} also permits creating deterministic signatures using just the precomputed random data in the signer's private key.
+The same verification algorithm is used to verify both hedged and deterministic signatures, so this choice does not affect interoperability.
 The signer SHOULD NOT use the deterministic variant of ML-DSA on platforms where side-channel attacks are a concern.
 
 To avoid algorithm substitution attacks, the CMSAlgorithmProtection attribute defined in {{!RFC6211}} SHOULD be included in signed attributes.
