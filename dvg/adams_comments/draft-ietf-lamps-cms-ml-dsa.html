@@ -1461,16 +1461,16 @@ SHA-512 <span>[<a href="#FIPS180" class="cite xref">FIPS180</a>]</span> <span cl
       <h2 id="name-security-considerations">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-5-1">The relevant security considerations from <span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> apply to this document as well.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">The security considerations for <span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> are equally applicable to this document.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">Security of the ML-DSA private key is critical.
-Compromise of the private key will enable an adversary to forge arbitrary signatures.<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">By default ML-DSA signature generation uses randomness from two sources: fresh random data generated during signature generation, and precomputed random data included in the signer's private key.
+<p id="section-5-1">The security considerations <span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> and <span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> apply to this specification as well.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">Security of the ML-DSA private key is critical.
+Compromise of the private key will enable an adversary to forge arbitrary signatures.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">By default ML-DSA signature generation uses randomness from two sources: fresh random data generated during signature generation, and precomputed random data included in the signer's private key.
 This is referred to as the "hedged" variant of ML-DSA.
 Inclusion of both sources of random can help mitigate against faulty random number generators and side-channel attacks.
 <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> also permits creating deterministic signatures using just the precomputed random data in the signer's private key.
-The signer <span class="bcp14">SHOULD NOT</span> use the deterministic variant of ML-DSA on platforms where side-channel attacks are a concern.<a href="#section-5-4" class="pilcrow">¶</a></p>
-<p id="section-5-5">To avoid algorithm substitution attacks, the CMSAlgorithmProtection attribute defined in <span>[<a href="#RFC6211" class="cite xref">RFC6211</a>]</span> <span class="bcp14">SHOULD</span> be included in signed attributes.<a href="#section-5-5" class="pilcrow">¶</a></p>
+The same verification algorithm is used to verify both hedged and deterministic signatures, so this choice does not affect interoperability.
+The signer <span class="bcp14">SHOULD NOT</span> use the deterministic variant of ML-DSA on platforms where side-channel attacks are a concern.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">To avoid algorithm substitution attacks, the CMSAlgorithmProtection attribute defined in <span>[<a href="#RFC6211" class="cite xref">RFC6211</a>]</span> <span class="bcp14">SHOULD</span> be included in signed attributes.<a href="#section-5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
