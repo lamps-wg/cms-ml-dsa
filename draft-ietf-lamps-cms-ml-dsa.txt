@@ -319,7 +319,7 @@ Table of Contents
       digest algorithm that otherwise would have been used if signed
       attributes were present, such as SHA-512.  When processing a
       SignerInfo signed using ML-DSA, if no signed attributes are
-      present, implementatons MUST ignore the content of the
+      present, implementations MUST ignore the content of the
       digestAlgorithm field.
 
    signatureAlgorithm:  When signing a signed-data using ML-DSA, the
