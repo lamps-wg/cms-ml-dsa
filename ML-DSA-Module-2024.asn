@@ -72,10 +72,9 @@ pk-ml-dsa-87 PUBLIC-KEY ::= {
     { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
   -- PRIVATE-KEY no ASN.1 wrapping -- }
 
-ML-DSA-PublicKey ::= OCTET STRING
+ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
 
-ML-DSA-PrivateKey ::= OCTET STRING
-
+ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
 
 --
 -- Expand the signature algorithm set used by CMS [RFC5911]
