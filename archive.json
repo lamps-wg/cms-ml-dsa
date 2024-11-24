@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-21T00:58:15.300960+00:00",
+  "timestamp": "2024-11-24T01:02:20.060475+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -222,6 +222,54 @@
           "updatedAt": "2024-11-14T23:24:18Z"
         }
       ]
+    },
+    {
+      "number": 10,
+      "id": "I_kwDONFRYgM6fshNw",
+      "title": "Size constraints for ML-DSA-PublicKey and ML-DSA-PrivateKey",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/10",
+      "state": "CLOSED",
+      "author": "adam-r-ncsc",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See this thread:\r\nhttps://mailarchive.ietf.org/arch/msg/spasm/2ptHLgPTksX7CNNNQr21pxO-zw8/\r\n\r\n`ML-DSA-PublicKey ::= OCTET STRING` would become `ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312..2592))`, assuming I've read FIPS 204 right.\r\n\r\n`ML-DSA-PrivateKey ::= OCTET STRING` would become `ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))`, assuming we're only supporting seeds as private keys.",
+      "createdAt": "2024-11-21T12:08:26Z",
+      "updatedAt": "2024-11-22T09:46:25Z",
+      "closedAt": "2024-11-22T09:46:25Z",
+      "comments": []
+    },
+    {
+      "number": 11,
+      "id": "I_kwDONFRYgM6fslQN",
+      "title": "Other security considerations",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/11",
+      "state": "CLOSED",
+      "author": "adam-r-ncsc",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "draft-ietf-lamps-dilithium-certificates takes care of much of this for us - is there anything else that needs adding?\r\n\r\nSome suggestions:\r\n\r\n- Implementations need to use a decent PRNG for key generation and rnd (if using hedged signatures).\r\n- Some other drafts discuss protection against fault attacks - FIPS 204 calls out hedged signatures as a particular defence against this.",
+      "createdAt": "2024-11-21T12:15:39Z",
+      "updatedAt": "2024-11-21T23:26:45Z",
+      "closedAt": "2024-11-21T23:26:45Z",
+      "comments": []
+    },
+    {
+      "number": 12,
+      "id": "I_kwDONFRYgM6fsp3U",
+      "title": "Example encodings",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/12",
+      "state": "OPEN",
+      "author": "adam-r-ncsc",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "draft-ietf-lamps-dilithium-certificates has example private keys and public keys. It also has a TODO for example certificates.\r\n\r\nWe could add example signed-data encodings. That being said, RFC 8419, draft-ietf-lamps-cms-sphincs-plus and even RFC 5652 don't have any, so it doesn't need to hold the draft back.\r\n\r\nIf we do include them, it would make sense to include signed attribute and non-signed attribute cases, and to show all three ML-DSA parameter sets. Re-using the keys and (eventually) certificates from draft-ietf-lamps-dilithium-certificates might be sensible too, if possible.",
+      "createdAt": "2024-11-21T12:23:59Z",
+      "updatedAt": "2024-11-21T12:24:00Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -475,6 +523,167 @@
           "body": "",
           "createdAt": "2024-11-12T10:10:54Z",
           "updatedAt": "2024-11-12T10:10:54Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDONFRYgM6CptkT",
+      "title": "Adam's comments",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/9",
+      "state": "MERGED",
+      "author": "danvangeest",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-21T11:11:07Z",
+      "updatedAt": "2024-11-21T15:30:45Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "fa06e80b47f1d4785d42066bdd4cefccff435b0b",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "dvg/adams_comments",
+      "headRefOid": "533b24056ff4261b25b1705d39ff0639e4b7cddc",
+      "closedAt": "2024-11-21T13:59:47Z",
+      "mergedAt": "2024-11-21T13:59:47Z",
+      "mergedBy": "danvangeest",
+      "mergeCommit": {
+        "oid": "e5f708e8b91b4eec996a6ca46e09e92e7a9516f7"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6SGTSE",
+          "commit": {
+            "abbreviatedOid": "ac5abda"
+          },
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "I suggested some extra text for the digestAlgorithm bit, but the rest of the changes all look good to me.",
+          "createdAt": "2024-11-21T11:43:36Z",
+          "updatedAt": "2024-11-21T11:46:51Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\nSHA-512 {{FIPS180}} MUST be supported for use with the variants of SLH-DSA in this document; however, other hash functions MAY also be supported.  When SHA-512 is used, the id-sha512 {{!RFC5754}} digest algorithm identifier is used and the parameters field MUST be omitted. When signing using ML-DSA without including signed attributes, the algorithm specified in the digestAlgorithm field has no meaning, as ML-DSA computes signatures over entire messages rather than externally computed digests. Nonetheless, it SHOULD specify a digest algorithm that otherwise would have been used if signed attributes were present, such as SHA-512. When processing a SignerInfo signed using ML-DSA, if no signed attributes are present, implementatons MUST ignore the content of the digestAlgorithm field.\r\n```",
+              "createdAt": "2024-11-21T11:43:36Z",
+              "updatedAt": "2024-11-21T11:46:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONFRYgM6SGuvI",
+          "commit": {
+            "abbreviatedOid": "533b240"
+          },
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-21T12:32:14Z",
+          "updatedAt": "2024-11-21T12:32:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDONFRYgM6CsCU9",
+      "title": "Add size parameters to ASN.1 public and private key OCTET STRINGs",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/13",
+      "state": "MERGED",
+      "author": "danvangeest",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #10",
+      "createdAt": "2024-11-21T15:30:27Z",
+      "updatedAt": "2024-11-22T09:46:24Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "e5f708e8b91b4eec996a6ca46e09e92e7a9516f7",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "dvg/sized_asn1",
+      "headRefOid": "e3a7c6b821ae1704b1c4f6320eba452358c23ddd",
+      "closedAt": "2024-11-22T09:46:24Z",
+      "mergedAt": "2024-11-22T09:46:24Z",
+      "mergedBy": "danvangeest",
+      "mergeCommit": {
+        "oid": "75fd6c72552e8b0f261d626b670a6043808fb239"
+      },
+      "comments": [
+        {
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In case you missed it, Russ suggested keeping a single type but adding a size range:\r\nhttps://mailarchive.ietf.org/arch/msg/spasm/2ptHLgPTksX7CNNNQr21pxO-zw8/\r\n\r\nLooks good if we're going for three separate public key types though.",
+          "createdAt": "2024-11-21T17:59:33Z",
+          "updatedAt": "2024-11-21T17:59:33Z"
+        },
+        {
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> In case you missed it, Russ suggested keeping a single type but adding a size range: https://mailarchive.ietf.org/arch/msg/spasm/2ptHLgPTksX7CNNNQr21pxO-zw8/\r\n> \r\n> Looks good if we're going for three separate public key types though.\r\n\r\nNever mind - I missed your message on the list about this! Looks like SIZE ( x | y | z ) is popular though.",
+          "createdAt": "2024-11-21T20:23:46Z",
+          "updatedAt": "2024-11-21T20:23:46Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6SQ2Y-",
+          "commit": {
+            "abbreviatedOid": "e3a7c6b"
+          },
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-22T09:26:02Z",
+          "updatedAt": "2024-11-22T09:26:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDONFRYgM6CtKQE",
+      "title": "Security considerations and HSM streaming",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/14",
+      "state": "MERGED",
+      "author": "adam-r-ncsc",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses #11 ",
+      "createdAt": "2024-11-21T17:53:04Z",
+      "updatedAt": "2024-11-21T23:26:52Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "e5f708e8b91b4eec996a6ca46e09e92e7a9516f7",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "ar/security_considerations",
+      "headRefOid": "78bbd1bd10ac8b820eeb3447e478e10f322071eb",
+      "closedAt": "2024-11-21T23:12:25Z",
+      "mergedAt": "2024-11-21T23:12:25Z",
+      "mergedBy": "danvangeest",
+      "mergeCommit": {
+        "oid": "3355bc94145f95bb522ac6b1234a305036a74293"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6SNZcp",
+          "commit": {
+            "abbreviatedOid": "78bbd1b"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-21T23:11:48Z",
+          "updatedAt": "2024-11-21T23:11:48Z",
           "comments": []
         }
       ]
