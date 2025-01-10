@@ -340,3 +340,72 @@ This document was heavily influenced by {{?RFC8419}}, {{?I-D.ietf-lamps-cms-sphi
 {::include ML-DSA-Module-2024.asn}
 <CODE ENDS>
 ~~~
+
+# Examples
+
+This appendix contains example signed-data encodings.
+They can be verified using the example public keys specified in Appendix C of {{?I-D.ietf-lamps-dilithium-certificates}}.
+
+## Signed-Data with signed attributes
+
+The following is an example of a signed-data with a single ML-DSA-44 signer, with signed attributes included:
+
+~~~
+{::include ./examples/mldsa44-signed-attrs.pem}
+~~~
+
+~~~
+{::include ./examples/mldsa44-signed-attrs.txt}
+~~~
+
+The following is an example of a signed-data with a single ML-DSA-65 signer, with signed attributes included:
+
+~~~
+{::include ./examples/mldsa65-signed-attrs.pem}
+~~~
+
+~~~
+{::include ./examples/mldsa65-signed-attrs.txt}
+~~~
+
+The following is an example of a signed-data with a single ML-DSA-87 signer, with signed attributes included:
+
+~~~
+{::include ./examples/mldsa87-signed-attrs.pem}
+~~~
+
+~~~
+{::include ./examples/mldsa87-signed-attrs.txt}
+~~~
+
+## Signed-Data without signed attributes
+
+The following is an example of a signed-data with a single ML-DSA-44 signer, with no signed attributes:
+
+~~~
+{::include ./examples/mldsa44-no-signed-attrs.pem}
+~~~
+
+~~~
+{::include ./examples/mldsa44-no-signed-attrs.txt}
+~~~
+
+The following is an example of a signed-data with a single ML-DSA-65 signer, with no signed attributes:
+
+~~~
+{::include ./examples/mldsa65-no-signed-attrs.pem}
+~~~
+
+~~~
+{::include ./examples/mldsa65-no-signed-attrs.txt}
+~~~
+
+The following is an example of a signed-data with a single ML-DSA-87 signer, with no signed attributes:
+
+~~~
+{::include ./examples/mldsa87-no-signed-attrs.pem}
+~~~
+
+~~~
+{::include ./examples/mldsa87-no-signed-attrs.txt}
+~~~
