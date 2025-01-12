@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-09T00:55:59.531995+00:00",
+  "timestamp": "2025-01-12T01:01:51.217496+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -684,6 +684,46 @@
           "body": "",
           "createdAt": "2024-11-21T23:11:48Z",
           "updatedAt": "2024-11-21T23:11:48Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDONFRYgM6HVDXr",
+      "title": "Example encodings",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/15",
+      "state": "OPEN",
+      "author": "adam-r-ncsc",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses #12. I've tried to keep in line with draft-ietf-lamps-dilithium-certificates: I use the same private/public keys, the same issuer name/serial, and the format in the document should be the same as well.\r\n\r\nThe code I used to generate these could easily be adapted to EdDSA to check that I'm at least doing pure mode signatures right, but openSSL doesn't support it properly as best I can tell (see https://github.com/openssl/openssl/pull/22391 and a familiar name in the comments). GnuTLS claims to support it, and I think BouncyCastle might, but I'm not familiar enough with either of those to test quickly.",
+      "createdAt": "2025-01-10T12:55:46Z",
+      "updatedAt": "2025-01-10T13:55:13Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "8ebab1395f681f2eb36bc23dc9a647f2d794a994",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "ar/examples",
+      "headRefOid": "4972bc3a7b8a2830a95fe0ab124128c1b74327d8",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6Xi2wJ",
+          "commit": {
+            "abbreviatedOid": "4972bc3"
+          },
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Haven't checked the test vectors since I don't have an implementation to hand, but it all compiles and looks sensible \ud83d\udc4d",
+          "createdAt": "2025-01-10T13:55:13Z",
+          "updatedAt": "2025-01-10T13:55:13Z",
           "comments": []
         }
       ]
