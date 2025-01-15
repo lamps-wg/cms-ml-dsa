@@ -1242,10 +1242,13 @@ In addition, the algorithm identifier and public key syntax are provided.<a href
 It is intended to be secure against both "traditional" cryptographic attacks, as well as attacks utilising a quantum computer.
 It offers smaller signatures and significantly faster runtimes than SLH-DSA <span>[<a href="#FIPS205" class="cite xref">FIPS205</a>]</span>, an alternative post-quantum signature algorithm also standardised by NIST.
 This document specifies the use of the ML-DSA in CMS at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-06#appendix-B" class="relref">Appendix B</a> of [<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> for more information on the security levels and key sizes of ML-DSA.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and Dilithium are not compatible.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">For each of the ML-DSA parameter sets, an algorithm identifier OID has been specified.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4"><span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> also specifies a pre-hashed variant of ML-DSA, called HashML-DSA.
-HashML-DSA is not used in CMS.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<aside id="section-1-2">
+        <p id="section-1-2.1">RFC EDITOR: Please replace <span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> and <span>[<a href="#I-D.ietf-lamps-cms-sphincs-plus" class="cite xref">I-D.ietf-lamps-cms-sphincs-plus</a>]</span> throughout this document with references to the published RFCs.<a href="#section-1-2.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="section-1-3">Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and Dilithium are not compatible.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">For each of the ML-DSA parameter sets, an algorithm identifier OID has been specified.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5"><span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> also specifies a pre-hashed variant of ML-DSA, called HashML-DSA.
+HashML-DSA is not used in CMS.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <div id="conventions-and-definitions">
 <section id="section-1.1">
         <h3 id="name-conventions-and-definitions">

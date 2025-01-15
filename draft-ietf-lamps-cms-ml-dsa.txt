@@ -110,6 +110,11 @@ Table of Contents
    of [I-D.ietf-lamps-dilithium-certificates] for more information on
    the security levels and key sizes of ML-DSA.
 
+      |  RFC EDITOR: Please replace
+      |  [I-D.ietf-lamps-dilithium-certificates] and
+      |  [I-D.ietf-lamps-cms-sphincs-plus] throughout this document with
+      |  references to the published RFCs.
+
    Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
    Dilithium are not compatible.
 
