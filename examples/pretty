@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Adapted from https://github.com/lamps-wg/dilithium-certificates/blob/main/examples/pretty
+
+for param in 44 65 87
+do
+    for type in signed-attrs no-signed-attrs
+    do
+        variant="mldsa$param-$type"
+        ~/go/bin/der2ascii -pem -i $variant.pem -o $variant.tmp
+        fold -w 64 $variant.tmp > $variant.txt
+        rm $variant.tmp
+    done
+done

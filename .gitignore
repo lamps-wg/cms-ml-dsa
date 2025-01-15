@@ -2,7 +2,6 @@
 *.pdf
 *.redxml
 *.swp
-*.txt
 *.upload
 *~
 .tags
@@ -18,6 +17,7 @@
 Gemfile.lock
 archive.json
 draft-ietf-lamps-cms-ml-dsa.xml
+draft-ietf-lamps-cms-ml-dsa.txt
 package-lock.json
 report.xml
 !requirements.txt
