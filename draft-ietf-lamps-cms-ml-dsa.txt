@@ -5,9 +5,9 @@
 Limited Additional Mechanisms for PKIX and SMIME               B. Salter
 Internet-Draft                                                  A. Raine
 Intended status: Standards Track       UK National Cyber Security Centre
-Expires: 26 May 2025                                        D. Van Geest
+Expires: 19 July 2025                                       D. Van Geest
                                                      CryptoNext Security
-                                                        22 November 2024
+                                                         15 January 2025
 
 
    Use of the ML-DSA Signature Algorithm in the Cryptographic Message
@@ -57,11 +57,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 May 2025.
+   This Internet-Draft will expire on 19 July 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -308,7 +308,7 @@ Table of Contents
       the identified message digest algorithm SHOULD produce a hash
       value of a size that is at least twice the collision strength of
       the internal commitment hash used by ML-DSA.  SHA-512 [FIPS180]
-      MUST be supported for use with the variants of SLH-DSA in this
+      MUST be supported for use with the variants of ML-DSA in this
       document; however, other hash functions MAY also be supported.
       When SHA-512 is used, the id-sha512 [RFC5754] digest algorithm
       identifier is used and the parameters field MUST be omitted.  When
@@ -436,8 +436,8 @@ Table of Contents
               2024, <https://csrc.nist.gov/projects/computer-security-
               objects-register/algorithm-registration>.
 
-   [FIPS204]  "Module-Lattice-Based Digital Signature Standard",
-              National Institute of Standards and Technology,
+   [FIPS204]  "Module-lattice-based digital signature standard",
+              National Institute of Standards and Technology (U.S.),
               DOI 10.6028/nist.fips.204, August 2024,
               <https://doi.org/10.6028/nist.fips.204>.
 
@@ -446,9 +446,9 @@ Table of Contents
               Westerbaan, "Internet X.509 Public Key Infrastructure:
               Algorithm Identifiers for ML-DSA", Work in Progress,
               Internet-Draft, draft-ietf-lamps-dilithium-certificates-
-              05, 4 November 2024,
+              06, 14 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
-              dilithium-certificates-05>.
+              dilithium-certificates-06>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -484,8 +484,8 @@ Table of Contents
               and Technology (U.S.), DOI 10.6028/nist.fips.180, 1993,
               <https://doi.org/10.6028/nist.fips.180>.
 
-   [FIPS205]  "Stateless Hash-Based Digital Signature Standard",
-              National Institute of Standards and Technology,
+   [FIPS205]  "Stateless hash-based digital signature standard",
+              National Institute of Standards and Technology (U.S.),
               DOI 10.6028/nist.fips.205, August 2024,
               <https://doi.org/10.6028/nist.fips.205>.
 
@@ -493,9 +493,9 @@ Table of Contents
               Housley, R., Fluhrer, S., Kampanakis, P., and B.
               Westerbaan, "Use of the SLH-DSA Signature Algorithm in the
               Cryptographic Message Syntax (CMS)", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-cms-sphincs-plus-16, 18
-              November 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-lamps-cms-sphincs-plus-16>.
+              Internet-Draft, draft-ietf-lamps-cms-sphincs-plus-19, 13
+              January 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-cms-sphincs-plus-19>.
 
    [KPLG2024] Krahmer, E., Pessl, P., Land, G., and T. Güneysu,
               "Correction Fault Attacks on Randomized CRYSTALS-
