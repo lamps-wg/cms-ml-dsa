@@ -107,6 +107,10 @@ It is intended to be secure against both "traditional" cryptographic attacks, as
 It offers smaller signatures and significantly faster runtimes than SLH-DSA {{FIPS205}}, an alternative post-quantum signature algorithm also standardised by NIST.
 This document specifies the use of the ML-DSA in CMS at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See {{Appendix B of I-D.ietf-lamps-dilithium-certificates}} for more information on the security levels and key sizes of ML-DSA.
 
+<aside markdown="block">
+RFC EDITOR: Please replace {{I-D.ietf-lamps-dilithium-certificates}} and {{I-D.ietf-lamps-cms-sphincs-plus}} throughout this document with references to the published RFCs.
+</aside>
+
 Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and Dilithium are not compatible.
 
 For each of the ML-DSA parameter sets, an algorithm identifier OID has been specified.
