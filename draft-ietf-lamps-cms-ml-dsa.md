@@ -144,7 +144,7 @@ AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
 
 <aside markdown="block">
   NOTE: The above syntax is from {{RFC5911}} and is compatible with the
-  2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
+  2021 ASN.1 syntax {{X680}}. See {{?RFC5280}} for the 1988 ASN.1 syntax.
 </aside>
 
 The fields in the AlgorithmIdentifier type have the following meanings:
@@ -173,64 +173,6 @@ id-ml-dsa-65 OBJECT IDENTIFIER ::= { sigAlgs 18 }
 id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
 
 ~~~
-
-# ML-DSA Key Encoding
-
-{{!RFC5280}} defines the SubjectPublicKeyInfo ASN.1 type.
-In X.509 certificates {{RFC5280}} and Certificate Management over CMS {{?RFC5272}}, the SubjectPublicKeyInfo type is used to encode public keys.
-It has the following syntax:
-
-~~~ asn1
-  SubjectPublicKeyInfo {PUBLIC-KEY: IOSet} ::= SEQUENCE {
-      algorithm        AlgorithmIdentifier {PUBLIC-KEY, {IOSet}},
-      subjectPublicKey BIT STRING
-  }
-~~~
-
-<aside markdown="block">
-  NOTE: The above syntax is from {{RFC5911}} and is compatible with the
-  2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
-</aside>
-
-The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:
-
-~~~ asn.1
-pk-ml-dsa-44 PUBLIC-KEY ::= {
-  IDENTIFIER id-ml-dsa-44
-  -- KEY no ASN.1 wrapping --
-  CERT-KEY-USAGE
-    { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-  -- PRIVATE-KEY no ASN.1 wrapping -- }
-
-pk-ml-dsa-65 PUBLIC-KEY ::= {
-  IDENTIFIER id-ml-dsa-65
-  -- KEY no ASN.1 wrapping --
-  CERT-KEY-USAGE
-    { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-  -- PRIVATE-KEY no ASN.1 wrapping -- }
-
-pk-ml-dsa-87 PUBLIC-KEY ::= {
-  IDENTIFIER id-ml-dsa-87
-  -- KEY no ASN.1 wrapping --
-  CERT-KEY-USAGE
-    { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-  -- PRIVATE-KEY no ASN.1 wrapping -- }
-
-ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
-
-ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
-~~~
-
-Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string encoding of an ML-DSA public key.
-When used in a SubjectPublicKeyInfo type, the subjectPublicKey BIT STRING contains the raw byte string encoding of the public key.
-
-When an ML-DSA public key appears outside of a SubjectPublicKeyInfo type in an environment that uses ASN.1 encoding, it can be encoded as an OCTET STRING by using the ML-DSA-PublicKey type.
-
-{{?RFC5958}} describes the Asymmetric Key Package CMS content type, and the OneAsymmetricKey type for encoding asymmetric keypairs.
-When an ML-DSA private key or keypair is encoded as a OneAsymmetricKey, it follows the description in {{Section 6 of I-D.ietf-lamps-dilithium-certificates}}.
-
-When the ML-DSA private key appears outside of an Asymmetric Key Package in an environment that uses ASN.1 encoding, it can be encoded as an OCTET STRING by using the ML-DSA-PrivateKey type.
-
 
 # Signed-data Conventions
 
@@ -326,7 +268,7 @@ This value may "optionally be computed in a different cryptographic module" and 
 
 # IANA Considerations
 
-For the ASN.1 module found in {{asn1}}, IANA is requested to assign an object identifier for the module identifier (TBD) with a description of "id-mod-ml-dsa-2024".
+For the ASN.1 module found in {{asn1}}, IANA is requested to assign an object identifier for the module identifier (TBD1) with a description of "id-mod-ml-dsa-2024".
 This should be allocated in the "SMI Security for S/MIME Module Identifier" registry (1.2.840.113549.1.9.16.0).
 
 
@@ -338,6 +280,11 @@ This document was heavily influenced by {{?RFC8419}}, {{?I-D.ietf-lamps-cms-sphi
 --- back
 
 # ASN.1 Module {#asn1}
+
+<aside markdown="block">
+RFC EDITOR: Please replace TBD2 with the value assigned by IANA during the
+publication of {{I-D.ietf-lamps-dilithium-certificates}}.
+</aside>
 
 ~~~ asn.1
 <CODE BEGINS>
