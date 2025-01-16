@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-14T00:53:44.065160+00:00",
+  "timestamp": "2025-01-16T00:54:30.312775+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -260,16 +260,76 @@
       "id": "I_kwDONFRYgM6fsp3U",
       "title": "Example encodings",
       "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/12",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "adam-r-ncsc",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "draft-ietf-lamps-dilithium-certificates has example private keys and public keys. It also has a TODO for example certificates.\r\n\r\nWe could add example signed-data encodings. That being said, RFC 8419, draft-ietf-lamps-cms-sphincs-plus and even RFC 5652 don't have any, so it doesn't need to hold the draft back.\r\n\r\nIf we do include them, it would make sense to include signed attribute and non-signed attribute cases, and to show all three ML-DSA parameter sets. Re-using the keys and (eventually) certificates from draft-ietf-lamps-dilithium-certificates might be sensible too, if possible.",
       "createdAt": "2024-11-21T12:23:59Z",
-      "updatedAt": "2024-11-21T12:24:00Z",
+      "updatedAt": "2025-01-15T18:23:12Z",
+      "closedAt": "2025-01-15T18:23:12Z",
+      "comments": [
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed by #15 ",
+          "createdAt": "2025-01-15T18:23:12Z",
+          "updatedAt": "2025-01-15T18:23:12Z"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "I_kwDONFRYgM6mRaz1",
+      "title": "Support for full private keys",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/17",
+      "state": "OPEN",
+      "author": "adam-r-ncsc",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The need to support full private keys (versus seeds only) for use with HSMs has come up in WGLC for other PQC LAMPS drafts. We're almost immune to that discussion as the primary private key format is described in the ML-DSA X.509 draft, but we do include a definition for ML-DSA-PrivateKey that's restricted to 32 bytes.\r\n\r\nIf the ML-DSA X.509 draft adopts a choice of two key formats, ML-DSA-PrivateKey should follow suit. Either way, there's no explanation that the 32 byte restriction corresponds to a seed, which perhaps might not be immediately obvious, so a brief explanation might help there.\r\n\r\nRelevant threads:\r\nhttps://mailarchive.ietf.org/arch/msg/spasm/QRvuqH2uLCgWLthF3JUC1C8eAUE/\r\nhttps://mailarchive.ietf.org/arch/msg/spasm/JRUQk0m0MtEr3YwFpcxD6PiwMLE/",
+      "createdAt": "2025-01-15T11:45:08Z",
+      "updatedAt": "2025-01-15T13:41:07Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I would be happy if the majority of our ASN.1 was moved over to the certs draft so we can sidestep the issue entirely.  That would also avoid us needing to add any seed explanation.\r\n\r\nI'll send an email to both sets of authors before making a WGLC comment on it for the certs draft.",
+          "createdAt": "2025-01-15T12:49:09Z",
+          "updatedAt": "2025-01-15T12:49:09Z"
+        },
+        {
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think that makes sense, the split does feel a little odd. The private key format is even arguably a CMS thing given the RFC it refers to a CMS RFC, but practically speaking the number of X.509 implementations using those formats is going to be much greater than the set of CMS implementations using them.",
+          "createdAt": "2025-01-15T13:00:34Z",
+          "updatedAt": "2025-01-15T13:00:34Z"
+        },
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I think that makes sense, the split does feel a little odd. The private key format is even arguably a CMS thing given the RFC it refers to a CMS RFC, but practically speaking the number of X.509 implementations using those formats is going to be much greater than the set of CMS implementations using them.\r\n\r\nCan you expand on \"the RFC it refers to a CMS RFC\"?  Which RFC are you/it referring to?",
+          "createdAt": "2025-01-15T13:07:32Z",
+          "updatedAt": "2025-01-15T13:07:32Z"
+        },
+        {
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm happy for everything to be moved over to the certs draft - having all of the ASN.1 everything in one place that we can just point to makes sense.\r\n\r\nEqually, I'd be happy for consensus during WGLC to make the decision for us.",
+          "createdAt": "2025-01-15T13:25:01Z",
+          "updatedAt": "2025-01-15T13:25:01Z"
+        },
+        {
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > I think that makes sense, the split does feel a little odd. The private key format is even arguably a CMS thing given the RFC it refers to a CMS RFC, but practically speaking the number of X.509 implementations using those formats is going to be much greater than the set of CMS implementations using them.\r\n> \r\n> Can you expand on \"the RFC it refers to a CMS RFC\"? Which RFC are you/it referring to?\r\n\r\nRFC 5958 - the document's titled \"Asymmetric Key Packages\" (as opposed to \"Asymmetric Key Formats\") and it describes how to encrypt/sign/etc private keys in CMS, so I've always seen it as a CMS RFC. But it doesn't describe the core private key format as being part of CMS and that format's derived from PKCS#8 (rather than PKCS#7), so I think my perception is based on biases from my personal experiences, rather than a reflection of reality! \ud83d\ude42\r\n\r\nEither way, I agree that the X.509 draft is the right place if everyone's amenable to that.",
+          "createdAt": "2025-01-15T13:41:06Z",
+          "updatedAt": "2025-01-15T13:41:06Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -693,25 +753,63 @@
       "id": "PR_kwDONFRYgM6HVDXr",
       "title": "Example encodings",
       "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/15",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "adam-r-ncsc",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Addresses #12. I've tried to keep in line with draft-ietf-lamps-dilithium-certificates: I use the same private/public keys, the same issuer name/serial, and the format in the document should be the same as well.\r\n\r\nThe code I used to generate these could easily be adapted to EdDSA to check that I'm at least doing pure mode signatures right, but openSSL doesn't support it properly as best I can tell (see https://github.com/openssl/openssl/pull/22391 and a familiar name in the comments). GnuTLS claims to support it, and I think BouncyCastle might, but I'm not familiar enough with either of those to test quickly.",
       "createdAt": "2025-01-10T12:55:46Z",
-      "updatedAt": "2025-01-10T13:55:13Z",
+      "updatedAt": "2025-01-15T18:27:02Z",
       "baseRepository": "lamps-wg/cms-ml-dsa",
       "baseRefName": "main",
       "baseRefOid": "8ebab1395f681f2eb36bc23dc9a647f2d794a994",
       "headRepository": "lamps-wg/cms-ml-dsa",
       "headRefName": "ar/examples",
       "headRefOid": "4972bc3a7b8a2830a95fe0ab124128c1b74327d8",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2025-01-15T18:07:31Z",
+      "mergedAt": "2025-01-15T18:07:31Z",
+      "mergedBy": "danvangeest",
+      "mergeCommit": {
+        "oid": "b8ee705d2ecb81e2d15bb66a65d2015c388cb740"
+      },
+      "comments": [
+        {
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We good to go on this one? Sounds like we have a successful interop",
+          "createdAt": "2025-01-15T14:55:46Z",
+          "updatedAt": "2025-01-15T14:55:46Z"
+        },
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I have successfully tested the signed-attributes version of the artifacts with a locally-modified OpenSSL (to fix support for pure signatures) and my own PQ OpenSSL provider.  I have not successfully tested the no-signed-attributes version of the artifacts, changing OpenSSL to support this would be a significant amount of work.\r\n\r\nI don't know how to address the no-signed-attributes attributes, either remove them or ask the WG if they can verify them.",
+          "createdAt": "2025-01-15T15:09:10Z",
+          "updatedAt": "2025-01-15T15:09:10Z"
+        },
+        {
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I don't know how to address the no-signed-attributes attributes, either remove them or ask the WG if they can verify them.\r\n\r\n@adam-r-ncsc, did you mention you did a sorta-interop for the unsigned attributes case (i.e. two independent implementations but forked from the same codebase so not totally independent)?\r\n\r\nAt any rate, seems to me like something that could be done as part of WGLC, assuming Russ is happy with that.",
+          "createdAt": "2025-01-15T15:15:18Z",
+          "updatedAt": "2025-01-15T15:15:18Z"
+        },
+        {
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm not sure we had a good test for the no-signed-attributes case unfortunately, the internal testing we did focused on a signed data with signed attributes. We can try and go further, but ultimately it's still two NCSC-originated implementations, so not a great test.\r\n\r\nIt's not hugely difficult to see if the signature verifies given that it's only calculated over the message's content, but that doesn't cover whether the rest of the message is formatted correctly. I'd upload my code - its only dependency is Cloudflare's CIRCL library - but I'd need to go check whether I'm actually allowed to do that first, and either way that's still not an interoperability test.\r\n\r\nRemoving them probably makes sense if nobody can test them? Maybe we:\r\n1. Merge the PR\r\n2. Produce a new version of the document and explain to the list that we have some untested examples\r\n3. If no testing ends up happening, produce a PR to remove those examples\r\n",
+          "createdAt": "2025-01-15T17:43:11Z",
+          "updatedAt": "2025-01-15T17:43:11Z"
+        },
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm fine with that proposal.  I'll have a short PR soon just adding an RFC editor note asking them to use the correct RFC number instead of dilithium-certificates.",
+          "createdAt": "2025-01-15T18:07:01Z",
+          "updatedAt": "2025-01-15T18:07:01Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDONFRYgM6Xi2wJ",
@@ -724,6 +822,116 @@
           "body": "Haven't checked the test vectors since I don't have an implementation to hand, but it all compiles and looks sensible \ud83d\udc4d",
           "createdAt": "2025-01-10T13:55:13Z",
           "updatedAt": "2025-01-10T13:55:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONFRYgM6YNAYh",
+          "commit": {
+            "abbreviatedOid": "4972bc3"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-15T18:07:18Z",
+          "updatedAt": "2025-01-15T18:07:18Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDONFRYgM6H1Nxs",
+      "title": "Fix SLH-DSA typo",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/16",
+      "state": "MERGED",
+      "author": "adam-r-ncsc",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixing a typo identified by Piotr Popis - \"SLH-DSA\" should be \"ML-DSA\".",
+      "createdAt": "2025-01-15T11:02:00Z",
+      "updatedAt": "2025-01-15T11:08:03Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "8ebab1395f681f2eb36bc23dc9a647f2d794a994",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "ar/correct_typo",
+      "headRefOid": "ac73a0763641e09ba759eb4f40088699a3ae7ddb",
+      "closedAt": "2025-01-15T11:06:45Z",
+      "mergedAt": "2025-01-15T11:06:45Z",
+      "mergedBy": "danvangeest",
+      "mergeCommit": {
+        "oid": "342f9d9d8d23b9873666c54dd0a3d2f4ad560f7a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6YIE93",
+          "commit": {
+            "abbreviatedOid": "ac73a07"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-15T11:06:32Z",
+          "updatedAt": "2025-01-15T11:06:32Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDONFRYgM6H43Sm",
+      "title": "Add editor note to replace draft names with RFCs",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/18",
+      "state": "MERGED",
+      "author": "danvangeest",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-01-15T18:22:31Z",
+      "updatedAt": "2025-01-15T18:49:36Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "b8ee705d2ecb81e2d15bb66a65d2015c388cb740",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "dvg/editor_note",
+      "headRefOid": "b39e471660fa420269db9aabf432594b4ed5e561",
+      "closedAt": "2025-01-15T18:49:36Z",
+      "mergedAt": "2025-01-15T18:49:36Z",
+      "mergedBy": "adam-r-ncsc",
+      "mergeCommit": {
+        "oid": "7082b020c2d0b48213fd0b9f794d74615700e3d8"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6YNRF1",
+          "commit": {
+            "abbreviatedOid": "b39e471"
+          },
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-15T18:38:00Z",
+          "updatedAt": "2025-01-15T18:38:00Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONFRYgM6YNWXc",
+          "commit": {
+            "abbreviatedOid": "b39e471"
+          },
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-15T18:49:27Z",
+          "updatedAt": "2025-01-15T18:49:27Z",
           "comments": []
         }
       ]
