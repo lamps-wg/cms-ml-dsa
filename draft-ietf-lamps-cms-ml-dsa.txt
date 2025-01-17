@@ -5,9 +5,9 @@
 Limited Additional Mechanisms for PKIX and SMIME               B. Salter
 Internet-Draft                                                  A. Raine
 Intended status: Standards Track       UK National Cyber Security Centre
-Expires: 20 July 2025                                       D. Van Geest
+Expires: 21 July 2025                                       D. Van Geest
                                                      CryptoNext Security
-                                                         16 January 2025
+                                                         17 January 2025
 
 
    Use of the ML-DSA Signature Algorithm in the Cryptographic Message
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 July 2025.
+   This Internet-Draft will expire on 21 July 2025.
 
 Copyright Notice
 
@@ -78,18 +78,17 @@ Table of Contents
    1.  Introduction
      1.1.  Conventions and Definitions
    2.  ML-DSA Algorithm Identifiers
-   3.  ML-DSA Key Encoding
-   4.  Signed-data Conventions
-     4.1.  Pure mode vs pre-hash mode
-     4.2.  Signature generation and verification
-     4.3.  SignerInfo content
-   5.  Security Considerations
-   6.  Operational Considerations
-   7.  IANA Considerations
-   8.  Acknowledgments
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   3.  Signed-data Conventions
+     3.1.  Pure mode vs pre-hash mode
+     3.2.  Signature generation and verification
+     3.3.  SignerInfo content
+   4.  Security Considerations
+   5.  Operational Considerations
+   6.  IANA Considerations
+   7.  Acknowledgments
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Appendix A.  ASN.1 Module
    Appendix B.  Examples
    Authors' Addresses
@@ -180,71 +179,9 @@ Table of Contents
 
    id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
 
-3.  ML-DSA Key Encoding
+3.  Signed-data Conventions
 
-   [RFC5280] defines the SubjectPublicKeyInfo ASN.1 type.  In X.509
-   certificates [RFC5280] and Certificate Management over CMS [RFC5272],
-   the SubjectPublicKeyInfo type is used to encode public keys.  It has
-   the following syntax:
-
-     SubjectPublicKeyInfo {PUBLIC-KEY: IOSet} ::= SEQUENCE {
-         algorithm        AlgorithmIdentifier {PUBLIC-KEY, {IOSet}},
-         subjectPublicKey BIT STRING
-     }
-
-      |  NOTE: The above syntax is from [RFC5911] and is compatible with
-      |  the 2021 ASN.1 syntax [X680].  See [RFC5280] for the 1988 ASN.1
-      |  syntax.
-
-   The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:
-
-   pk-ml-dsa-44 PUBLIC-KEY ::= {
-     IDENTIFIER id-ml-dsa-44
-     -- KEY no ASN.1 wrapping --
-     CERT-KEY-USAGE
-       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-     -- PRIVATE-KEY no ASN.1 wrapping -- }
-
-   pk-ml-dsa-65 PUBLIC-KEY ::= {
-     IDENTIFIER id-ml-dsa-65
-     -- KEY no ASN.1 wrapping --
-     CERT-KEY-USAGE
-       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-     -- PRIVATE-KEY no ASN.1 wrapping -- }
-
-   pk-ml-dsa-87 PUBLIC-KEY ::= {
-     IDENTIFIER id-ml-dsa-87
-     -- KEY no ASN.1 wrapping --
-     CERT-KEY-USAGE
-       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-     -- PRIVATE-KEY no ASN.1 wrapping -- }
-
-   ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
-
-   ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
-
-   Algorithm 22 in Section 7.2 of [FIPS204] defines the raw byte string
-   encoding of an ML-DSA public key.  When used in a
-   SubjectPublicKeyInfo type, the subjectPublicKey BIT STRING contains
-   the raw byte string encoding of the public key.
-
-   When an ML-DSA public key appears outside of a SubjectPublicKeyInfo
-   type in an environment that uses ASN.1 encoding, it can be encoded as
-   an OCTET STRING by using the ML-DSA-PublicKey type.
-
-   [RFC5958] describes the Asymmetric Key Package CMS content type, and
-   the OneAsymmetricKey type for encoding asymmetric keypairs.  When an
-   ML-DSA private key or keypair is encoded as a OneAsymmetricKey, it
-   follows the description in Section 6 of
-   [I-D.ietf-lamps-dilithium-certificates].
-
-   When the ML-DSA private key appears outside of an Asymmetric Key
-   Package in an environment that uses ASN.1 encoding, it can be encoded
-   as an OCTET STRING by using the ML-DSA-PrivateKey type.
-
-4.  Signed-data Conventions
-
-4.1.  Pure mode vs pre-hash mode
+3.1.  Pure mode vs pre-hash mode
 
    [RFC5652] specifies that digital signatures for CMS are produced
    using a digest of the message to be signed, and the signer's private
@@ -263,7 +200,7 @@ Table of Contents
    and SLH-DSA in CMS [I-D.ietf-lamps-cms-sphincs-plus] and only
    specifies use of the pure mode of ML-DSA in CMS.
 
-4.2.  Signature generation and verification
+3.2.  Signature generation and verification
 
    [RFC5652] describes the two methods that are used to calculate and
    verify signatures in CMS.  One method is used when signed attributes
@@ -304,7 +241,7 @@ Table of Contents
    contexts.  When using ML-DSA as described in this document, the
    context string is not used.
 
-4.3.  SignerInfo content
+3.3.  SignerInfo content
 
    When using ML-DSA, the fields of a SignerInfo are used as follows:
 
@@ -356,7 +293,7 @@ Table of Contents
       [RFC5652] places further requirements on the successful
       verification of a signature.
 
-5.  Security Considerations
+4.  Security Considerations
 
    The security considerations [RFC5652] and
    [I-D.ietf-lamps-dilithium-certificates] apply to this specification
@@ -399,7 +336,7 @@ Table of Contents
    attribute defined in [RFC6211] SHOULD be included in signed
    attributes.
 
-6.  Operational Considerations
+5.  Operational Considerations
 
    If ML-DSA signing is implemented in a hardware device such as
    hardware security module (HSM) or portable cryptographic token,
@@ -419,24 +356,24 @@ Table of Contents
    hardware device, rather than requiring the entire message to be
    transmitted.
 
-7.  IANA Considerations
+6.  IANA Considerations
 
    For the ASN.1 module found in Appendix A, IANA is requested to assign
-   an object identifier for the module identifier (TBD) with a
+   an object identifier for the module identifier (TBD1) with a
    description of "id-mod-ml-dsa-2024".  This should be allocated in the
    "SMI Security for S/MIME Module Identifier" registry
    (1.2.840.113549.1.9.16.0).
 
-8.  Acknowledgments
+7.  Acknowledgments
 
    This document was heavily influenced by [RFC8419],
    [I-D.ietf-lamps-cms-sphincs-plus], and
    [I-D.ietf-lamps-dilithium-certificates].  Thanks go to the authors of
    those documents.
 
-9.  References
+8.  References
 
-9.1.  Normative References
+8.1.  Normative References
 
    [CSOR]     NIST, "Computer Security Objects Register", 20 August
               2024, <https://csrc.nist.gov/projects/computer-security-
@@ -461,12 +398,6 @@ Table of Contents
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
-   [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
-              Housley, R., and W. Polk, "Internet X.509 Public Key
-              Infrastructure Certificate and Certificate Revocation List
-              (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
-              <https://www.rfc-editor.org/rfc/rfc5280>.
-
    [RFC5652]  Housley, R., "Cryptographic Message Syntax (CMS)", STD 70,
               RFC 5652, DOI 10.17487/RFC5652, September 2009,
               <https://www.rfc-editor.org/rfc/rfc5652>.
@@ -484,7 +415,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-9.2.  Informative References
+8.2.  Informative References
 
    [FIPS180]  "Secure hash standard", National Institute of Standards
               and Technology (U.S.), DOI 10.6028/nist.fips.180, 1993,
@@ -512,18 +443,16 @@ Table of Contents
               DOI 10.17487/RFC4086, June 2005,
               <https://www.rfc-editor.org/rfc/rfc4086>.
 
-   [RFC5272]  Schaad, J. and M. Myers, "Certificate Management over CMS
-              (CMC)", RFC 5272, DOI 10.17487/RFC5272, June 2008,
-              <https://www.rfc-editor.org/rfc/rfc5272>.
+   [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
+              Housley, R., and W. Polk, "Internet X.509 Public Key
+              Infrastructure Certificate and Certificate Revocation List
+              (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
+              <https://www.rfc-editor.org/rfc/rfc5280>.
 
    [RFC5911]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for
               Cryptographic Message Syntax (CMS) and S/MIME", RFC 5911,
               DOI 10.17487/RFC5911, June 2010,
               <https://www.rfc-editor.org/rfc/rfc5911>.
-
-   [RFC5958]  Turner, S., "Asymmetric Key Packages", RFC 5958,
-              DOI 10.17487/RFC5958, August 2010,
-              <https://www.rfc-editor.org/rfc/rfc5958>.
 
    [RFC8032]  Josefsson, S. and I. Liusvaara, "Edwards-Curve Digital
               Signature Algorithm (EdDSA)", RFC 8032,
@@ -546,84 +475,30 @@ Table of Contents
 
 Appendix A.  ASN.1 Module
 
+      |  RFC EDITOR: Please replace TBD2 with the value assigned by IANA
+      |  during the publication of
+      |  [I-D.ietf-lamps-dilithium-certificates].
+
    <CODE BEGINS>
    ML-DSA-Module-2024
      { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
-       id-smime(16) id-mod(0) id-mod-ml-dsa-2024(TBD) }
+       id-smime(16) id-mod(0) id-mod-ml-dsa-2024(TBD1) }
 
    DEFINITIONS IMPLICIT TAGS ::= BEGIN
 
    EXPORTS ALL;
 
-   IMPORTS PUBLIC-KEY, SIGNATURE-ALGORITHM, SMIME-CAPS
+   IMPORTS SIGNATURE-ALGORITHM, SMIME-CAPS
      FROM AlgorithmInformation-2009 -- in [RFC5911]
      { iso(1) identified-organization(3) dod(6) internet(1)
        security(5) mechanisms(5) pkix(7) id-mod(0)
-       id-mod-algorithmInformation-02(58) } ;
+       id-mod-algorithmInformation-02(58) }
 
-   --
-   -- Object Identifiers
-   --
-
-   sigAlgs OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
-       us(840) organization(1) gov(101) csor(3) nistAlgorithms(4) 3 }
-
-   id-ml-dsa-44 OBJECT IDENTIFIER ::= { sigAlgs 17 }
-
-   id-ml-dsa-65 OBJECT IDENTIFIER ::= { sigAlgs 18 }
-
-   id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
-
-   --
-   -- Signature Algorithm Identifiers
-   --
-
-   sa-ml-dsa-44 SIGNATURE-ALGORITHM ::= {
-     IDENTIFIER id-ml-dsa-44
-     PARAMS ARE absent
-     PUBLIC-KEYS { pk-ml-dsa-44 }
-     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-44 } }
-
-   sa-ml-dsa-65 SIGNATURE-ALGORITHM ::= {
-     IDENTIFIER id-ml-dsa-65
-     PARAMS ARE absent
-     PUBLIC-KEYS { pk-ml-dsa-65 }
-     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-65 } }
-
-   sa-ml-dsa-87 SIGNATURE-ALGORITHM ::= {
-     IDENTIFIER id-ml-dsa-87
-     PARAMS ARE absent
-     PUBLIC-KEYS { pk-ml-dsa-87 }
-     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-87 } }
-
-   --
-   -- Public Keys
-   --
-
-   pk-ml-dsa-44 PUBLIC-KEY ::= {
-     IDENTIFIER id-ml-dsa-44
-     -- KEY no ASN.1 wrapping --
-     CERT-KEY-USAGE
-       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-     -- PRIVATE-KEY no ASN.1 wrapping -- }
-
-   pk-ml-dsa-65 PUBLIC-KEY ::= {
-     IDENTIFIER id-ml-dsa-65
-     -- KEY no ASN.1 wrapping --
-     CERT-KEY-USAGE
-       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-     -- PRIVATE-KEY no ASN.1 wrapping -- }
-
-   pk-ml-dsa-87 PUBLIC-KEY ::= {
-     IDENTIFIER id-ml-dsa-87
-     -- KEY no ASN.1 wrapping --
-     CERT-KEY-USAGE
-       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-     -- PRIVATE-KEY no ASN.1 wrapping -- }
-
-   ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
-
-   ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
+   sa-ml-dsa-44, sa-ml-dsa-65, sa-ml-dsa-87
+     FROM X509-ML-DSA-2024 -- From [I-D.ietf-lamps-dilithium-certificates]
+     { iso(1) identified-organization(3) dod(6) internet(1)
+       security(5) mechanisms(5) pkix(7) id-mod(0)
+       id-mod-x509-ml-dsa-2024(TBD2) } ;
 
    --
    -- Expand the signature algorithm set used by CMS [RFC5911]
