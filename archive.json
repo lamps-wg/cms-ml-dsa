@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-16T00:54:30.312775+00:00",
+  "timestamp": "2025-01-19T00:58:38.456423+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -291,7 +291,7 @@
       "labels": [],
       "body": "The need to support full private keys (versus seeds only) for use with HSMs has come up in WGLC for other PQC LAMPS drafts. We're almost immune to that discussion as the primary private key format is described in the ML-DSA X.509 draft, but we do include a definition for ML-DSA-PrivateKey that's restricted to 32 bytes.\r\n\r\nIf the ML-DSA X.509 draft adopts a choice of two key formats, ML-DSA-PrivateKey should follow suit. Either way, there's no explanation that the 32 byte restriction corresponds to a seed, which perhaps might not be immediately obvious, so a brief explanation might help there.\r\n\r\nRelevant threads:\r\nhttps://mailarchive.ietf.org/arch/msg/spasm/QRvuqH2uLCgWLthF3JUC1C8eAUE/\r\nhttps://mailarchive.ietf.org/arch/msg/spasm/JRUQk0m0MtEr3YwFpcxD6PiwMLE/",
       "createdAt": "2025-01-15T11:45:08Z",
-      "updatedAt": "2025-01-15T13:41:07Z",
+      "updatedAt": "2025-01-16T10:45:24Z",
       "closedAt": null,
       "comments": [
         {
@@ -328,6 +328,20 @@
           "body": "> > I think that makes sense, the split does feel a little odd. The private key format is even arguably a CMS thing given the RFC it refers to a CMS RFC, but practically speaking the number of X.509 implementations using those formats is going to be much greater than the set of CMS implementations using them.\r\n> \r\n> Can you expand on \"the RFC it refers to a CMS RFC\"? Which RFC are you/it referring to?\r\n\r\nRFC 5958 - the document's titled \"Asymmetric Key Packages\" (as opposed to \"Asymmetric Key Formats\") and it describes how to encrypt/sign/etc private keys in CMS, so I've always seen it as a CMS RFC. But it doesn't describe the core private key format as being part of CMS and that format's derived from PKCS#8 (rather than PKCS#7), so I think my perception is based on biases from my personal experiences, rather than a reflection of reality! \ud83d\ude42\r\n\r\nEither way, I agree that the X.509 draft is the right place if everyone's amenable to that.",
           "createdAt": "2025-01-15T13:41:06Z",
           "updatedAt": "2025-01-15T13:41:06Z"
+        },
+        {
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Do we want to resolve this before going to WGLC ourselves, or should we publish as-is and let it all be sorted out as part of the WGLC process? Alternatively I can ask Russ what his preferred approach is.",
+          "createdAt": "2025-01-16T10:37:56Z",
+          "updatedAt": "2025-01-16T10:37:56Z"
+        },
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Do we want to resolve this before going to WGLC ourselves, or should we publish as-is and let it all be sorted out as part of the WGLC process? Alternatively I can ask Russ what his preferred approach is.\n\nYou could reply to Russ' thread to us authors saying we're working with the dilithium-certs authors to move the ASN.1 and key encoding text to the dilithium-certs draft for the reasons I posted to LAMPS.  There are PRs for the changes already.  Then ask him if he wants to wait for those PRs, or start the WGLC knowing both drafts should be updated shortly.",
+          "createdAt": "2025-01-16T10:45:23Z",
+          "updatedAt": "2025-01-16T10:45:23Z"
         }
       ]
     }
@@ -932,6 +946,98 @@
           "body": "",
           "createdAt": "2025-01-15T18:49:27Z",
           "updatedAt": "2025-01-15T18:49:27Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDONFRYgM6H_I6M",
+      "title": "Move ASN.1 and key encoding text over to dilithium-certificates draft",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/19",
+      "state": "MERGED",
+      "author": "danvangeest",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-01-16T10:40:03Z",
+      "updatedAt": "2025-01-17T08:12:52Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "7082b020c2d0b48213fd0b9f794d74615700e3d8",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "dvg/move_asn1_and_key_encoding_to_dilithium",
+      "headRefOid": "573745f404c202365bdce298b726d8f7bb7f855e",
+      "closedAt": "2025-01-17T08:12:52Z",
+      "mergedAt": "2025-01-17T08:12:52Z",
+      "mergedBy": "danvangeest",
+      "mergeCommit": {
+        "oid": "8e9a43317b414f6fc0b03e585033b1a1a41cbf5a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6YZuUo",
+          "commit": {
+            "abbreviatedOid": "573745f"
+          },
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-16T18:07:43Z",
+          "updatedAt": "2025-01-16T18:07:43Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDONFRYgM6IEZ0K",
+      "title": "Remove no-signed-attrs examples",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/20",
+      "state": "MERGED",
+      "author": "danvangeest",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-01-16T21:59:12Z",
+      "updatedAt": "2025-01-16T22:06:51Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "7082b020c2d0b48213fd0b9f794d74615700e3d8",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "dvg/remove_some_exampled",
+      "headRefOid": "2afcafc66c6089627e0a1919757f5b417da9d6a3",
+      "closedAt": "2025-01-16T22:06:51Z",
+      "mergedAt": "2025-01-16T22:06:51Z",
+      "mergedBy": "adam-r-ncsc",
+      "mergeCommit": {
+        "oid": "fa0a29c50eb28a8e9b32189c906fa4caca687bb6"
+      },
+      "comments": [
+        {
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Russ said that three examples should be fine.",
+          "createdAt": "2025-01-16T21:59:25Z",
+          "updatedAt": "2025-01-16T21:59:25Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6YcH0Z",
+          "commit": {
+            "abbreviatedOid": "2afcafc"
+          },
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-16T22:06:34Z",
+          "updatedAt": "2025-01-16T22:06:34Z",
           "comments": []
         }
       ]
