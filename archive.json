@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T00:54:02.526910+00:00",
+  "timestamp": "2025-02-02T00:57:50.576694+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -344,6 +344,22 @@
           "updatedAt": "2025-01-16T10:45:23Z"
         }
       ]
+    },
+    {
+      "number": 21,
+      "id": "I_kwDONFRYgM6oKvMf",
+      "title": "Add \"SHOULD\" for SHAKE256 digests",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/21",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Hi folks,\n\nThe draft currently calls out SHA-512 as a \"MUST\" for a digest. And it says \"MAY\" for others. \n\n> SHA-512 [[FIPS180](https://doi.org/10.6028/nist.fips.180)] MUST be supported for use with the variants of ML-DSA in this document; however, other hash functions MAY also be supported.\n\nI suggest to call out SHAKE256 as a \"SHOULD\". SHAKE256 is used in ML-DSA so it makes sense for platforms that may not want to have SHA2. \n\nI understand that SHA2 is prevalent, so we don't want to make SHAKE256 a \"MUST\", but I suggest to also call it out as a \n\n> [...] SHOULD for use-cases that may want to use the same XOF as ML-DSA for code economy \n\nor something like that. \n\nThx. ",
+      "createdAt": "2025-01-30T17:16:08Z",
+      "updatedAt": "2025-01-30T17:16:50Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
