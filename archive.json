@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-18T00:55:41.509497+00:00",
+  "timestamp": "2025-02-20T00:56:27.554770+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -357,9 +357,17 @@
       "labels": [],
       "body": "Hi folks,\n\nThe draft currently calls out SHA-512 as a \"MUST\" for a digest. And it says \"MAY\" for others. \n\n> SHA-512 [[FIPS180](https://doi.org/10.6028/nist.fips.180)] MUST be supported for use with the variants of ML-DSA in this document; however, other hash functions MAY also be supported.\n\nI suggest to call out SHAKE256 as a \"SHOULD\". SHAKE256 is used in ML-DSA so it makes sense for platforms that may not want to have SHA2. \n\nI understand that SHA2 is prevalent, so we don't want to make SHAKE256 a \"MUST\", but I suggest to also call it out as a \n\n> [...] SHOULD for use-cases that may want to use the same XOF as ML-DSA for code economy \n\nor something like that. \n\nThx. ",
       "createdAt": "2025-01-30T17:16:08Z",
-      "updatedAt": "2025-01-30T17:16:50Z",
+      "updatedAt": "2025-02-19T14:01:30Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "Honzaik",
+          "authorAssociation": "NONE",
+          "body": "Hi,\n\nI agree with @csosto-pk. Let me say that I am fairly new to this stuff so I might have misunderstood something, but I see an inconsistency in relation to existing standards. \n\nFrom what I understand, in cases where there is no signedAttributes, i.e., it is a \"direct signature\", the digestAlgorithm field serves no purpose as all modern signature OIDs specify the internal hashing algorithm already (\"id-ecdsa-with-sha3-512\", \"ecdsa-with-SHA256\"). The convention seems to be to set digestAlgorithm based on the signatureAlgorithm. \n\nThe EdDSA CMS RFC 8419 (https://datatracker.ietf.org/doc/rfc8419/) seems to also adhere to this convention where in cases where there is no signedAttributes. Specifically, for Ed448, which also internally uses SHAKE256 like ML-DSA, the digestAlgorithm must be \"id-shake256\". (I am still a bit puzzled why it is not \"id-shake256-len\".). The RFC also states that when signedAttributes are used, the digestAlgorithm must be \"id-shake256-len\" (with 512-bit parameter). \n\nSimilarly, the SHAKE ECDSA RFC 8702 (https://datatracker.ietf.org/doc/rfc8702/) states \"The digest algorithm MUST be the same as the message hash algorithms used in signatures.\" which I understand means that if signedAttributes are used, the only possible digestAlgorithm (to compute the message-digest) is \"id-shake256\" (implictly assuming 512-bit output) if the signatureAlgorithm is \"id-ecdsa-with-shake256\". \n\nI don't really understand the reasons why \"id-shake256\" is used sometimes instead of the \"id-shake256-len\" which explicitly defines a hash function (whereas \"id-shake256\" is technically an XOF). I see that @csosto-pk is one of the authors so I'd be happy to learn why that is (I tried to look into the archives but I haven't found a clear answer). \n\nBased on these existing examples of \"signatures that internally use SHAKE just like ML-DSA\" the convention seems to be to specify SHAKE256 as the digestAlgorithm if signedAttributes are not present. Therefore, it would make sense to me to use \"id-shake256-len\" in cases where no signedAttributes are present (or \"id-shake256\" depending on the reasons not to use the length-specific identifier). Additionally, it would make even more sense to also explicitly mention SHAKE256 as an option since it is the internal hash in ML-DSA.\n\n//edit, added this\nI also found https://github.com/openssl/openssl/issues/11413#issuecomment-604492113 where Russ Housley explains why the digestAlgorithm is separate: due to stream processing. However, this doesn't seem useful for (non-pre-hash) ML-DSA (just like Ed448) as the internal hash is prefixed by some algorithm specific data, so the processor cannot begin calculating the hash before encountering signatureAlgorithm. It seems the digestAlgorithm field is sort of in an awkward spot where for older algorithms it reflects the internal hash, but newer algorithms do not use a simple H(msg) hash so it being separate from signatureAlgorithm is useless. Nonetheless, it seems to me if anything, it should say SHAKE256 (and not SHA512).\n\nI am honestly more confused the more I read into this (https://github.com/openssl/openssl/issues/9392). It seems like the message-digest value must be computed using the same digest algorithm that the signature uses (according to 11.2 in RFC 5652) i.e. the one indicated in digestAlgorithm, therefore there is just no way to use SHA512 with non-pre-hash ML-DSA. Am I missing something?",
+          "createdAt": "2025-02-18T17:43:32Z",
+          "updatedAt": "2025-02-19T14:01:30Z"
+        }
+      ]
     }
   ],
   "pulls": [
