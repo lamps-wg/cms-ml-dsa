@@ -220,7 +220,7 @@ SHA-512 {{FIPS180}} MUST be supported for use with the variants of ML-DSA in thi
 This is to provide an interoperable option for legacy CMS implementations that wish to migrate to use post-quantum cryptography, but that may not support use of SHA-3 derivatives at the CMS layer.
 However, other hash functions MAY also be supported; in particular, SHAKE256 SHOULD be supported, as this is the digest algorithm used internally in ML-DSA.
 When SHA-512 is used, the id-sha512 {{!RFC5754}} digest algorithm identifier is used and the parameters field MUST be omitted.
-When SHAKE256 is used, the id-shake256 {{!RFC8702}} digest algorithm identifier is used, and the parameters field MUST be omitted.
+When SHAKE256 is used, the id-shake256 {{!RFC8702}} digest algorithm identifier is used and produces 512 bits of output, and the parameters field MUST be omitted.
 When signing using ML-DSA without including signed attributes, the algorithm specified in the digestAlgorithm field has no meaning, as ML-DSA computes signatures over entire messages rather than externally computed digests.
 Nonetheless, it SHOULD specify a digest algorithm that otherwise would have been used if signed attributes were present, such as SHA-512.
 When processing a SignerInfo signed using ML-DSA, if no signed attributes are present, implementations MUST ignore the content of the digestAlgorithm field.
