@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T01:07:48.676367+00:00",
+  "timestamp": "2025-04-10T01:00:52.595594+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -387,6 +387,37 @@
           "body": "Hi @Honzaik \n\nI agree that this whole situation is a bit messy and having SHAKE would seem the more sensible decision. The current state of things has arisen out of discussions on backwards compatibility in LAMPS. In short, it was believed that there would be CMS implementations that could have an ML-DSA implementation added to them (and hence would have access to SHAKE at the crypto primitive layer), but wouldn't have access to SHAKE/SHA-3 at the CMS layer (instead only having access to SHA-2). [See here for a comment to that effect](https://mailarchive.ietf.org/arch/msg/spasm/XXnmi3Z8CMCPy1M5CNFU2kMFFZ8/), though the discussions go back earlier.\n\nIn order to make it as easy as possible for these implementations to adopt PQC and use this draft, this is the slightly odd compromise we've ended up with.\n\nIn the case of signing without signed attributes, as noted the digest algorithm field doesn't actually do anything. However, if we included the SHAKE OID, that might cause these old CMS implementations to stumble, hence we're using the SHA-512 OID instead. It probably also makes sense to be consistent and use the same OID in both cases (with and without signed attributes). This is indeed inconsistent with what's been done in the past, but I believe the current view of the WG that it's a pain worth dealing with to maximise compatibility.\n\nIf you're not convinced these old implementations exist, or that they're not worth supporting, that's worth raising on the LAMPS mailing list.\n\nWe could add SHAKE as a SHOULD or a MAY, though conformant implementations would still need to support SHA-512. Of course, you're welcome to write a non-conformant implementation that just implements SHAKE \ud83d\ude09.",
           "createdAt": "2025-02-27T14:58:38Z",
           "updatedAt": "2025-02-27T14:59:54Z"
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "I_kwDONFRYgM6xtFXT",
+      "title": "Two more nits (handle at AUTH48)",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/22",
+      "state": "CLOSED",
+      "author": "csosto-pk",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Handle this at AUTH48.\n\nTwo more nits for those unfamiliar with CMS: \n \n> [\u2026] When signed attributes are present, a hash MUST be computed over the content using the same hash function [\u2026]\n \nwould be more accurate as \n \n> [\u2026] When signed attributes are present, a hash MUST be computed over the content DER encoded signed attributes using the same hash function [\u2026]\n \nIt is mentioned below, but \u201ccontent\u201d may confuse folks that the hash would be of the whole content. \n \nAnd \n \n> ELSE message-digest attribute = Hash(content);\n \nshould rather be \n \n> ELSE signed attributes message-digest attribute = Hash(content);\n",
+      "createdAt": "2025-04-09T02:43:21Z",
+      "updatedAt": "2025-04-09T14:06:48Z",
+      "closedAt": "2025-04-09T14:06:47Z",
+      "comments": [
+        {
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi Panos, are you sure you've opened this issue in the right reo? The quoted lines appear not in this draft, but in the cms-slh-dsa draft.",
+          "createdAt": "2025-04-09T07:08:46Z",
+          "updatedAt": "2025-04-09T07:08:46Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "NONE",
+          "body": "Oops, sorry, that was by accident. Closing. ",
+          "createdAt": "2025-04-09T14:06:47Z",
+          "updatedAt": "2025-04-09T14:06:47Z"
         }
       ]
     }
@@ -1084,6 +1115,53 @@
           "createdAt": "2025-01-16T22:06:34Z",
           "updatedAt": "2025-01-16T22:06:34Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDONFRYgM6R58Ri",
+      "title": "Bs/wglc comments",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/23",
+      "state": "OPEN",
+      "author": "BenS-3",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* Explains why SHA-512 was chosen as the interop MUST\r\n* Adds SHAKE256 as a SHOULD (which people were in favour of in Bangkok)",
+      "createdAt": "2025-04-09T08:30:58Z",
+      "updatedAt": "2025-04-09T14:21:51Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "8e9a43317b414f6fc0b03e585033b1a1a41cbf5a",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "bs/wglc-comments",
+      "headRefOid": "03f59ee89e0f135913ca6ff185e76102407df8ad",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6kIc_j",
+          "commit": {
+            "abbreviatedOid": "03f59ee"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-09T14:21:50Z",
+          "updatedAt": "2025-04-09T14:21:51Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nWhen SHAKE256 is used, the id-shake256 {{!RFC8702}} digest algorithm identifier is used and produces 512 bits of output, and the parameters field MUST be omitted.\r\n```",
+              "createdAt": "2025-04-09T14:21:50Z",
+              "updatedAt": "2025-04-09T14:21:51Z"
+            }
+          ]
         }
       ]
     }
