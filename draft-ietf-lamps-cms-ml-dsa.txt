@@ -5,9 +5,9 @@
 Limited Additional Mechanisms for PKIX and SMIME               B. Salter
 Internet-Draft                                                  A. Raine
 Intended status: Standards Track       UK National Cyber Security Centre
-Expires: 21 July 2025                                       D. Van Geest
+Expires: 13 October 2025                                    D. Van Geest
                                                      CryptoNext Security
-                                                         17 January 2025
+                                                           11 April 2025
 
 
    Use of the ML-DSA Signature Algorithm in the Cryptographic Message
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 July 2025.
+   This Internet-Draft will expire on 13 October 2025.
 
 Copyright Notice
 
@@ -252,16 +252,23 @@ Table of Contents
       value of a size that is at least twice the collision strength of
       the internal commitment hash used by ML-DSA.  SHA-512 [FIPS180]
       MUST be supported for use with the variants of ML-DSA in this
-      document; however, other hash functions MAY also be supported.
-      When SHA-512 is used, the id-sha512 [RFC5754] digest algorithm
-      identifier is used and the parameters field MUST be omitted.  When
-      signing using ML-DSA without including signed attributes, the
-      algorithm specified in the digestAlgorithm field has no meaning,
-      as ML-DSA computes signatures over entire messages rather than
-      externally computed digests.  Nonetheless, it SHOULD specify a
-      digest algorithm that otherwise would have been used if signed
-      attributes were present, such as SHA-512.  When processing a
-      SignerInfo signed using ML-DSA, if no signed attributes are
+      document.  This is to provide an interoperable option for legacy
+      CMS implementations that wish to migrate to use post-quantum
+      cryptography, but that may not support use of SHA-3 derivatives at
+      the CMS layer.  However, other hash functions MAY also be
+      supported; in particular, SHAKE256 SHOULD be supported, as this is
+      the digest algorithm used internally in ML-DSA.  When SHA-512 is
+      used, the id-sha512 [RFC5754] digest algorithm identifier is used
+      and the parameters field MUST be omitted.  When SHAKE256 is used,
+      the id-shake256 [RFC8702] digest algorithm identifier is used and
+      produces 512 bits of output, and the parameters field MUST be
+      omitted.  When signing using ML-DSA without including signed
+      attributes, the algorithm specified in the digestAlgorithm field
+      has no meaning, as ML-DSA computes signatures over entire messages
+      rather than externally computed digests.  Nonetheless, it SHOULD
+      specify a digest algorithm that otherwise would have been used if
+      signed attributes were present, such as SHA-512.  When processing
+      a SignerInfo signed using ML-DSA, if no signed attributes are
       present, implementations MUST ignore the content of the
       digestAlgorithm field.
 
@@ -389,9 +396,9 @@ Table of Contents
               Westerbaan, "Internet X.509 Public Key Infrastructure:
               Algorithm Identifiers for ML-DSA", Work in Progress,
               Internet-Draft, draft-ietf-lamps-dilithium-certificates-
-              06, 14 January 2025,
+              07, 2 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
-              dilithium-certificates-06>.
+              dilithium-certificates-07>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -414,6 +421,11 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8702]  Kampanakis, P. and Q. Dang, "Use of the SHAKE One-Way Hash
+              Functions in the Cryptographic Message Syntax (CMS)",
+              RFC 8702, DOI 10.17487/RFC8702, January 2020,
+              <https://www.rfc-editor.org/rfc/rfc8702>.
 
 8.2.  Informative References
 
