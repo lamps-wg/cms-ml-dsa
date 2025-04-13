@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-10T01:00:52.595594+00:00",
+  "timestamp": "2025-04-13T02:30:10.261503+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -357,15 +357,15 @@
       "id": "I_kwDONFRYgM6oKvMf",
       "title": "Add \"SHOULD\" for SHAKE256 digests",
       "url": "https://github.com/lamps-wg/cms-ml-dsa/issues/21",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "csosto-pk",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Hi folks,\n\nThe draft currently calls out SHA-512 as a \"MUST\" for a digest. And it says \"MAY\" for others. \n\n> SHA-512 [[FIPS180](https://doi.org/10.6028/nist.fips.180)] MUST be supported for use with the variants of ML-DSA in this document; however, other hash functions MAY also be supported.\n\nI suggest to call out SHAKE256 as a \"SHOULD\". SHAKE256 is used in ML-DSA so it makes sense for platforms that may not want to have SHA2. \n\nI understand that SHA2 is prevalent, so we don't want to make SHAKE256 a \"MUST\", but I suggest to also call it out as a \n\n> [...] SHOULD for use-cases that may want to use the same XOF as ML-DSA for code economy \n\nor something like that. \n\nThx. ",
       "createdAt": "2025-01-30T17:16:08Z",
-      "updatedAt": "2025-02-27T14:59:54Z",
-      "closedAt": null,
+      "updatedAt": "2025-04-11T06:38:13Z",
+      "closedAt": "2025-04-11T06:38:12Z",
       "comments": [
         {
           "author": "Honzaik",
@@ -387,6 +387,13 @@
           "body": "Hi @Honzaik \n\nI agree that this whole situation is a bit messy and having SHAKE would seem the more sensible decision. The current state of things has arisen out of discussions on backwards compatibility in LAMPS. In short, it was believed that there would be CMS implementations that could have an ML-DSA implementation added to them (and hence would have access to SHAKE at the crypto primitive layer), but wouldn't have access to SHAKE/SHA-3 at the CMS layer (instead only having access to SHA-2). [See here for a comment to that effect](https://mailarchive.ietf.org/arch/msg/spasm/XXnmi3Z8CMCPy1M5CNFU2kMFFZ8/), though the discussions go back earlier.\n\nIn order to make it as easy as possible for these implementations to adopt PQC and use this draft, this is the slightly odd compromise we've ended up with.\n\nIn the case of signing without signed attributes, as noted the digest algorithm field doesn't actually do anything. However, if we included the SHAKE OID, that might cause these old CMS implementations to stumble, hence we're using the SHA-512 OID instead. It probably also makes sense to be consistent and use the same OID in both cases (with and without signed attributes). This is indeed inconsistent with what's been done in the past, but I believe the current view of the WG that it's a pain worth dealing with to maximise compatibility.\n\nIf you're not convinced these old implementations exist, or that they're not worth supporting, that's worth raising on the LAMPS mailing list.\n\nWe could add SHAKE as a SHOULD or a MAY, though conformant implementations would still need to support SHA-512. Of course, you're welcome to write a non-conformant implementation that just implements SHAKE \ud83d\ude09.",
           "createdAt": "2025-02-27T14:58:38Z",
           "updatedAt": "2025-02-27T14:59:54Z"
+        },
+        {
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Resolved in [PR #23](https://github.com/lamps-wg/cms-ml-dsa/pull/23)",
+          "createdAt": "2025-04-11T06:38:12Z",
+          "updatedAt": "2025-04-11T06:38:12Z"
         }
       ]
     },
@@ -1123,24 +1130,26 @@
       "id": "PR_kwDONFRYgM6R58Ri",
       "title": "Bs/wglc comments",
       "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/23",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "BenS-3",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "* Explains why SHA-512 was chosen as the interop MUST\r\n* Adds SHAKE256 as a SHOULD (which people were in favour of in Bangkok)",
       "createdAt": "2025-04-09T08:30:58Z",
-      "updatedAt": "2025-04-09T14:21:51Z",
+      "updatedAt": "2025-04-11T06:36:46Z",
       "baseRepository": "lamps-wg/cms-ml-dsa",
       "baseRefName": "main",
       "baseRefOid": "8e9a43317b414f6fc0b03e585033b1a1a41cbf5a",
       "headRepository": "lamps-wg/cms-ml-dsa",
       "headRefName": "bs/wglc-comments",
-      "headRefOid": "03f59ee89e0f135913ca6ff185e76102407df8ad",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "98316d2ffd80bf5ea832205dc56f1d5638a1181f",
+      "closedAt": "2025-04-11T06:36:46Z",
+      "mergedAt": "2025-04-11T06:36:46Z",
+      "mergedBy": "BenS-3",
+      "mergeCommit": {
+        "oid": "19ebd0c70ecbd8f2ee2387087fd1cad895ac68a7"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1162,6 +1171,32 @@
               "updatedAt": "2025-04-09T14:21:51Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDONFRYgM6kRvuX",
+          "commit": {
+            "abbreviatedOid": "98316d2"
+          },
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-10T10:04:07Z",
+          "updatedAt": "2025-04-10T10:04:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONFRYgM6kTqv-",
+          "commit": {
+            "abbreviatedOid": "98316d2"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-10T12:59:04Z",
+          "updatedAt": "2025-04-10T12:59:04Z",
+          "comments": []
         }
       ]
     }
