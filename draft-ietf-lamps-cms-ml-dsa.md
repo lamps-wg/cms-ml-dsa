@@ -215,7 +215,7 @@ When using ML-DSA, the fields of a SignerInfo are used as follows:
 digestAlgorithm:
 
 : Per {{Section 5.3 of RFC5652}}, the digestAlgorithm field identifies the message digest algorithm used by the signer, and any associated parameters.
-To ensure collision resistance, the identified message digest algorithm SHOULD produce a hash value of a size that is at least twice the collision strength parameter of the ML-DSA parameter set, represented by the λ (lambda) symbol in {{FIPS204}}.
+To ensure collision resistance, the identified message digest algorithm SHOULD produce a hash value of a size that is at least twice the collision strength parameter of the ML-DSA parameter set, represented by the λ (*lambda*) symbol in {{FIPS204}}.
 SHA-512 {{FIPS180}} MUST be supported for use with the variants of ML-DSA in this document.
 This is to provide an interoperable option for legacy CMS implementations that wish to migrate to use post-quantum cryptography, but that may not support use of SHA-3 derivatives at the CMS layer.
 However, other hash functions MAY also be supported; in particular, SHAKE256 SHOULD be supported, as this is the digest algorithm used internally in ML-DSA.
@@ -270,7 +270,7 @@ If ML-DSA signing is implemented in a hardware device such as hardware security 
 By including signed attributes, which necessarily include the message-digest attribute and the content-type attribute as described in Section 5.3 of {{RFC5652}}, the much smaller set of signed attributes are sent to the device for signing.
 
 This approach addresses the use case for HashML-DSA, and is one reason why HashML-DSA is not specified for use with CMS in this document.
-Additionally, the pure variant of ML-DSA does support a form of pre-hash via the *mu* "message representative" value described in Section 6.2 of {{FIPS204}}.
+Additionally, the pure variant of ML-DSA does support a form of pre-hash via the 𝜇 (*mu*) "message representative" value described in Section 6.2 of {{FIPS204}}.
 This value may "optionally be computed in a different cryptographic module" and supplied to the hardware device, rather than requiring the entire message to be transmitted.
 
 # IANA Considerations
