@@ -259,10 +259,10 @@ Table of Contents
       output.  The overall security strength offered by an ML-DSA
       signature calculated over signed attributes is the floor of the
       digest algorithm's strength and the ML-DSA parameter set.
-      Verifiers SHOULD reject a signature if the signer's choice of
-      digest algorithm does not meet the security requirements of their
-      choice of ML-DSA parameter set.  Table 1 shows appropriate SHA-2
-      and SHA-3 digest algorithms for each parameter set.
+      Verifiers MAY reject a signature if the signer's choice of digest
+      algorithm does not meet the security requirements of their choice
+      of ML-DSA parameter set.  Table 1 shows appropriate SHA-2 and
+      SHA-3 digest algorithms for each parameter set.
 
       SHA-512 [FIPS180] MUST be supported for use with the variants of
       ML-DSA in this document.  SHA-512 is suitable for all ML-DSA

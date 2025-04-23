@@ -1363,7 +1363,7 @@ Each ML-DSA parameter set has a collision strength parameter, represented by the
 When signers utilise signed attributes, their choice of digest algorithm may impact the overall security level of their signature.
 Selecting a digest algorithm that offers λ (<em>lambda</em>) bits of security strength against second preimage attacks and collision attacks is sufficient to meet the security level offered by a given parameter set, so long as the digest algorithm produces at least 2λ (twice <em>lambda</em>) bits of output.
 The overall security strength offered by an ML-DSA signature calculated over signed attributes is the floor of the digest algorithm's strength and the ML-DSA parameter set.
-Verifiers <span class="bcp14">SHOULD</span> reject a signature if the signer's choice of digest algorithm does not meet the security requirements of their choice of ML-DSA parameter set.
+Verifiers <span class="bcp14">MAY</span> reject a signature if the signer's choice of digest algorithm does not meet the security requirements of their choice of ML-DSA parameter set.
 <a href="#ml-dsa-digest-algs" class="auto internal xref">Table 1</a> shows appropriate SHA-2 and SHA-3 digest algorithms for each parameter set.<a href="#section-3.3-2.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
