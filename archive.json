@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-29T01:02:36.704086+00:00",
+  "timestamp": "2025-05-01T01:08:56.381315+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -1212,7 +1212,7 @@
       "labels": [],
       "body": "Comments are here:\r\nhttps://mailarchive.ietf.org/arch/msg/spasm/do9CMFMOhlx_0kDmi2ZQ-yZqMXA/\r\n\r\nThe suggestion about lambda seemed like a good idea to me, so I've brought that in and also added the mu character to the relevant section. RFC 7997 describes the use of non-ASCII characters in RFCs, I think the text here is compliant. Since I was writing about lambda, I included more detail about lambda and suitable hash functions for application-level pre-hashing, which comes from a section of FIPS 204 that specifically references CMS.\r\n\r\nAs for Viktor's comments about not forcing alignment of hash functions, I've tried to demonstrate this with a table, and I think that table also helps illustrate why SHA-512 is a sensible default option for interop purposes.\r\n\r\nI don't think the changes fundamentally alter what we're saying, but the use of normative language does change a bit. In particular there's one \"MAY\" that becomes a \"SHOULD\".",
       "createdAt": "2025-04-23T12:53:59Z",
-      "updatedAt": "2025-04-28T07:29:38Z",
+      "updatedAt": "2025-04-29T06:36:28Z",
       "baseRepository": "lamps-wg/cms-ml-dsa",
       "baseRefName": "main",
       "baseRefOid": "19ebd0c70ecbd8f2ee2387087fd1cad895ac68a7",
@@ -1230,6 +1230,13 @@
           "body": "I think this looks good. I think that\r\n\r\n> Verifiers MAY reject a signature if the signer's choice of digest algorithm does not meet the security requirements of their choice of ML-DSA parameter set\r\n\r\ndoes potentially increase the likelihood of a receiver being uninteroperable with a sender, but to me it's a perfectly reasonable condition, and library authors are free to ignore it since it's a MAY.",
           "createdAt": "2025-04-24T07:00:53Z",
           "updatedAt": "2025-04-24T07:00:53Z"
+        },
+        {
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The draft has now been sent to the IESG, so I guess we hit pause on this. I don't think that's a problem (since this PR was just adding clarity) - we'll presumably need to do an extra rev or three once the directorate reviews come back, at which point we might be asked to make this change anyway",
+          "createdAt": "2025-04-29T06:36:27Z",
+          "updatedAt": "2025-04-29T06:36:27Z"
         }
       ],
       "reviews": [
