@@ -272,9 +272,9 @@ To avoid algorithm substitution attacks, the CMSAlgorithmProtection attribute de
 If ML-DSA signing is implemented in a hardware device such as hardware security module (HSM) or portable cryptographic token, implementers might want to avoid sending the full content to the device for performance reasons.
 By including signed attributes, which necessarily include the message-digest attribute and the content-type attribute as described in Section 5.3 of {{RFC5652}}, the much smaller set of signed attributes are sent to the device for signing.
 
-This approach addresses the use case for HashML-DSA, and is one reason why HashML-DSA is not specified for use with CMS in this document.
-Additionally, the pure variant of ML-DSA does support a form of pre-hash via the *mu* "message representative" value described in Section 6.2 of {{FIPS204}}.
+Additionally, the pure variant of ML-DSA does support a form of pre-hash via external calculation of the *mu* "message representative" value described in Section 6.2 of {{FIPS204}}.
 This value may "optionally be computed in a different cryptographic module" and supplied to the hardware device, rather than requiring the entire message to be transmitted.
+Appendix D of {{?I-D.ietf-lamps-dilithium-certificates}} describes use of external *mu* calculations in further detail.
 
 # IANA Considerations
 
