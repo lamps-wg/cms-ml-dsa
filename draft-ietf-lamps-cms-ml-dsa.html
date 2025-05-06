@@ -1320,13 +1320,10 @@ id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
         </h3>
 <p id="section-3.1-1"><span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> specifies that digital signatures for CMS are produced using a digest of the message to be signed, and the signer's private key.
 At the time of publication of that RFC, all signature algorithms supported in CMS required a message digest to be calculated externally to that algorithm, which would then be supplied to the algorithm implementation when calculating and verifying signatures.
-Since then, EdDSA <span>[<a href="#RFC8032" class="cite xref">RFC8032</a>]</span>, SLH-DSA <span>[<a href="#FIPS205" class="cite xref">FIPS205</a>]</span> and ML-DSA have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
+Since then, EdDSA <span>[<a href="#RFC8032" class="cite xref">RFC8032</a>]</span> and SLH-DSA <span>[<a href="#FIPS205" class="cite xref">FIPS205</a>]</span> have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
 In the pre-hash mode, a message digest (the "pre-hash") is calculated separately and supplied to the signature algorithm as described above.
 In the pure mode, the message to be signed or verified is instead supplied directly to the signature algorithm.
-When EdDSA <span>[<a href="#RFC8419" class="cite xref">RFC8419</a>]</span> and SLH-DSA <span>[<a href="#I-D.ietf-lamps-cms-sphincs-plus" class="cite xref">I-D.ietf-lamps-cms-sphincs-plus</a>]</span> are used with CMS, only the pure mode of those algorithms is used.
-This document continues to follow that convention.
-When using ML-DSA with CMS, the pure mode of the algorithm <span class="bcp14">MUST</span> be used.
-The pre-hash mode ("HashML-DSA") <span class="bcp14">MUST NOT</span> be used.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+ML-DSA also supports a pre-hash and pure mode, though this document follows the convention set by EdDSA in CMS <span>[<a href="#RFC8419" class="cite xref">RFC8419</a>]</span> and SLH-DSA in CMS <span>[<a href="#I-D.ietf-lamps-cms-sphincs-plus" class="cite xref">I-D.ietf-lamps-cms-sphincs-plus</a>]</span> and only specifies use of the pure mode of ML-DSA in CMS.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="signature-generation-and-verification">
@@ -1375,7 +1372,7 @@ When processing a SignerInfo signed using ML-DSA, if no signed attributes are pr
           <dd class="break"></dd>
 <dt id="section-3.3-2.3">signatureAlgorithm:</dt>
           <dd style="margin-left: 1.5em" id="section-3.3-2.4">
-            <p id="section-3.3-2.4.1">The signatureAlgorithm field <span class="bcp14">MUST</span> contain one of the ML-DSA signature algorithm OIDs, and the parameters field <span class="bcp14">MUST</span> be absent. The algorithm OID <span class="bcp14">MUST</span> be one of the following OIDs described in <a href="#ml-dsa-algorithm-identifiers" class="auto internal xref">Section 2</a>:<a href="#section-3.3-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-2.4.1">When signing a signed-data using ML-DSA, the signatureAlgorithm field <span class="bcp14">MUST</span> contain one of the ML-DSA signature algorithm OIDs, and the parameters field <span class="bcp14">MUST</span> be absent. The algorithm OID <span class="bcp14">MUST</span> be one of the following OIDs described in <a href="#ml-dsa-algorithm-identifiers" class="auto internal xref">Section 2</a>:<a href="#section-3.3-2.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1451,9 +1448,9 @@ Implementers <span class="bcp14">SHOULD</span> consider implementing such protec
       </h2>
 <p id="section-5-1">If ML-DSA signing is implemented in a hardware device such as hardware security module (HSM) or portable cryptographic token, implementers might want to avoid sending the full content to the device for performance reasons.
 By including signed attributes, which necessarily include the message-digest attribute and the content-type attribute as described in Section 5.3 of <span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>, the much smaller set of signed attributes are sent to the device for signing.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">Additionally, the pure variant of ML-DSA does support a form of pre-hash via external calculation of the <em>mu</em> "message representative" value described in Section 6.2 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
-This value may "optionally be computed in a different cryptographic module" and supplied to the hardware device, rather than requiring the entire message to be transmitted.
-Appendix D of <span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> describes use of external <em>mu</em> calculations in further detail.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-2">This approach addresses the use case for HashML-DSA, and is one reason why HashML-DSA is not specified for use with CMS in this document.
+Additionally, the pure variant of ML-DSA does support a form of pre-hash via the <em>mu</em> "message representative" value described in Section 6.2 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
+This value may "optionally be computed in a different cryptographic module" and supplied to the hardware device, rather than requiring the entire message to be transmitted.<a href="#section-5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
