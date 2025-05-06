@@ -230,7 +230,7 @@ When processing a SignerInfo signed using ML-DSA, if no signed attributes are pr
 
 signatureAlgorithm:
 
- : The signatureAlgorithm field MUST contain one of the ML-DSA signature algorithm OIDs, and the parameters field MUST be absent. The algorithm OID MUST be one of the following OIDs described in {{ml-dsa-algorithm-identifiers}}:
+ : When signing a signed-data using ML-DSA, the signatureAlgorithm field MUST contain one of the ML-DSA signature algorithm OIDs, and the parameters field MUST be absent. The algorithm OID MUST be one of the following OIDs described in {{ml-dsa-algorithm-identifiers}}:
 
  | Signature algorithm | Algorithm Identifier OID |
  | ML-DSA-44           | id-ml-dsa-44             |
