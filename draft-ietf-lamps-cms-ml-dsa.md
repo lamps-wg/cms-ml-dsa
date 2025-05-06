@@ -180,13 +180,10 @@ id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
 
 {{RFC5652}} specifies that digital signatures for CMS are produced using a digest of the message to be signed, and the signer's private key.
 At the time of publication of that RFC, all signature algorithms supported in CMS required a message digest to be calculated externally to that algorithm, which would then be supplied to the algorithm implementation when calculating and verifying signatures.
-Since then, EdDSA {{?RFC8032}}, SLH-DSA {{FIPS205}} and ML-DSA have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
+Since then, EdDSA {{?RFC8032}} and SLH-DSA {{FIPS205}} have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
 In the pre-hash mode, a message digest (the "pre-hash") is calculated separately and supplied to the signature algorithm as described above.
 In the pure mode, the message to be signed or verified is instead supplied directly to the signature algorithm.
-When EdDSA {{?RFC8419}} and SLH-DSA {{?I-D.ietf-lamps-cms-sphincs-plus}} are used with CMS, only the pure mode of those algorithms is used.
-This document continues to follow that convention.
-When using ML-DSA with CMS, the pure mode of the algorithm MUST be used.
-The pre-hash mode ("HashML-DSA") MUST NOT be used.
+ML-DSA also supports a pre-hash and pure mode, though this document follows the convention set by EdDSA in CMS {{?RFC8419}} and SLH-DSA in CMS {{?I-D.ietf-lamps-cms-sphincs-plus}} and only specifies use of the pure mode of ML-DSA in CMS.
 
 ## Signature generation and verification
 
