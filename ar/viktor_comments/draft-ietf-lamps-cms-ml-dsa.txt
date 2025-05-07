@@ -5,9 +5,9 @@
 Limited Additional Mechanisms for PKIX and SMIME               B. Salter
 Internet-Draft                                                  A. Raine
 Intended status: Standards Track       UK National Cyber Security Centre
-Expires: 25 October 2025                                    D. Van Geest
+Expires: 8 November 2025                                    D. Van Geest
                                                      CryptoNext Security
-                                                           23 April 2025
+                                                              7 May 2025
 
 
    Use of the ML-DSA Signature Algorithm in the Cryptographic Message
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 October 2025.
+   This Internet-Draft will expire on 8 November 2025.
 
 Copyright Notice
 
@@ -269,14 +269,14 @@ Table of Contents
       parameter sets and provides an interoperable option for legacy CMS
       implementations that wish to migrate to use post-quantum
       cryptography, but that may not support use of SHA-3 derivatives at
-      the CMS layer.  Other hash functions SHOULD be supported; in
-      particular, SHAKE256 is the digest algorithm used internally in
-      ML-DSA, and may be preferred by some implementations for this
-      reason.  When SHA-512 is used, the id-sha512 [RFC5754] digest
-      algorithm identifier is used and the parameters field MUST be
-      omitted.  When SHAKE256 is used, the id-shake256 [RFC8702] digest
-      algorithm identifier is used and produces 512 bits of output, and
-      the parameters field MUST be omitted.
+      the CMS layer.  However, other hash functions MAY also be
+      supported; in particular, SHAKE256 SHOULD be supported, as this is
+      the digest algorithm used internally in ML-DSA.  When SHA-512 is
+      used, the id-sha512 [RFC5754] digest algorithm identifier is used
+      and the parameters field MUST be omitted.  When SHAKE256 is used,
+      the id-shake256 [RFC8702] digest algorithm identifier is used and
+      produces 512 bits of output, and the parameters field MUST be
+      omitted.
 
       When signing using ML-DSA without including signed attributes, the
       algorithm specified in the digestAlgorithm field has no meaning,
@@ -424,12 +424,12 @@ Table of Contents
 
    [I-D.ietf-lamps-dilithium-certificates]
               Massimo, J., Kampanakis, P., Turner, S., and B.
-              Westerbaan, "Internet X.509 Public Key Infrastructure:
-              Algorithm Identifiers for ML-DSA", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-dilithium-certificates-
-              07, 2 February 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
-              dilithium-certificates-07>.
+              Westerbaan, "Internet X.509 Public Key Infrastructure -
+              Algorithm Identifiers for the Module-Lattice-Based Digital
+              Signature Algorithm (ML-DSA)", Work in Progress, Internet-
+              Draft, draft-ietf-lamps-dilithium-certificates-09, 7 May
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              lamps-dilithium-certificates-09>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
