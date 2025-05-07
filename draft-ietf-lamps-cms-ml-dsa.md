@@ -224,7 +224,7 @@ Verifiers MAY reject a signature if the signer's choice of digest algorithm does
 
 : SHA-512 {{FIPS180}} MUST be supported for use with the variants of ML-DSA in this document.
 SHA-512 is suitable for all ML-DSA parameter sets and provides an interoperable option for legacy CMS implementations that wish to migrate to use post-quantum cryptography, but that may not support use of SHA-3 derivatives at the CMS layer.
-Other hash functions SHOULD be supported; in particular, SHAKE256 is the digest algorithm used internally in ML-DSA, and may be preferred by some implementations for this reason.
+However, other hash functions MAY also be supported; in particular, SHAKE256 SHOULD be supported, as this is the digest algorithm used internally in ML-DSA.
 When SHA-512 is used, the id-sha512 {{!RFC5754}} digest algorithm identifier is used and the parameters field MUST be omitted.
 When SHAKE256 is used, the id-shake256 {{!RFC8702}} digest algorithm identifier is used and produces 512 bits of output, and the parameters field MUST be omitted.
 
