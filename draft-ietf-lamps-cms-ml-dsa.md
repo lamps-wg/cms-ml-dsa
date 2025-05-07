@@ -215,15 +215,29 @@ When using ML-DSA, the fields of a SignerInfo are used as follows:
 digestAlgorithm:
 
 : Per {{Section 5.3 of RFC5652}}, the digestAlgorithm field identifies the message digest algorithm used by the signer, and any associated parameters.
-To ensure collision resistance, the identified message digest algorithm SHOULD produce a hash value of a size that is at least twice the collision strength of the internal commitment hash used by ML-DSA.
-SHA-512 {{FIPS180}} MUST be supported for use with the variants of ML-DSA in this document.
-This is to provide an interoperable option for legacy CMS implementations that wish to migrate to use post-quantum cryptography, but that may not support use of SHA-3 derivatives at the CMS layer.
+Each ML-DSA parameter set has a collision strength parameter, represented by the λ (*lambda*) symbol in {{FIPS204}}.
+When signers utilise signed attributes, their choice of digest algorithm may impact the overall security level of their signature.
+Selecting a digest algorithm that offers λ (*lambda*) bits of security strength against second preimage attacks and collision attacks is sufficient to meet the security level offered by a given parameter set, so long as the digest algorithm produces at least 2λ (twice *lambda*) bits of output.
+The overall security strength offered by an ML-DSA signature calculated over signed attributes is the floor of the digest algorithm's strength and the ML-DSA parameter set.
+Verifiers MAY reject a signature if the signer's choice of digest algorithm does not meet the security requirements of their choice of ML-DSA parameter set.
+{{ml-dsa-digest-algs}} shows appropriate SHA-2 and SHA-3 digest algorithms for each parameter set.
+
+: SHA-512 {{FIPS180}} MUST be supported for use with the variants of ML-DSA in this document.
+SHA-512 is suitable for all ML-DSA parameter sets and provides an interoperable option for legacy CMS implementations that wish to migrate to use post-quantum cryptography, but that may not support use of SHA-3 derivatives at the CMS layer.
 However, other hash functions MAY also be supported; in particular, SHAKE256 SHOULD be supported, as this is the digest algorithm used internally in ML-DSA.
 When SHA-512 is used, the id-sha512 {{!RFC5754}} digest algorithm identifier is used and the parameters field MUST be omitted.
 When SHAKE256 is used, the id-shake256 {{!RFC8702}} digest algorithm identifier is used and produces 512 bits of output, and the parameters field MUST be omitted.
-When signing using ML-DSA without including signed attributes, the algorithm specified in the digestAlgorithm field has no meaning, as ML-DSA computes signatures over entire messages rather than externally computed digests.
-Nonetheless, it SHOULD specify a digest algorithm that otherwise would have been used if signed attributes were present, such as SHA-512.
+
+: When signing using ML-DSA without including signed attributes, the algorithm specified in the digestAlgorithm field has no meaning, as ML-DSA computes signatures over entire messages rather than externally computed digests.
+As such, the considerations above and in {{ml-dsa-digest-algs}} do not apply.
+Nonetheless, the digestAlgorithm field SHOULD specify a digest algorithm that otherwise would have been used if signed attributes were present, such as SHA-512.
 When processing a SignerInfo signed using ML-DSA, if no signed attributes are present, implementations MUST ignore the content of the digestAlgorithm field.
+
+ | Signature algorithm | Digest Algorithms                                                           |
+ | ML-DSA-44           | SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE128, SHAKE256 |
+ | ML-DSA-65           | SHA-384, SHA-512, SHA3-384, SHA3-512, SHAKE256                              |
+ | ML-DSA-87           | SHA-512, SHA3-512, SHAKE256                                                 |
+ {: #ml-dsa-digest-algs title="Suitable digest algorithms for ML-DSA"}
 
 signatureAlgorithm:
 
@@ -270,7 +284,7 @@ If ML-DSA signing is implemented in a hardware device such as hardware security 
 By including signed attributes, which necessarily include the message-digest attribute and the content-type attribute as described in Section 5.3 of {{RFC5652}}, the much smaller set of signed attributes are sent to the device for signing.
 
 This approach addresses the use case for HashML-DSA, and is one reason why HashML-DSA is not specified for use with CMS in this document.
-Additionally, the pure variant of ML-DSA does support a form of pre-hash via the *mu* "message representative" value described in Section 6.2 of {{FIPS204}}.
+Additionally, the pure variant of ML-DSA does support a form of pre-hash via the 𝜇 (*mu*) "message representative" value described in Section 6.2 of {{FIPS204}}.
 This value may "optionally be computed in a different cryptographic module" and supplied to the hardware device, rather than requiring the entire message to be transmitted.
 
 # IANA Considerations
