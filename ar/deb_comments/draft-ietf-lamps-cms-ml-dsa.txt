@@ -5,9 +5,9 @@
 Limited Additional Mechanisms for PKIX and SMIME               B. Salter
 Internet-Draft                                                  A. Raine
 Intended status: Standards Track       UK National Cyber Security Centre
-Expires: 7 November 2025                                    D. Van Geest
+Expires: 9 November 2025                                    D. Van Geest
                                                      CryptoNext Security
-                                                              6 May 2025
+                                                              8 May 2025
 
 
    Use of the ML-DSA Signature Algorithm in the Cryptographic Message
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 November 2025.
+   This Internet-Draft will expire on 9 November 2025.
 
 Copyright Notice
 
@@ -197,7 +197,7 @@ Table of Contents
    message to be signed or verified is instead supplied directly to the
    signature algorithm.  When EdDSA [RFC8419] and SLH-DSA
    [I-D.ietf-lamps-cms-sphincs-plus] are used with CMS, only the pure
-   mode of those algorithms is used.
+   mode of those algorithms is specified.
 
    This document continues to follow that convention.  When using ML-DSA
    with CMS, the pure mode of the algorithm MUST be used.  The pre-hash
@@ -395,11 +395,12 @@ Table of Contents
 
    [I-D.ietf-lamps-dilithium-certificates]
               Massimo, J., Kampanakis, P., Turner, S., and B.
-              Westerbaan, "Internet X.509 Public Key Infrastructure:
-              Algorithm Identifiers for ML-DSA", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-dilithium-certificates-
-              08, 25 April 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-lamps-dilithium-certificates-08>.
+              Westerbaan, "Internet X.509 Public Key Infrastructure -
+              Algorithm Identifiers for the Module-Lattice-Based Digital
+              Signature Algorithm (ML-DSA)", Work in Progress, Internet-
+              Draft, draft-ietf-lamps-dilithium-certificates-09, 7 May
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              lamps-dilithium-certificates-09>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
