@@ -184,10 +184,9 @@ Since then, EdDSA {{?RFC8032}}, SLH-DSA {{FIPS205}} and ML-DSA have also been st
 In the pre-hash mode, a message digest (the "pre-hash") is calculated separately and supplied to the signature algorithm as described above.
 In the pure mode, the message to be signed or verified is instead supplied directly to the signature algorithm.
 When EdDSA {{?RFC8419}} and SLH-DSA {{?I-D.ietf-lamps-cms-sphincs-plus}} are used with CMS, only the pure mode of those algorithms is specified.
-
-This document continues to follow that convention.
-When using ML-DSA with CMS, the pure mode of the algorithm MUST be used.
-The pre-hash mode ("HashML-DSA") MUST NOT be used.
+This is because in most situations, CMS signatures are computed over a set of signed attributes that contain a hash of the content, rather than being computed over the message content itself.
+Since signed attributes are typically small, use of pre-hash modes in CMS wouldn't significantly reduce the size of the data to be signed, and hence offers no benefit.
+This document follows that convention and does not specify the use of ML-DSA's pre-hash mode ("HashML-DSA") in CMS.
 
 ## Signature generation and verification
 
