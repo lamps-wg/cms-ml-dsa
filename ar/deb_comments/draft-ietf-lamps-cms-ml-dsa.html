@@ -1323,10 +1323,10 @@ At the time of publication of that RFC, all signature algorithms supported in CM
 Since then, EdDSA <span>[<a href="#RFC8032" class="cite xref">RFC8032</a>]</span>, SLH-DSA <span>[<a href="#FIPS205" class="cite xref">FIPS205</a>]</span> and ML-DSA have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
 In the pre-hash mode, a message digest (the "pre-hash") is calculated separately and supplied to the signature algorithm as described above.
 In the pure mode, the message to be signed or verified is instead supplied directly to the signature algorithm.
-When EdDSA <span>[<a href="#RFC8419" class="cite xref">RFC8419</a>]</span> and SLH-DSA <span>[<a href="#I-D.ietf-lamps-cms-sphincs-plus" class="cite xref">I-D.ietf-lamps-cms-sphincs-plus</a>]</span> are used with CMS, only the pure mode of those algorithms is specified.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">This document continues to follow that convention.
-When using ML-DSA with CMS, the pure mode of the algorithm <span class="bcp14">MUST</span> be used.
-The pre-hash mode ("HashML-DSA") <span class="bcp14">MUST NOT</span> be used.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+When EdDSA <span>[<a href="#RFC8419" class="cite xref">RFC8419</a>]</span> and SLH-DSA <span>[<a href="#I-D.ietf-lamps-cms-sphincs-plus" class="cite xref">I-D.ietf-lamps-cms-sphincs-plus</a>]</span> are used with CMS, only the pure mode of those algorithms is specified.
+This is because in most situations, CMS signatures are computed over a set of signed attributes that contain a hash of the content, rather than being computed over the message content itself.
+Since signed attributes are typically small, use of pre-hash modes in CMS wouldn't significantly reduce the size of the data to be signed, and hence offers no benefit.
+This document follows that convention and does not specify the use of ML-DSA's pre-hash mode ("HashML-DSA") in CMS.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="signature-generation-and-verification">
