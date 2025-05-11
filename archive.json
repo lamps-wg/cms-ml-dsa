@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-08T01:04:22.911304+00:00",
+  "timestamp": "2025-05-11T01:08:19.016691+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -1360,19 +1360,79 @@
       "labels": [],
       "body": "Comments are here:\r\nhttps://mailarchive.ietf.org/arch/msg/spasm/CpTC_mkAp5HS5xU6x9I7POtkCg4/\r\n\r\nI've not address the digestAlgorithm section comment yet, but this is hopefully tackled by #24.",
       "createdAt": "2025-05-07T16:01:46Z",
-      "updatedAt": "2025-05-07T16:01:47Z",
+      "updatedAt": "2025-05-08T12:19:12Z",
       "baseRepository": "lamps-wg/cms-ml-dsa",
       "baseRefName": "main",
       "baseRefOid": "6676a0976633178ad5171cad95264340bcfe2dbe",
       "headRepository": "lamps-wg/cms-ml-dsa",
       "headRefName": "ar/deb_comments",
-      "headRefOid": "ec2dc5aa9c3ba7778942bdeaa0af2f5fe397e8b2",
+      "headRefOid": "72d5a2de7117422197eeb4357f215530b58c0bca",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6oPnd2",
+          "commit": {
+            "abbreviatedOid": "ec2dc5a"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-07T17:43:13Z",
+          "updatedAt": "2025-05-08T10:54:30Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "I think using normative language here is excessive.  I think it means that if HashML-DSA was to be specified for use in CMS in the future this document would have to be updated rather than just producing a separate document.  The EdDSA and SLH-DSA documents don't have this strong language.\r\n\r\nPerhaps, \"This document continues to follow that convention and does not specify the use of HashML-DSA in CMS.\" I'd also make this sentence part of the previous paragraph instead of a separate paragraph.\r\n\r\nRFC8419 justifies why pre-hash is not specified.  Is it worth doing the same here, or just leave it without the reasoning?\r\n> In most situations,\r\n   the CMS SignedData includes signed attributes, including the message\r\n   digest of the content.  Since HashEdDSA offers no benefit when signed\r\n   attributes are present, only PureEdDSA is used with the CMS.",
+              "createdAt": "2025-05-07T17:43:13Z",
+              "updatedAt": "2025-05-08T10:54:30Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nWhen EdDSA {{?RFC8419}} and SLH-DSA {{?I-D.ietf-lamps-cms-sphincs-plus}} are used with CMS, only the pure mode of those algorithms is specified.\r\n```",
+              "createdAt": "2025-05-07T17:43:25Z",
+              "updatedAt": "2025-05-08T10:54:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONFRYgM6oXxIE",
+          "commit": {
+            "abbreviatedOid": "ec2dc5a"
+          },
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-08T11:20:36Z",
+          "updatedAt": "2025-05-08T11:20:36Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "Sounds good to me. I think some justification is a good idea, I'll suggest some text.",
+              "createdAt": "2025-05-08T11:20:36Z",
+              "updatedAt": "2025-05-08T11:20:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONFRYgM6oYT0x",
+          "commit": {
+            "abbreviatedOid": "72d5a2d"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-08T12:19:12Z",
+          "updatedAt": "2025-05-08T12:19:12Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
