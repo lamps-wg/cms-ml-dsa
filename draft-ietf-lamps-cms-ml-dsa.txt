@@ -5,9 +5,9 @@
 Limited Additional Mechanisms for PKIX and SMIME               B. Salter
 Internet-Draft                                                  A. Raine
 Intended status: Standards Track       UK National Cyber Security Centre
-Expires: 7 November 2025                                    D. Van Geest
+Expires: 14 November 2025                                   D. Van Geest
                                                      CryptoNext Security
-                                                              6 May 2025
+                                                             13 May 2025
 
 
    Use of the ML-DSA Signature Algorithm in the Cryptographic Message
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 November 2025.
+   This Internet-Draft will expire on 14 November 2025.
 
 Copyright Notice
 
@@ -119,7 +119,8 @@ Table of Contents
    has been specified.
 
    [FIPS204] also specifies a pre-hashed variant of ML-DSA, called
-   HashML-DSA.  HashML-DSA is not used in CMS.
+   HashML-DSA.  Use of HashML-DSA in CMS is not specified in this
+   document.
 
 1.1.  Conventions and Definitions
 
@@ -189,16 +190,22 @@ Table of Contents
    algorithms supported in CMS required a message digest to be
    calculated externally to that algorithm, which would then be supplied
    to the algorithm implementation when calculating and verifying
-   signatures.  Since then, EdDSA [RFC8032] and SLH-DSA [FIPS205] have
-   also been standardised, and these algorithms support both a "pure"
-   and "pre-hash" mode.  In the pre-hash mode, a message digest (the
-   "pre-hash") is calculated separately and supplied to the signature
-   algorithm as described above.  In the pure mode, the message to be
-   signed or verified is instead supplied directly to the signature
-   algorithm.  ML-DSA also supports a pre-hash and pure mode, though
-   this document follows the convention set by EdDSA in CMS [RFC8419]
-   and SLH-DSA in CMS [I-D.ietf-lamps-cms-sphincs-plus] and only
-   specifies use of the pure mode of ML-DSA in CMS.
+   signatures.  Since then, EdDSA [RFC8032], SLH-DSA [FIPS205] and ML-
+   DSA have also been standardised, and these algorithms support both a
+   "pure" and "pre-hash" mode.  In the pre-hash mode, a message digest
+   (the "pre-hash") is calculated separately and supplied to the
+   signature algorithm as described above.  In the pure mode, the
+   message to be signed or verified is instead supplied directly to the
+   signature algorithm.  When EdDSA [RFC8419] and SLH-DSA
+   [I-D.ietf-lamps-cms-sphincs-plus] are used with CMS, only the pure
+   mode of those algorithms is specified.  This is because in most
+   situations, CMS signatures are computed over a set of signed
+   attributes that contain a hash of the content, rather than being
+   computed over the message content itself.  Since signed attributes
+   are typically small, use of pre-hash modes in CMS wouldn't
+   significantly reduce the size of the data to be signed, and hence
+   offers no benefit.  This document follows that convention and does
+   not specify the use of ML-DSA's pre-hash mode ("HashML-DSA") in CMS.
 
 3.2.  Signature generation and verification
 
@@ -272,11 +279,10 @@ Table of Contents
       present, implementations MUST ignore the content of the
       digestAlgorithm field.
 
-   signatureAlgorithm:  When signing a signed-data using ML-DSA, the
-      signatureAlgorithm field MUST contain one of the ML-DSA signature
-      algorithm OIDs, and the parameters field MUST be absent.  The
-      algorithm OID MUST be one of the following OIDs described in
-      Section 2:
+   signatureAlgorithm:  The signatureAlgorithm field MUST contain one of
+      the ML-DSA signature algorithm OIDs, and the parameters field MUST
+      be absent.  The algorithm OID MUST be one of the following OIDs
+      described in Section 2:
 
             +=====================+==========================+
             | Signature algorithm | Algorithm Identifier OID |
@@ -354,14 +360,14 @@ Table of Contents
    much smaller set of signed attributes are sent to the device for
    signing.
 
-   This approach addresses the use case for HashML-DSA, and is one
-   reason why HashML-DSA is not specified for use with CMS in this
-   document.  Additionally, the pure variant of ML-DSA does support a
-   form of pre-hash via the _mu_ "message representative" value
-   described in Section 6.2 of [FIPS204].  This value may "optionally be
-   computed in a different cryptographic module" and supplied to the
-   hardware device, rather than requiring the entire message to be
-   transmitted.
+   Additionally, the pure variant of ML-DSA does support a form of pre-
+   hash via external calculation of the _mu_ "message representative"
+   value described in Section 6.2 of [FIPS204].  This value may
+   "optionally be computed in a different cryptographic module" and
+   supplied to the hardware device, rather than requiring the entire
+   message to be transmitted.  Appendix D of
+   [I-D.ietf-lamps-dilithium-certificates] describes use of external
+   _mu_ calculations in further detail.
 
 6.  IANA Considerations
 
@@ -393,11 +399,12 @@ Table of Contents
 
    [I-D.ietf-lamps-dilithium-certificates]
               Massimo, J., Kampanakis, P., Turner, S., and B.
-              Westerbaan, "Internet X.509 Public Key Infrastructure:
-              Algorithm Identifiers for ML-DSA", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-dilithium-certificates-
-              08, 25 April 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-lamps-dilithium-certificates-08>.
+              Westerbaan, "Internet X.509 Public Key Infrastructure -
+              Algorithm Identifiers for the Module-Lattice-Based Digital
+              Signature Algorithm (ML-DSA)", Work in Progress, Internet-
+              Draft, draft-ietf-lamps-dilithium-certificates-09, 7 May
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              lamps-dilithium-certificates-09>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
