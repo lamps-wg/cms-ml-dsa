@@ -116,7 +116,7 @@ Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and Dilithium a
 For each of the ML-DSA parameter sets, an algorithm identifier OID has been specified.
 
 {{FIPS204}} also specifies a pre-hashed variant of ML-DSA, called HashML-DSA.
-HashML-DSA is not used in CMS.
+Use of HashML-DSA in CMS is not specified in this document.
 
 
 ## Conventions and Definitions
