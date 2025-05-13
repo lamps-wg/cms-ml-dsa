@@ -116,7 +116,7 @@ Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and Dilithium a
 For each of the ML-DSA parameter sets, an algorithm identifier OID has been specified.
 
 {{FIPS204}} also specifies a pre-hashed variant of ML-DSA, called HashML-DSA.
-HashML-DSA is not used in CMS.
+Use of HashML-DSA in CMS is not specified in this document.
 
 
 ## Conventions and Definitions
@@ -180,10 +180,13 @@ id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
 
 {{RFC5652}} specifies that digital signatures for CMS are produced using a digest of the message to be signed, and the signer's private key.
 At the time of publication of that RFC, all signature algorithms supported in CMS required a message digest to be calculated externally to that algorithm, which would then be supplied to the algorithm implementation when calculating and verifying signatures.
-Since then, EdDSA {{?RFC8032}} and SLH-DSA {{FIPS205}} have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
+Since then, EdDSA {{?RFC8032}}, SLH-DSA {{FIPS205}} and ML-DSA have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
 In the pre-hash mode, a message digest (the "pre-hash") is calculated separately and supplied to the signature algorithm as described above.
 In the pure mode, the message to be signed or verified is instead supplied directly to the signature algorithm.
-ML-DSA also supports a pre-hash and pure mode, though this document follows the convention set by EdDSA in CMS {{?RFC8419}} and SLH-DSA in CMS {{?I-D.ietf-lamps-cms-sphincs-plus}} and only specifies use of the pure mode of ML-DSA in CMS.
+When EdDSA {{?RFC8419}} and SLH-DSA {{?I-D.ietf-lamps-cms-sphincs-plus}} are used with CMS, only the pure mode of those algorithms is specified.
+This is because in most situations, CMS signatures are computed over a set of signed attributes that contain a hash of the content, rather than being computed over the message content itself.
+Since signed attributes are typically small, use of pre-hash modes in CMS wouldn't significantly reduce the size of the data to be signed, and hence offers no benefit.
+This document follows that convention and does not specify the use of ML-DSA's pre-hash mode ("HashML-DSA") in CMS.
 
 ## Signature generation and verification
 
@@ -241,7 +244,7 @@ When processing a SignerInfo signed using ML-DSA, if no signed attributes are pr
 
 signatureAlgorithm:
 
- : When signing a signed-data using ML-DSA, the signatureAlgorithm field MUST contain one of the ML-DSA signature algorithm OIDs, and the parameters field MUST be absent. The algorithm OID MUST be one of the following OIDs described in {{ml-dsa-algorithm-identifiers}}:
+ : The signatureAlgorithm field MUST contain one of the ML-DSA signature algorithm OIDs, and the parameters field MUST be absent. The algorithm OID MUST be one of the following OIDs described in {{ml-dsa-algorithm-identifiers}}:
 
  | Signature algorithm | Algorithm Identifier OID |
  | ML-DSA-44           | id-ml-dsa-44             |
@@ -283,9 +286,9 @@ To avoid algorithm substitution attacks, the CMSAlgorithmProtection attribute de
 If ML-DSA signing is implemented in a hardware device such as hardware security module (HSM) or portable cryptographic token, implementers might want to avoid sending the full content to the device for performance reasons.
 By including signed attributes, which necessarily include the message-digest attribute and the content-type attribute as described in Section 5.3 of {{RFC5652}}, the much smaller set of signed attributes are sent to the device for signing.
 
-This approach addresses the use case for HashML-DSA, and is one reason why HashML-DSA is not specified for use with CMS in this document.
-Additionally, the pure variant of ML-DSA does support a form of pre-hash via the 𝜇 (*mu*) "message representative" value described in Section 6.2 of {{FIPS204}}.
+Additionally, the pure variant of ML-DSA does support a form of pre-hash via external calculation of the 𝜇 (*mu*) "message representative" value described in Section 6.2 of {{FIPS204}}.
 This value may "optionally be computed in a different cryptographic module" and supplied to the hardware device, rather than requiring the entire message to be transmitted.
+Appendix D of {{?I-D.ietf-lamps-dilithium-certificates}} describes use of external 𝜇 (*mu*) calculations in further detail.
 
 # IANA Considerations
 
