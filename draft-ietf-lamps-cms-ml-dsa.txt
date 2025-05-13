@@ -265,11 +265,12 @@ Table of Contents
       digest algorithm produces at least 2λ (twice _lambda_) bits of
       output.  The overall security strength offered by an ML-DSA
       signature calculated over signed attributes is the floor of the
-      digest algorithm's strength and the ML-DSA parameter set.
-      Verifiers MAY reject a signature if the signer's choice of digest
-      algorithm does not meet the security requirements of their choice
-      of ML-DSA parameter set.  Table 1 shows appropriate SHA-2 and
-      SHA-3 digest algorithms for each parameter set.
+      digest algorithm's strength and the strength of the ML-DSA
+      parameter set.  Verifiers MAY reject a signature if the signer's
+      choice of digest algorithm does not meet the security requirements
+      of their choice of ML-DSA parameter set.  Table 1 shows
+      appropriate SHA-2 and SHA-3 digest algorithms for each parameter
+      set.
 
       SHA-512 [FIPS180] MUST be supported for use with the variants of
       ML-DSA in this document.  SHA-512 is suitable for all ML-DSA
@@ -282,8 +283,8 @@ Table of Contents
       used, the id-sha512 [RFC5754] digest algorithm identifier is used
       and the parameters field MUST be omitted.  When SHAKE256 is used,
       the id-shake256 [RFC8702] digest algorithm identifier is used and
-      produces 512 bits of output, and the parameters field MUST be
-      omitted.
+      the parameters field MUST be omitted.  SHAKE256 produces 512 bits
+      of output when used as a message digest algorithm in CMS.
 
       When signing using ML-DSA without including signed attributes, the
       algorithm specified in the digestAlgorithm field has no meaning,

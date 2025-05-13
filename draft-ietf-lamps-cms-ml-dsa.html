@@ -1365,7 +1365,7 @@ When using ML-DSA as described in this document, the context string is not used.
 Each ML-DSA parameter set has a collision strength parameter, represented by the λ (<em>lambda</em>) symbol in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
 When signers utilise signed attributes, their choice of digest algorithm may impact the overall security level of their signature.
 Selecting a digest algorithm that offers λ (<em>lambda</em>) bits of security strength against second preimage attacks and collision attacks is sufficient to meet the security level offered by a given parameter set, so long as the digest algorithm produces at least 2λ (twice <em>lambda</em>) bits of output.
-The overall security strength offered by an ML-DSA signature calculated over signed attributes is the floor of the digest algorithm's strength and the ML-DSA parameter set.
+The overall security strength offered by an ML-DSA signature calculated over signed attributes is the floor of the digest algorithm's strength and the strength of the ML-DSA parameter set.
 Verifiers <span class="bcp14">MAY</span> reject a signature if the signer's choice of digest algorithm does not meet the security requirements of their choice of ML-DSA parameter set.
 <a href="#ml-dsa-digest-algs" class="auto internal xref">Table 1</a> shows appropriate SHA-2 and SHA-3 digest algorithms for each parameter set.<a href="#section-3.3-2.2.1" class="pilcrow">¶</a></p>
 </dd>
@@ -1376,7 +1376,8 @@ Verifiers <span class="bcp14">MAY</span> reject a signature if the signer's choi
 SHA-512 is suitable for all ML-DSA parameter sets and provides an interoperable option for legacy CMS implementations that wish to migrate to use post-quantum cryptography, but that may not support use of SHA-3 derivatives at the CMS layer.
 However, other hash functions <span class="bcp14">MAY</span> also be supported; in particular, SHAKE256 <span class="bcp14">SHOULD</span> be supported, as this is the digest algorithm used internally in ML-DSA.
 When SHA-512 is used, the id-sha512 <span>[<a href="#RFC5754" class="cite xref">RFC5754</a>]</span> digest algorithm identifier is used and the parameters field <span class="bcp14">MUST</span> be omitted.
-When SHAKE256 is used, the id-shake256 <span>[<a href="#RFC8702" class="cite xref">RFC8702</a>]</span> digest algorithm identifier is used and produces 512 bits of output, and the parameters field <span class="bcp14">MUST</span> be omitted.<a href="#section-3.3-2.4.1" class="pilcrow">¶</a></p>
+When SHAKE256 is used, the id-shake256 <span>[<a href="#RFC8702" class="cite xref">RFC8702</a>]</span> digest algorithm identifier is used and the parameters field <span class="bcp14">MUST</span> be omitted.
+SHAKE256 produces 512 bits of output when used as a message digest algorithm in CMS.<a href="#section-3.3-2.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.3-2.5"></dt>
