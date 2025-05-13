@@ -221,7 +221,7 @@ digestAlgorithm:
 Each ML-DSA parameter set has a collision strength parameter, represented by the λ (*lambda*) symbol in {{FIPS204}}.
 When signers utilise signed attributes, their choice of digest algorithm may impact the overall security level of their signature.
 Selecting a digest algorithm that offers λ (*lambda*) bits of security strength against second preimage attacks and collision attacks is sufficient to meet the security level offered by a given parameter set, so long as the digest algorithm produces at least 2λ (twice *lambda*) bits of output.
-The overall security strength offered by an ML-DSA signature calculated over signed attributes is the floor of the digest algorithm's strength and the ML-DSA parameter set.
+The overall security strength offered by an ML-DSA signature calculated over signed attributes is the floor of the digest algorithm's strength and the strength of the ML-DSA parameter set.
 Verifiers MAY reject a signature if the signer's choice of digest algorithm does not meet the security requirements of their choice of ML-DSA parameter set.
 {{ml-dsa-digest-algs}} shows appropriate SHA-2 and SHA-3 digest algorithms for each parameter set.
 
@@ -229,7 +229,8 @@ Verifiers MAY reject a signature if the signer's choice of digest algorithm does
 SHA-512 is suitable for all ML-DSA parameter sets and provides an interoperable option for legacy CMS implementations that wish to migrate to use post-quantum cryptography, but that may not support use of SHA-3 derivatives at the CMS layer.
 However, other hash functions MAY also be supported; in particular, SHAKE256 SHOULD be supported, as this is the digest algorithm used internally in ML-DSA.
 When SHA-512 is used, the id-sha512 {{!RFC5754}} digest algorithm identifier is used and the parameters field MUST be omitted.
-When SHAKE256 is used, the id-shake256 {{!RFC8702}} digest algorithm identifier is used and produces 512 bits of output, and the parameters field MUST be omitted.
+When SHAKE256 is used, the id-shake256 {{!RFC8702}} digest algorithm identifier is used and the parameters field MUST be omitted.
+SHAKE256 produces 512 bits of output when used as a message digest algorithm in CMS.
 
 : When signing using ML-DSA without including signed attributes, the algorithm specified in the digestAlgorithm field has no meaning, as ML-DSA computes signatures over entire messages rather than externally computed digests.
 As such, the considerations above and in {{ml-dsa-digest-algs}} do not apply.
