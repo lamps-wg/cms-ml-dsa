@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-11T01:08:19.016691+00:00",
+  "timestamp": "2025-05-15T01:01:26.886576+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -1205,24 +1205,26 @@
       "id": "PR_kwDONFRYgM6TlsAB",
       "title": "Address Viktor's comments",
       "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/24",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "adam-r-ncsc",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Comments are here:\r\nhttps://mailarchive.ietf.org/arch/msg/spasm/do9CMFMOhlx_0kDmi2ZQ-yZqMXA/\r\n\r\nThe suggestion about lambda seemed like a good idea to me, so I've brought that in and also added the mu character to the relevant section. RFC 7997 describes the use of non-ASCII characters in RFCs, I think the text here is compliant. Since I was writing about lambda, I included more detail about lambda and suitable hash functions for application-level pre-hashing, which comes from a section of FIPS 204 that specifically references CMS.\r\n\r\nAs for Viktor's comments about not forcing alignment of hash functions, I've tried to demonstrate this with a table, and I think that table also helps illustrate why SHA-512 is a sensible default option for interop purposes.\r\n\r\nI don't think the changes fundamentally alter what we're saying, but the use of normative language does change a bit. In particular there's one \"MAY\" that becomes a \"SHOULD\".",
       "createdAt": "2025-04-23T12:53:59Z",
-      "updatedAt": "2025-05-07T17:18:07Z",
+      "updatedAt": "2025-05-13T10:56:32Z",
       "baseRepository": "lamps-wg/cms-ml-dsa",
       "baseRefName": "main",
-      "baseRefOid": "19ebd0c70ecbd8f2ee2387087fd1cad895ac68a7",
+      "baseRefOid": "d95cd3cbbb92099bdee6d655720616bc5d2d0835",
       "headRepository": "lamps-wg/cms-ml-dsa",
       "headRefName": "ar/viktor_comments",
-      "headRefOid": "a8ca1f9367bfb2b38a1cda7952efe8412096af6d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "5d1df47df164121624aacdb0dff26607bbae532a",
+      "closedAt": "2025-05-13T08:08:43Z",
+      "mergedAt": "2025-05-13T08:08:43Z",
+      "mergedBy": "adam-r-ncsc",
+      "mergeCommit": {
+        "oid": "5097d4a6e262a5628d0e1a3ca0134834f47072c4"
+      },
       "comments": [
         {
           "author": "BenS-3",
@@ -1353,25 +1355,42 @@
       "id": "PR_kwDONFRYgM6VTQA4",
       "title": "Address Deb Cooley's AD comments",
       "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/25",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "adam-r-ncsc",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Comments are here:\r\nhttps://mailarchive.ietf.org/arch/msg/spasm/CpTC_mkAp5HS5xU6x9I7POtkCg4/\r\n\r\nI've not address the digestAlgorithm section comment yet, but this is hopefully tackled by #24.",
       "createdAt": "2025-05-07T16:01:46Z",
-      "updatedAt": "2025-05-08T12:19:12Z",
+      "updatedAt": "2025-05-13T10:56:19Z",
       "baseRepository": "lamps-wg/cms-ml-dsa",
       "baseRefName": "main",
       "baseRefOid": "6676a0976633178ad5171cad95264340bcfe2dbe",
       "headRepository": "lamps-wg/cms-ml-dsa",
       "headRefName": "ar/deb_comments",
-      "headRefOid": "72d5a2de7117422197eeb4357f215530b58c0bca",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "f1453ebbfc5a82c97cf73f87d92792693f5b8493",
+      "closedAt": "2025-05-13T08:02:12Z",
+      "mergedAt": "2025-05-13T08:02:12Z",
+      "mergedBy": "adam-r-ncsc",
+      "mergeCommit": {
+        "oid": "d95cd3cbbb92099bdee6d655720616bc5d2d0835"
+      },
+      "comments": [
+        {
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The two PRs look good to me, thanks for all your work (I took a great time to take leave...)\r\n\r\nThink the only remaining point is Deb's first point? I personally think it's more correct to say \"HashML-DSA is not specified in this document\" than \"not used in CMS\". Don't want to hijack the PR so if we all agree, happy for you to make that change @adam-r-ncsc \r\n",
+          "createdAt": "2025-05-13T07:15:35Z",
+          "updatedAt": "2025-05-13T07:15:35Z"
+        },
+        {
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> The two PRs look good to me, thanks for all your work (I took a great time to take leave...)\r\n> \r\n> Think the only remaining point is Deb's first point? I personally think it's more correct to say \"HashML-DSA is not specified in this document\" than \"not used in CMS\". Don't want to hijack the PR so if we all agree, happy for you to make that change @adam-r-ncsc\r\n\r\nYou're right, it would make sense to change it given that we've used similar language later in the document. I'll make the change.",
+          "createdAt": "2025-05-13T07:38:58Z",
+          "updatedAt": "2025-05-13T07:38:58Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDONFRYgM6oPnd2",
@@ -1430,6 +1449,74 @@
           "body": "",
           "createdAt": "2025-05-08T12:19:12Z",
           "updatedAt": "2025-05-08T12:19:12Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONFRYgM6pBDqQ",
+          "commit": {
+            "abbreviatedOid": "f1453eb"
+          },
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-13T07:43:47Z",
+          "updatedAt": "2025-05-13T07:43:47Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "PR_kwDONFRYgM6V-wZ1",
+      "title": "Minor typo/grammar corrections",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/26",
+      "state": "MERGED",
+      "author": "adam-r-ncsc",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-13T11:08:01Z",
+      "updatedAt": "2025-05-13T12:59:26Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "5097d4a6e262a5628d0e1a3ca0134834f47072c4",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "ar/typos",
+      "headRefOid": "bfb50ad84fad45b720eb94707858d8524d64bfd8",
+      "closedAt": "2025-05-13T12:59:21Z",
+      "mergedAt": "2025-05-13T12:59:21Z",
+      "mergedBy": "adam-r-ncsc",
+      "mergeCommit": {
+        "oid": "7988b82467009de16b05bbc9b58907e95234d68a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6pDtKZ",
+          "commit": {
+            "abbreviatedOid": "bfb50ad"
+          },
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-05-13T11:17:19Z",
+          "updatedAt": "2025-05-13T11:17:19Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONFRYgM6pETNw",
+          "commit": {
+            "abbreviatedOid": "bfb50ad"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-13T12:00:44Z",
+          "updatedAt": "2025-05-13T12:00:44Z",
           "comments": []
         }
       ]
