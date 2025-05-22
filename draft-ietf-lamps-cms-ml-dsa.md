@@ -234,7 +234,7 @@ SHAKE256 produces 512 bits of output when used as a message digest algorithm in 
 
 : When signing using ML-DSA without including signed attributes, the algorithm specified in the digestAlgorithm field has no meaning, as ML-DSA computes signatures over entire messages rather than externally computed digests.
 As such, the considerations above and in {{ml-dsa-digest-algs}} do not apply.
-Nonetheless, the digestAlgorithm field SHOULD specify a digest algorithm that otherwise would have been used if signed attributes were present, such as SHA-512.
+Nonetheless, in this case implementations MUST specify SHA-512 as the digestAlgorithm in order to minimise the likelihood of an interoperability failure.
 When processing a SignerInfo signed using ML-DSA, if no signed attributes are present, implementations MUST ignore the content of the digestAlgorithm field.
 
  | Signature algorithm | Digest Algorithms                                                           |
