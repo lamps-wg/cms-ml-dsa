@@ -5,9 +5,9 @@
 Limited Additional Mechanisms for PKIX and SMIME               B. Salter
 Internet-Draft                                                  A. Raine
 Intended status: Standards Track       UK National Cyber Security Centre
-Expires: 14 November 2025                                   D. Van Geest
+Expires: 23 November 2025                                   D. Van Geest
                                                      CryptoNext Security
-                                                             13 May 2025
+                                                             22 May 2025
 
 
    Use of the ML-DSA Signature Algorithm in the Cryptographic Message
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 November 2025.
+   This Internet-Draft will expire on 23 November 2025.
 
 Copyright Notice
 
@@ -290,9 +290,9 @@ Table of Contents
       algorithm specified in the digestAlgorithm field has no meaning,
       as ML-DSA computes signatures over entire messages rather than
       externally computed digests.  As such, the considerations above
-      and in Table 1 do not apply.  Nonetheless, the digestAlgorithm
-      field SHOULD specify a digest algorithm that otherwise would have
-      been used if signed attributes were present, such as SHA-512.
+      and in Table 1 do not apply.  Nonetheless, in this case
+      implementations MUST specify SHA-512 as the digestAlgorithm in
+      order to minimise the likelihood of an interoperability failure.
       When processing a SignerInfo signed using ML-DSA, if no signed
       attributes are present, implementations MUST ignore the content of
       the digestAlgorithm field.
@@ -434,9 +434,9 @@ Table of Contents
               Westerbaan, "Internet X.509 Public Key Infrastructure -
               Algorithm Identifiers for the Module-Lattice-Based Digital
               Signature Algorithm (ML-DSA)", Work in Progress, Internet-
-              Draft, draft-ietf-lamps-dilithium-certificates-09, 7 May
+              Draft, draft-ietf-lamps-dilithium-certificates-10, 21 May
               2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              lamps-dilithium-certificates-09>.
+              lamps-dilithium-certificates-10>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,

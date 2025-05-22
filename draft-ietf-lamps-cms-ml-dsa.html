@@ -26,7 +26,7 @@ In addition, the algorithm identifier and public key syntax are provided.
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.0
-    platformdirs 4.3.7
+    platformdirs 4.3.8
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.3
@@ -1054,7 +1054,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salter, et al.</td>
-<td class="center">Expires 14 November 2025</td>
+<td class="center">Expires 23 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1067,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-cms-ml-dsa-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-13" class="published">13 May 2025</time>
+<time datetime="2025-05-22" class="published">22 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-14">14 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-23">23 November 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1132,7 +1132,7 @@ In addition, the algorithm identifier and public key syntax are provided.<a href
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 14 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1230,7 +1230,7 @@ In addition, the algorithm identifier and public key syntax are provided.<a href
 <p id="section-1-1">The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a digital signature algorithm standardised by NIST as part of their post-quantum cryptography standardization process.
 It is intended to be secure against both "traditional" cryptographic attacks, as well as attacks utilising a quantum computer.
 It offers smaller signatures and significantly faster runtimes than SLH-DSA <span>[<a href="#FIPS205" class="cite xref">FIPS205</a>]</span>, an alternative post-quantum signature algorithm also standardised by NIST.
-This document specifies the use of the ML-DSA in CMS at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-09#appendix-B" class="relref">Appendix B</a> of [<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> for more information on the security levels and key sizes of ML-DSA.<a href="#section-1-1" class="pilcrow">¶</a></p>
+This document specifies the use of the ML-DSA in CMS at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-10#appendix-B" class="relref">Appendix B</a> of [<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> for more information on the security levels and key sizes of ML-DSA.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <aside id="section-1-2">
         <p id="section-1-2.1">RFC EDITOR: Please replace <span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> and <span>[<a href="#I-D.ietf-lamps-cms-sphincs-plus" class="cite xref">I-D.ietf-lamps-cms-sphincs-plus</a>]</span> throughout this document with references to the published RFCs.<a href="#section-1-2.1" class="pilcrow">¶</a></p>
 </aside>
@@ -1384,7 +1384,7 @@ SHAKE256 produces 512 bits of output when used as a message digest algorithm in 
           <dd style="margin-left: 1.5em" id="section-3.3-2.6">
             <p id="section-3.3-2.6.1">When signing using ML-DSA without including signed attributes, the algorithm specified in the digestAlgorithm field has no meaning, as ML-DSA computes signatures over entire messages rather than externally computed digests.
 As such, the considerations above and in <a href="#ml-dsa-digest-algs" class="auto internal xref">Table 1</a> do not apply.
-Nonetheless, the digestAlgorithm field <span class="bcp14">SHOULD</span> specify a digest algorithm that otherwise would have been used if signed attributes were present, such as SHA-512.
+Nonetheless, in this case implementations <span class="bcp14">MUST</span> specify SHA-512 as the digestAlgorithm in order to minimise the likelihood of an interoperability failure.
 When processing a SignerInfo signed using ML-DSA, if no signed attributes are present, implementations <span class="bcp14">MUST</span> ignore the content of the digestAlgorithm field.<a href="#section-3.3-2.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
@@ -1539,7 +1539,7 @@ This should be allocated in the "SMI Security for S/MIME Module Identifier" regi
 <dd class="break"></dd>
 <dt id="I-D.ietf-lamps-dilithium-certificates">[I-D.ietf-lamps-dilithium-certificates]</dt>
         <dd>
-<span class="refAuthor">Massimo, J.</span>, <span class="refAuthor">Kampanakis, P.</span>, <span class="refAuthor">Turner, S.</span>, and <span class="refAuthor">B. Westerbaan</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the Module-Lattice-Based Digital Signature Algorithm (ML-DSA)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-dilithium-certificates-09</span>, <time datetime="2025-05-07" class="refDate">7 May 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-09">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-09</a>&gt;</span>. </dd>
+<span class="refAuthor">Massimo, J.</span>, <span class="refAuthor">Kampanakis, P.</span>, <span class="refAuthor">Turner, S.</span>, and <span class="refAuthor">B. Westerbaan</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the Module-Lattice-Based Digital Signature Algorithm (ML-DSA)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-dilithium-certificates-10</span>, <time datetime="2025-05-21" class="refDate">21 May 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-10">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-10</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
