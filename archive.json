@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-22T01:04:36.266144+00:00",
+  "timestamp": "2025-05-25T01:10:38.307661+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -1526,24 +1526,26 @@
       "id": "PR_kwDONFRYgM6W196f",
       "title": "Mandate SHA-512 as digestAlgorithm when not using signed attributes",
       "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/27",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "BenS-3",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-05-20T08:09:06Z",
-      "updatedAt": "2025-05-21T16:31:59Z",
+      "updatedAt": "2025-05-22T06:53:09Z",
       "baseRepository": "lamps-wg/cms-ml-dsa",
       "baseRefName": "main",
       "baseRefOid": "7988b82467009de16b05bbc9b58907e95234d68a",
       "headRepository": "lamps-wg/cms-ml-dsa",
       "headRefName": "bs/ad_comments",
       "headRefOid": "d5abb3d2f6e63a7169076c742c4cf80278bb3bac",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-05-22T06:53:09Z",
+      "mergedAt": "2025-05-22T06:53:09Z",
+      "mergedBy": "BenS-3",
+      "mergeCommit": {
+        "oid": "1958ad87c200ea050fe061ecb0a244b98663c789"
+      },
       "comments": [],
       "reviews": [
         {
