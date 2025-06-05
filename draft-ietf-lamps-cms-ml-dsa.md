@@ -1,6 +1,6 @@
 ---
 title: "Use of the ML-DSA Signature Algorithm in the Cryptographic Message Syntax (CMS)"
-abbrev: "ML-DSA in CMS"
+abbrev: "ML-DSA in the CMS"
 category: std
 
 docname: draft-ietf-lamps-cms-ml-dsa-latest
@@ -105,7 +105,7 @@ In addition, the algorithm identifier and public key syntax are provided.
 The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a digital signature algorithm standardised by NIST as part of their post-quantum cryptography standardization process.
 It is intended to be secure against both "traditional" cryptographic attacks, as well as attacks utilising a quantum computer.
 It offers smaller signatures and significantly faster runtimes than SLH-DSA {{FIPS205}}, an alternative post-quantum signature algorithm also standardised by NIST.
-This document specifies the use of the ML-DSA in CMS at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See {{Appendix B of I-D.ietf-lamps-dilithium-certificates}} for more information on the security levels and key sizes of ML-DSA.
+This document specifies the use of the ML-DSA in the CMS at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See {{Appendix B of I-D.ietf-lamps-dilithium-certificates}} for more information on the security levels and key sizes of ML-DSA.
 
 <aside markdown="block">
 RFC EDITOR: Please replace {{I-D.ietf-lamps-dilithium-certificates}} and {{I-D.ietf-lamps-cms-sphincs-plus}} throughout this document with references to the published RFCs.
@@ -116,7 +116,7 @@ Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and Dilithium a
 For each of the ML-DSA parameter sets, an algorithm identifier OID has been specified.
 
 {{FIPS204}} also specifies a pre-hashed variant of ML-DSA, called HashML-DSA.
-Use of HashML-DSA in CMS is not specified in this document.
+Use of HashML-DSA in the CMS is not specified in this document.
 
 
 ## Conventions and Definitions
@@ -127,7 +127,7 @@ Use of HashML-DSA in CMS is not specified in this document.
 # ML-DSA Algorithm Identifiers {#ml-dsa-algorithm-identifiers}
 
 Many ASN.1 data structure types use the AlgorithmIdentifier type to identify cryptographic algorithms.
-In CMS, AlgorithmIdentifiers are used to identify ML-DSA signatures in the signed-data content type.
+in the CMS, AlgorithmIdentifiers are used to identify ML-DSA signatures in the signed-data content type.
 They may also appear in X.509 certificates used to verify those signatures.
 The same AlgorithmIdentifiers are used to identify ML-DSA public keys and signature algorithms.
 {{?I-D.ietf-lamps-dilithium-certificates}} describes the use of ML-DSA in X.509 certificates.
@@ -179,18 +179,18 @@ id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
 ## Pure mode vs pre-hash mode
 
 {{RFC5652}} specifies that digital signatures for CMS are produced using a digest of the message to be signed, and the signer's private key.
-At the time of publication of that RFC, all signature algorithms supported in CMS required a message digest to be calculated externally to that algorithm, which would then be supplied to the algorithm implementation when calculating and verifying signatures.
+At the time of publication of that RFC, all signature algorithms supported in the CMS required a message digest to be calculated externally to that algorithm, which would then be supplied to the algorithm implementation when calculating and verifying signatures.
 Since then, EdDSA {{?RFC8032}}, SLH-DSA {{FIPS205}} and ML-DSA have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
 In the pre-hash mode, a message digest (the "pre-hash") is calculated separately and supplied to the signature algorithm as described above.
 In the pure mode, the message to be signed or verified is instead supplied directly to the signature algorithm.
 When EdDSA {{?RFC8419}} and SLH-DSA {{?I-D.ietf-lamps-cms-sphincs-plus}} are used with CMS, only the pure mode of those algorithms is specified.
 This is because in most situations, CMS signatures are computed over a set of signed attributes that contain a hash of the content, rather than being computed over the message content itself.
-Since signed attributes are typically small, use of pre-hash modes in CMS wouldn't significantly reduce the size of the data to be signed, and hence offers no benefit.
-This document follows that convention and does not specify the use of ML-DSA's pre-hash mode ("HashML-DSA") in CMS.
+Since signed attributes are typically small, use of pre-hash modes in the CMS wouldn't significantly reduce the size of the data to be signed, and hence offers no benefit.
+This document follows that convention and does not specify the use of ML-DSA's pre-hash mode ("HashML-DSA") in the CMS.
 
 ## Signature generation and verification
 
-{{RFC5652}} describes the two methods that are used to calculate and verify signatures in CMS.
+{{RFC5652}} describes the two methods that are used to calculate and verify signatures in the CMS.
 One method is used when signed attributes are present in the signedAttrs field of the relevant SignerInfo, and another is used when signed attributes are absent.
 Each method produces a different "message digest" to be supplied to the signature algorithm in question, but because the pure mode of ML-DSA is used, the "message digest" is in fact the entire message.
 Use of signed attributes is preferred, but the conventions for signed-data without signed attributes is also described below for completeness.
@@ -230,7 +230,7 @@ SHA-512 is suitable for all ML-DSA parameter sets and provides an interoperable 
 However, other hash functions MAY also be supported; in particular, SHAKE256 SHOULD be supported, as this is the digest algorithm used internally in ML-DSA.
 When SHA-512 is used, the id-sha512 {{!RFC5754}} digest algorithm identifier is used and the parameters field MUST be omitted.
 When SHAKE256 is used, the id-shake256 {{!RFC8702}} digest algorithm identifier is used and the parameters field MUST be omitted.
-SHAKE256 produces 512 bits of output when used as a message digest algorithm in CMS.
+SHAKE256 produces 512 bits of output when used as a message digest algorithm in the CMS.
 
 : When signing using ML-DSA without including signed attributes, the algorithm specified in the digestAlgorithm field has no meaning, as ML-DSA computes signatures over entire messages rather than externally computed digests.
 As such, the considerations above and in {{ml-dsa-digest-algs}} do not apply.
