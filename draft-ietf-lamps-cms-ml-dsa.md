@@ -261,7 +261,7 @@ signatureAlgorithm:
 
 # Security Considerations
 
-The security considerations {{RFC5652}} and {{!I-D.ietf-lamps-dilithium-certificates}} apply to this specification as well.
+The security considerations in {{RFC5652}} and {{!I-D.ietf-lamps-dilithium-certificates}} apply to this specification.
 
 Security of the ML-DSA private key is critical.
 Compromise of the private key will enable an adversary to forge arbitrary signatures.
