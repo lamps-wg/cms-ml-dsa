@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-25T01:10:38.307661+00:00",
+  "timestamp": "2025-06-08T01:12:10.502740+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -1572,6 +1572,79 @@
           "body": "",
           "createdAt": "2025-05-21T16:31:59Z",
           "updatedAt": "2025-05-21T16:31:59Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDONFRYgM6ZKXTZ",
+      "title": "Bs/ietf last call",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/28",
+      "state": "OPEN",
+      "author": "BenS-3",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Changing \"in CMS\" to \"in the CMS\" was proposed by Russ - apparently it's wording that goes back to PKCS#7.\r\n\r\nRemoving the Greek letters was proposed in the [GENART review](https://mailarchive.ietf.org/arch/msg/spasm/duwm3Yye9xCAWDuBv2p_shBl5X4/)\r\n\r\nThe change to line 264 was proposed by the [SECDIR review](https://mailarchive.ietf.org/arch/msg/spasm/8btQ2asD4HNQTVFoSQaseAGMmSs/)\r\n\r\nWe still have non-ASCII characters in the reference list - I assume this will be handled by the RFC editor?",
+      "createdAt": "2025-06-05T09:09:29Z",
+      "updatedAt": "2025-06-06T10:36:38Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "1958ad87c200ea050fe061ecb0a244b98663c789",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "bs/ietf-last-call",
+      "headRefOid": "b3b7fc1010eac4956f4fddfe086ccc714d8443d6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6s0qa4",
+          "commit": {
+            "abbreviatedOid": "b3b7fc1"
+          },
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-05T09:10:56Z",
+          "updatedAt": "2025-06-05T09:10:57Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "Wasn't sure of the best way to word this (I thought \"twice lambda\" by itself might not be entirely clear)",
+              "createdAt": "2025-06-05T09:10:56Z",
+              "updatedAt": "2025-06-05T09:10:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONFRYgM6s6PLk",
+          "commit": {
+            "abbreviatedOid": "b3b7fc1"
+          },
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM. \"the CMS\" sounds a bit clunky to me after it's been expanded once, but I'm happy to defer to Russ on that.",
+          "createdAt": "2025-06-05T16:14:14Z",
+          "updatedAt": "2025-06-05T16:14:14Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONFRYgM6tH5i6",
+          "commit": {
+            "abbreviatedOid": "b3b7fc1"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-06T10:36:37Z",
+          "updatedAt": "2025-06-06T10:36:37Z",
           "comments": []
         }
       ]
