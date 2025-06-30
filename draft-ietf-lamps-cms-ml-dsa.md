@@ -269,7 +269,7 @@ Compromise of the private key will enable an adversary to forge arbitrary signat
 ML-DSA depends on high quality random numbers that are suitable for use in cryptography.
 The use of inadequate pseudo-random number generators (PRNGs) to generate such values can significantly undermine the security properties offered by a cryptographic algorithm.
 For instance, an attacker may find it much easier to reproduce the PRNG environment that produced any private keys, searching the resulting small set of possibilities, rather than brute force searching the whole key space.
-The generation of random numbers of a sufficient level of quality for use in cryptography is difficult, and {{?RFC4086}} offers important guidance in this area.
+The generation of random numbers of a sufficient level of quality for use in cryptography is difficult; see Section 3.6.1 of {{FIPS204}} for some additional information.
 
 By default ML-DSA signature generation uses randomness from two sources: fresh random data generated during signature generation, and precomputed random data included in the signer's private key.
 This is referred to as the "hedged" variant of ML-DSA.
