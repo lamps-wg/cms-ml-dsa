@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-10T01:07:23.064345+00:00",
+  "timestamp": "2025-07-01T01:14:42.924361+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -1647,6 +1647,61 @@
           "body": "",
           "createdAt": "2025-06-06T10:36:37Z",
           "updatedAt": "2025-06-06T10:36:37Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "id": "PR_kwDONFRYgM6cp_FA",
+      "title": "pre-empt RFC4086 complaints",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/29",
+      "state": "MERGED",
+      "author": "danvangeest",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-30T09:01:11Z",
+      "updatedAt": "2025-06-30T09:23:22Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "770e0a643b924de20df187d7f07a224035bce7b7",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "dvg/no_RFC4086",
+      "headRefOid": "38131306f2b2515ee1211c2534ecdf0371e02ce7",
+      "closedAt": "2025-06-30T09:23:22Z",
+      "mergedAt": "2025-06-30T09:23:22Z",
+      "mergedBy": "danvangeest",
+      "mergeCommit": {
+        "oid": "333dc85054bb1ed1faef9e22ee7f07a6f34e2169"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6xDgPv",
+          "commit": {
+            "abbreviatedOid": "3813130"
+          },
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-30T09:10:45Z",
+          "updatedAt": "2025-06-30T09:10:45Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONFRYgM6xDgtv",
+          "commit": {
+            "abbreviatedOid": "3813130"
+          },
+          "author": "BenS-3",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-30T09:11:22Z",
+          "updatedAt": "2025-06-30T09:11:22Z",
           "comments": []
         }
       ]
