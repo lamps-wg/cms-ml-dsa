@@ -93,7 +93,7 @@ informative:
 
 --- abstract
 
-The Module-Lattice-Based Digital Signature Algorithm (ML-DSA), as defined in US FIPS 204, is a post-quantum digital signature scheme that aims to be secure against an adversary in possession of a Cryptographically Relevant Quantum Computer (CRQC).
+The Module-Lattice-Based Digital Signature Algorithm (ML-DSA), as defined by NIST in FIPS 204, is a post-quantum digital signature scheme that aims to be secure against an adversary in possession of a Cryptographically Relevant Quantum Computer (CRQC).
 This document specifies the conventions for using the ML-DSA signature algorithm with the Cryptographic Message Syntax (CMS).
 In addition, the algorithm identifier and public key syntax are provided.
 
