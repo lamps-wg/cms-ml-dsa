@@ -296,7 +296,10 @@ This should be allocated in the "SMI Security for S/MIME Module Identifier" regi
 
 # Acknowledgments
 
-This document was heavily influenced by {{?RFC8419}}, {{?I-D.ietf-lamps-cms-sphincs-plus}}, and {{?I-D.ietf-lamps-dilithium-certificates}}.  Thanks go to the authors of those documents.
+The authors would like to thank the following people for their contributions and reviews that helped shape this document: Viktor Dukhovni, Russ Housley, Panos Kampanakis, Mike Ounsworth, Falko Strenzke, Sean Turner, and Wei-Jun Wang.
+
+This document was heavily influenced by {{?RFC8419}}, {{?I-D.ietf-lamps-cms-sphincs-plus}}, and {{?I-D.ietf-lamps-dilithium-certificates}}.
+Thanks go to the authors of those documents.
 
 
 --- back
