@@ -93,7 +93,7 @@ informative:
 
 --- abstract
 
-The Module-Lattice-Based Digital Signature Algorithm (ML-DSA), as defined in FIPS 204, is a post-quantum digital signature scheme that aims to be secure against an adversary in possession of a Cryptographically Relevant Quantum Computer (CRQC).
+The Module-Lattice-Based Digital Signature Algorithm (ML-DSA), as defined in US FIPS 204, is a post-quantum digital signature scheme that aims to be secure against an adversary in possession of a Cryptographically Relevant Quantum Computer (CRQC).
 This document specifies the conventions for using the ML-DSA signature algorithm with the Cryptographic Message Syntax (CMS).
 In addition, the algorithm identifier and public key syntax are provided.
 
@@ -102,14 +102,10 @@ In addition, the algorithm identifier and public key syntax are provided.
 
 # Introduction
 
-The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a digital signature algorithm standardised by NIST as part of their post-quantum cryptography standardization process.
+The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a digital signature algorithm standardised by the US National Institute of Standards and Technology (NIST) as part of their post-quantum cryptography standardization process.
 It is intended to be secure against both "traditional" cryptographic attacks, as well as attacks utilising a quantum computer.
 It offers smaller signatures and significantly faster runtimes than SLH-DSA {{FIPS205}}, an alternative post-quantum signature algorithm also standardised by NIST.
 This document specifies the use of the ML-DSA in the CMS at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See {{Appendix B of I-D.ietf-lamps-dilithium-certificates}} for more information on the security levels and key sizes of ML-DSA.
-
-<aside markdown="block">
-RFC EDITOR: Please replace {{I-D.ietf-lamps-dilithium-certificates}} and {{I-D.ietf-lamps-cms-sphincs-plus}} throughout this document with references to the published RFCs.
-</aside>
 
 Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and Dilithium are not compatible.
 
@@ -117,6 +113,7 @@ For each of the ML-DSA parameter sets, an algorithm identifier OID has been spec
 
 {{FIPS204}} also specifies a pre-hashed variant of ML-DSA, called HashML-DSA.
 Use of HashML-DSA in the CMS is not specified in this document.
+See Section {{pure-vs-pre-hash}} for more details.
 
 
 ## Conventions and Definitions
@@ -127,7 +124,7 @@ Use of HashML-DSA in the CMS is not specified in this document.
 # ML-DSA Algorithm Identifiers {#ml-dsa-algorithm-identifiers}
 
 Many ASN.1 data structure types use the AlgorithmIdentifier type to identify cryptographic algorithms.
-in the CMS, AlgorithmIdentifiers are used to identify ML-DSA signatures in the signed-data content type.
+In the CMS, AlgorithmIdentifiers are used to identify ML-DSA signatures in the signed-data content type.
 They may also appear in X.509 certificates used to verify those signatures.
 The same AlgorithmIdentifiers are used to identify ML-DSA public keys and signature algorithms.
 {{?I-D.ietf-lamps-dilithium-certificates}} describes the use of ML-DSA in X.509 certificates.
@@ -176,7 +173,7 @@ id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
 
 # Signed-data Conventions
 
-## Pure mode vs pre-hash mode
+## Pure mode vs pre-hash mode {#pure-vs-pre-hash}
 
 {{RFC5652}} specifies that digital signatures for CMS are produced using a digest of the message to be signed, and the signer's private key.
 At the time of publication of that RFC, all signature algorithms supported in the CMS required a message digest to be calculated externally to that algorithm, which would then be supplied to the algorithm implementation when calculating and verifying signatures.
@@ -307,8 +304,8 @@ This document was heavily influenced by {{?RFC8419}}, {{?I-D.ietf-lamps-cms-sphi
 # ASN.1 Module {#asn1}
 
 <aside markdown="block">
-RFC EDITOR: Please replace TBD2 with the value assigned by IANA during the
-publication of {{I-D.ietf-lamps-dilithium-certificates}}.
+RFC EDITOR: Please replace the reference to [I-D.ietf-lamps-dilithium-certificates]
+in the ASN.1 module below with a reference the corresponding published RFC.
 </aside>
 
 ~~~ asn.1
