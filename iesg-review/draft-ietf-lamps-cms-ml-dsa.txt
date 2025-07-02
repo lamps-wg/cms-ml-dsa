@@ -116,7 +116,7 @@ Table of Contents
 
    [FIPS204] also specifies a pre-hashed variant of ML-DSA, called
    HashML-DSA.  Use of HashML-DSA in the CMS is not specified in this
-   document.  See Section Section 3.1 for more details.
+   document.  See Section 3.1 for more details.
 
 1.1.  Conventions and Definitions
 
