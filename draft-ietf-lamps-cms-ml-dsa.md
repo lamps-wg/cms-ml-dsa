@@ -113,7 +113,7 @@ For each of the ML-DSA parameter sets, an algorithm identifier OID has been spec
 
 {{FIPS204}} also specifies a pre-hashed variant of ML-DSA, called HashML-DSA.
 Use of HashML-DSA in the CMS is not specified in this document.
-See Section {{pure-vs-pre-hash}} for more details.
+See {{pure-vs-pre-hash}} for more details.
 
 
 ## Conventions and Definitions
