@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-01T01:14:42.924361+00:00",
+  "timestamp": "2025-07-03T01:06:59.663950+00:00",
   "repo": "lamps-wg/cms-ml-dsa",
   "labels": [
     {
@@ -1702,6 +1702,142 @@
           "body": "",
           "createdAt": "2025-06-30T09:11:22Z",
           "updatedAt": "2025-06-30T09:11:22Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "id": "PR_kwDONFRYgM6dC5JS",
+      "title": "Address Med's comments",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/30",
+      "state": "MERGED",
+      "author": "BenS-3",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-02T08:55:51Z",
+      "updatedAt": "2025-07-02T10:57:47Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "333dc85054bb1ed1faef9e22ee7f07a6f34e2169",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "iesg-review",
+      "headRefOid": "8353337f8882f2a73b6c6154f354c25e74176943",
+      "closedAt": "2025-07-02T10:57:47Z",
+      "mergedAt": "2025-07-02T10:57:47Z",
+      "mergedBy": "BenS-3",
+      "mergeCommit": {
+        "oid": "b9fd78701ed4421408415ff5c50b01e9124a5b2a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6xhg_4",
+          "commit": {
+            "abbreviatedOid": "dea8a9f"
+          },
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-02T09:04:37Z",
+          "updatedAt": "2025-07-02T09:04:37Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONFRYgM6xiTbW",
+          "commit": {
+            "abbreviatedOid": "dea8a9f"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-02T10:08:22Z",
+          "updatedAt": "2025-07-02T10:17:18Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I don't agree with Med's suggestion here, none of the other drafts use \"US\" on its own,  Using NIST would be better.\r\n\r\n```suggestion\r\nThe Module-Lattice-Based Digital Signature Algorithm (ML-DSA), as defined by NIST in FIPS 204, is a post-quantum digital signature scheme that aims to be secure against an adversary in possession of a Cryptographically Relevant Quantum Computer (CRQC).\r\n```",
+              "createdAt": "2025-07-02T10:08:22Z",
+              "updatedAt": "2025-07-02T10:17:18Z"
+            },
+            {
+              "originalPosition": 29,
+              "body": "```suggestion\r\nSee {{pure-vs-pre-hash}} for more details.\r\n```\r\n\"Section X.Y\" will get added automatically.",
+              "createdAt": "2025-07-02T10:11:58Z",
+              "updatedAt": "2025-07-02T10:17:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONFRYgM6xivy5",
+          "commit": {
+            "abbreviatedOid": "8353337"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-02T10:50:32Z",
+          "updatedAt": "2025-07-02T10:50:32Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "id": "PR_kwDONFRYgM6dEGoi",
+      "title": "Add acknowledgments",
+      "url": "https://github.com/lamps-wg/cms-ml-dsa/pull/31",
+      "state": "MERGED",
+      "author": "BenS-3",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-02T11:03:36Z",
+      "updatedAt": "2025-07-02T14:59:38Z",
+      "baseRepository": "lamps-wg/cms-ml-dsa",
+      "baseRefName": "main",
+      "baseRefOid": "b9fd78701ed4421408415ff5c50b01e9124a5b2a",
+      "headRepository": "lamps-wg/cms-ml-dsa",
+      "headRefName": "add-acknowledgments",
+      "headRefOid": "504b3663264321f963cb1ecdad3f7e4416017933",
+      "closedAt": "2025-07-02T14:59:38Z",
+      "mergedAt": "2025-07-02T14:59:38Z",
+      "mergedBy": "BenS-3",
+      "mergeCommit": {
+        "oid": "07e740164d9ecdfaf0cc73f63441ae973ab8e0d4"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONFRYgM6xjRVE",
+          "commit": {
+            "abbreviatedOid": "504b366"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-02T11:39:57Z",
+          "updatedAt": "2025-07-02T11:39:57Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONFRYgM6xjbuQ",
+          "commit": {
+            "abbreviatedOid": "504b366"
+          },
+          "author": "adam-r-ncsc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-02T11:54:57Z",
+          "updatedAt": "2025-07-02T11:54:57Z",
           "comments": []
         }
       ]
