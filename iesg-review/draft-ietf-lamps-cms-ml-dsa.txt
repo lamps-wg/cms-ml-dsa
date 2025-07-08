@@ -243,7 +243,7 @@ Table of Contents
 
    ML-DSA has a context string input that can be used to ensure that
    different signatures are generated for different application
-   contexts.  When using ML-DSA as described in this document, the
+   contexts.  When using ML-DSA as specified in this document, the
    context string is set to the empty string.
 
 3.3.  SignerInfo content
