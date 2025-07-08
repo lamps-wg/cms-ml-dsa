@@ -206,7 +206,7 @@ Recalculation of the hash value by the recipient is an important step in signatu
 This is as true for ML-DSA as it is for SLH-DSA, although ML-DSA signature generation and verification is significantly faster than SLH-DSA.
 
 ML-DSA has a context string input that can be used to ensure that different signatures are generated for different application contexts.
-When using ML-DSA as described in this document, the context string is not used.
+When using ML-DSA as described in this document, the context string is set to the empty string.
 
 ## SignerInfo content
 
