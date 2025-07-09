@@ -5,9 +5,9 @@
 Limited Additional Mechanisms for PKIX and SMIME               B. Salter
 Internet-Draft                                                  A. Raine
 Intended status: Standards Track       UK National Cyber Security Centre
-Expires: 9 January 2026                                     D. Van Geest
+Expires: 10 January 2026                                    D. Van Geest
                                                      CryptoNext Security
-                                                             8 July 2025
+                                                             9 July 2025
 
 
    Use of the ML-DSA Signature Algorithm in the Cryptographic Message
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 January 2026.
+   This Internet-Draft will expire on 10 January 2026.
 
 Copyright Notice
 
@@ -98,7 +98,7 @@ Table of Contents
    The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a
    digital signature algorithm standardised by the US National Institute
    of Standards and Technology (NIST) as part of their post-quantum
-   cryptography standardization process.  It is intended to be secure
+   cryptography standardisation process.  It is intended to be secure
    against both "traditional" cryptographic attacks, as well as attacks
    utilising a quantum computer.  It offers smaller signatures and
    significantly faster runtimes than SLH-DSA [FIPS205], an alternative
@@ -355,7 +355,7 @@ Table of Contents
    difficult; see Section 3.6.1 of [FIPS204] for some additional
    information.
 
-   By default ML-DSA signature generation uses randomness from two
+   By default, ML-DSA signature generation uses randomness from two
    sources: fresh random data generated during signature generation, and
    precomputed random data included in the signer's private key.  This
    is referred to as the "hedged" variant of ML-DSA.  Inclusion of both
@@ -470,8 +470,8 @@ Table of Contents
 8.2.  Informative References
 
    [FIPS180]  "Secure hash standard", National Institute of Standards
-              and Technology (U.S.), DOI 10.6028/nist.fips.180, 1993,
-              <https://doi.org/10.6028/nist.fips.180>.
+              and Technology (U.S.), DOI 10.6028/nist.fips.180-4, 2015,
+              <https://doi.org/10.6028/nist.fips.180-4>.
 
    [FIPS205]  "Stateless hash-based digital signature standard",
               National Institute of Standards and Technology (U.S.),
