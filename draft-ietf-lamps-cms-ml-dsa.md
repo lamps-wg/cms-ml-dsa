@@ -50,7 +50,7 @@ normative:
   RFC5652:
 
 informative:
-  FIPS180: DOI.10.6028/NIST.FIPS.180
+  FIPS180: DOI.10.6028/NIST.FIPS.180-4
   FIPS205: DOI.10.6028/NIST.FIPS.205
   RFC5911:
   X680:
@@ -102,7 +102,7 @@ In addition, the algorithm identifier and public key syntax are provided.
 
 # Introduction
 
-The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a digital signature algorithm standardised by the US National Institute of Standards and Technology (NIST) as part of their post-quantum cryptography standardization process.
+The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a digital signature algorithm standardised by the US National Institute of Standards and Technology (NIST) as part of their post-quantum cryptography standardisation process.
 It is intended to be secure against both "traditional" cryptographic attacks, as well as attacks utilising a quantum computer.
 It offers smaller signatures and significantly faster runtimes than SLH-DSA {{FIPS205}}, an alternative post-quantum signature algorithm also standardised by NIST.
 This document specifies the use of the ML-DSA in the CMS at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See {{Appendix B of I-D.ietf-lamps-dilithium-certificates}} for more information on the security levels and key sizes of ML-DSA.
@@ -268,7 +268,7 @@ The use of inadequate pseudo-random number generators (PRNGs) to generate such v
 For instance, an attacker may find it much easier to reproduce the PRNG environment that produced any private keys, searching the resulting small set of possibilities, rather than brute force searching the whole key space.
 The generation of random numbers of a sufficient level of quality for use in cryptography is difficult; see Section 3.6.1 of {{FIPS204}} for some additional information.
 
-By default ML-DSA signature generation uses randomness from two sources: fresh random data generated during signature generation, and precomputed random data included in the signer's private key.
+By default, ML-DSA signature generation uses randomness from two sources: fresh random data generated during signature generation, and precomputed random data included in the signer's private key.
 This is referred to as the "hedged" variant of ML-DSA.
 Inclusion of both sources of random can help mitigate against faulty random number generators, side-channel attacks and fault attacks.
 {{FIPS204}} also permits creating deterministic signatures using just the precomputed random data in the signer's private key.
