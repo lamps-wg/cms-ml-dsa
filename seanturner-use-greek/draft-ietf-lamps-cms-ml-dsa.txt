@@ -5,9 +5,9 @@
 Limited Additional Mechanisms for PKIX and SMIME               B. Salter
 Internet-Draft                                                  A. Raine
 Intended status: Standards Track       UK National Cyber Security Centre
-Expires: 1 January 2026                                     D. Van Geest
+Expires: 2 April 2026                                       D. Van Geest
                                                      CryptoNext Security
-                                                            30 June 2025
+                                                       29 September 2025
 
 
    Use of the ML-DSA Signature Algorithm in the Cryptographic Message
@@ -17,8 +17,8 @@ Expires: 1 January 2026                                     D. Van Geest
 Abstract
 
    The Module-Lattice-Based Digital Signature Algorithm (ML-DSA), as
-   defined in FIPS 204, is a post-quantum digital signature scheme that
-   aims to be secure against an adversary in possession of a
+   defined by NIST in FIPS 204, is a post-quantum digital signature
+   scheme that aims to be secure against an adversary in possession of a
    Cryptographically Relevant Quantum Computer (CRQC).  This document
    specifies the conventions for using the ML-DSA signature algorithm
    with the Cryptographic Message Syntax (CMS).  In addition, the
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 January 2026.
+   This Internet-Draft will expire on 2 April 2026.
 
 Copyright Notice
 
@@ -96,21 +96,17 @@ Table of Contents
 1.  Introduction
 
    The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a
-   digital signature algorithm standardised by NIST as part of their
-   post-quantum cryptography standardization process.  It is intended to
-   be secure against both "traditional" cryptographic attacks, as well
-   as attacks utilising a quantum computer.  It offers smaller
-   signatures and significantly faster runtimes than SLH-DSA [FIPS205],
-   an alternative post-quantum signature algorithm also standardised by
-   NIST.  This document specifies the use of the ML-DSA in the CMS at
-   three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See
-   Appendix B of [I-D.ietf-lamps-dilithium-certificates] for more
-   information on the security levels and key sizes of ML-DSA.
-
-      |  RFC EDITOR: Please replace
-      |  [I-D.ietf-lamps-dilithium-certificates] and
-      |  [I-D.ietf-lamps-cms-sphincs-plus] throughout this document with
-      |  references to the published RFCs.
+   digital signature algorithm standardised by the US National Institute
+   of Standards and Technology (NIST) as part of their post-quantum
+   cryptography standardisation process.  It is intended to be secure
+   against both "traditional" cryptographic attacks, as well as attacks
+   utilising a quantum computer.  It offers smaller signatures and
+   significantly faster runtimes than SLH-DSA [FIPS205], an alternative
+   post-quantum signature algorithm also standardised by NIST.  This
+   document specifies the use of the ML-DSA in the CMS at three security
+   levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See Appendix B of
+   [I-D.ietf-lamps-dilithium-certificates] for more information on the
+   security levels and key sizes of ML-DSA.
 
    Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
    Dilithium are not compatible.
@@ -120,7 +116,7 @@ Table of Contents
 
    [FIPS204] also specifies a pre-hashed variant of ML-DSA, called
    HashML-DSA.  Use of HashML-DSA in the CMS is not specified in this
-   document.
+   document.  See Section 3.1 for more details.
 
 1.1.  Conventions and Definitions
 
@@ -133,7 +129,7 @@ Table of Contents
 2.  ML-DSA Algorithm Identifiers
 
    Many ASN.1 data structure types use the AlgorithmIdentifier type to
-   identify cryptographic algorithms. in the CMS, AlgorithmIdentifiers
+   identify cryptographic algorithms.  In the CMS, AlgorithmIdentifiers
    are used to identify ML-DSA signatures in the signed-data content
    type.  They may also appear in X.509 certificates used to verify
    those signatures.  The same AlgorithmIdentifiers are used to identify
@@ -247,8 +243,8 @@ Table of Contents
 
    ML-DSA has a context string input that can be used to ensure that
    different signatures are generated for different application
-   contexts.  When using ML-DSA as described in this document, the
-   context string is not used.
+   contexts.  When using ML-DSA as specified in this document, the
+   context string is set to the empty string.
 
 3.3.  SignerInfo content
 
@@ -359,7 +355,7 @@ Table of Contents
    difficult; see Section 3.6.1 of [FIPS204] for some additional
    information.
 
-   By default ML-DSA signature generation uses randomness from two
+   By default, ML-DSA signature generation uses randomness from two
    sources: fresh random data generated during signature generation, and
    precomputed random data included in the signer's private key.  This
    is referred to as the "hedged" variant of ML-DSA.  Inclusion of both
@@ -394,13 +390,12 @@ Table of Contents
    signing.
 
    Additionally, the pure variant of ML-DSA does support a form of pre-
-   hash via external calculation of the mu "message representative"
-   value described in Section 6.2 of [FIPS204].  This value may
-   "optionally be computed in a different cryptographic module" and
-   supplied to the hardware device, rather than requiring the entire
-   message to be transmitted.  Appendix D of
-   [I-D.ietf-lamps-dilithium-certificates] describes use of external mu
-   calculations in further detail.
+   hash via external calculation of the μ "message representative" value
+   described in Section 6.2 of [FIPS204].  This value may "optionally be
+   computed in a different cryptographic module" and supplied to the
+   hardware device, rather than requiring the entire message to be
+   transmitted.  Appendix D of [I-D.ietf-lamps-dilithium-certificates]
+   describes use of external μ calculations in further detail.
 
 6.  IANA Considerations
 
@@ -411,6 +406,11 @@ Table of Contents
    (1.2.840.113549.1.9.16.0).
 
 7.  Acknowledgments
+
+   The authors would like to thank the following people for their
+   contributions and reviews that helped shape this document: Viktor
+   Dukhovni, Russ Housley, Panos Kampanakis, Mike Ounsworth, Falko
+   Strenzke, Sean Turner, and Wei-Jun Wang.
 
    This document was heavily influenced by [RFC8419],
    [I-D.ietf-lamps-cms-sphincs-plus], and
@@ -469,8 +469,8 @@ Table of Contents
 8.2.  Informative References
 
    [FIPS180]  "Secure hash standard", National Institute of Standards
-              and Technology (U.S.), DOI 10.6028/nist.fips.180, 1993,
-              <https://doi.org/10.6028/nist.fips.180>.
+              and Technology (U.S.), DOI 10.6028/nist.fips.180-4, 2015,
+              <https://doi.org/10.6028/nist.fips.180-4>.
 
    [FIPS205]  "Stateless hash-based digital signature standard",
               National Institute of Standards and Technology (U.S.),
@@ -521,9 +521,9 @@ Table of Contents
 
 Appendix A.  ASN.1 Module
 
-      |  RFC EDITOR: Please replace TBD2 with the value assigned by IANA
-      |  during the publication of
-      |  [I-D.ietf-lamps-dilithium-certificates].
+      |  RFC EDITOR: Please replace the reference to
+      |  [I-D.ietf-lamps-dilithium-certificates] in the ASN.1 module
+      |  below with a reference the corresponding published RFC.
 
    <CODE BEGINS>
    ML-DSA-Module-2024
@@ -544,7 +544,7 @@ Appendix A.  ASN.1 Module
      FROM X509-ML-DSA-2024 -- From [I-D.ietf-lamps-dilithium-certificates]
      { iso(1) identified-organization(3) dod(6) internet(1)
        security(5) mechanisms(5) pkix(7) id-mod(0)
-       id-mod-x509-ml-dsa-2024(TBD2) } ;
+       id-mod-x509-ml-dsa-2024(119) } ;
 
    --
    -- Expand the signature algorithm set used by CMS [RFC5911]
