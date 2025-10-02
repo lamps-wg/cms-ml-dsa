@@ -5,9 +5,9 @@
 Limited Additional Mechanisms for PKIX and SMIME               B. Salter
 Internet-Draft                                                  A. Raine
 Intended status: Standards Track       UK National Cyber Security Centre
-Expires: 10 January 2026                                    D. Van Geest
+Expires: 5 April 2026                                       D. Van Geest
                                                      CryptoNext Security
-                                                             9 July 2025
+                                                          2 October 2025
 
 
    Use of the ML-DSA Signature Algorithm in the Cryptographic Message
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 January 2026.
+   This Internet-Draft will expire on 5 April 2026.
 
 Copyright Notice
 
@@ -253,14 +253,14 @@ Table of Contents
    digestAlgorithm:  Per Section 5.3 of [RFC5652], the digestAlgorithm
       field identifies the message digest algorithm used by the signer,
       and any associated parameters.  Each ML-DSA parameter set has a
-      collision strength parameter, represented by the lambda symbol in
-      [FIPS204].  When signers utilise signed attributes, their choice
-      of digest algorithm may impact the overall security level of their
-      signature.  Selecting a digest algorithm that offers lambda bits
-      of security strength against second preimage attacks and collision
-      attacks is sufficient to meet the security level offered by a
-      given parameter set, so long as the digest algorithm produces at
-      least 2 * lambda bits of output.  The overall security strength
+      collision strength parameter, represented by the λ (lambda) symbol
+      in [FIPS204].  When signers utilise signed attributes, their
+      choice of digest algorithm may impact the overall security level
+      of their signature.  Selecting a digest algorithm that offers λ
+      bits of security strength against second preimage attacks and
+      collision attacks is sufficient to meet the security level offered
+      by a given parameter set, so long as the digest algorithm produces
+      at least 2 * λ bits of output.  The overall security strength
       offered by an ML-DSA signature calculated over signed attributes
       is the floor of the digest algorithm's strength and the strength
       of the ML-DSA parameter set.  Verifiers MAY reject a signature if
@@ -390,12 +390,12 @@ Table of Contents
    signing.
 
    Additionally, the pure variant of ML-DSA does support a form of pre-
-   hash via external calculation of the mu "message representative"
+   hash via external calculation of the μ (mu) "message representative"
    value described in Section 6.2 of [FIPS204].  This value may
    "optionally be computed in a different cryptographic module" and
    supplied to the hardware device, rather than requiring the entire
    message to be transmitted.  Appendix D of
-   [I-D.ietf-lamps-dilithium-certificates] describes use of external mu
+   [I-D.ietf-lamps-dilithium-certificates] describes use of external μ
    calculations in further detail.
 
 6.  IANA Considerations
@@ -436,9 +436,9 @@ Table of Contents
               Westerbaan, "Internet X.509 Public Key Infrastructure -
               Algorithm Identifiers for the Module-Lattice-Based Digital
               Signature Algorithm (ML-DSA)", Work in Progress, Internet-
-              Draft, draft-ietf-lamps-dilithium-certificates-12, 26 June
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              lamps-dilithium-certificates-12>.
+              Draft, draft-ietf-lamps-dilithium-certificates-13, 30
+              September 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-dilithium-certificates-13>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
