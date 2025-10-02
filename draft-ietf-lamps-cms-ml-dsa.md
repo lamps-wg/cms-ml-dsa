@@ -215,9 +215,9 @@ When using ML-DSA, the fields of a SignerInfo are used as follows:
 digestAlgorithm:
 
 : Per {{Section 5.3 of RFC5652}}, the digestAlgorithm field identifies the message digest algorithm used by the signer, and any associated parameters.
-Each ML-DSA parameter set has a collision strength parameter, represented by the lambda symbol in {{FIPS204}}.
+Each ML-DSA parameter set has a collision strength parameter, represented by the &lambda; (lambda) symbol in {{FIPS204}}.
 When signers utilise signed attributes, their choice of digest algorithm may impact the overall security level of their signature.
-Selecting a digest algorithm that offers lambda bits of security strength against second preimage attacks and collision attacks is sufficient to meet the security level offered by a given parameter set, so long as the digest algorithm produces at least 2 * lambda bits of output.
+Selecting a digest algorithm that offers &lambda; bits of security strength against second preimage attacks and collision attacks is sufficient to meet the security level offered by a given parameter set, so long as the digest algorithm produces at least 2 * &lambda; bits of output.
 The overall security strength offered by an ML-DSA signature calculated over signed attributes is the floor of the digest algorithm's strength and the strength of the ML-DSA parameter set.
 Verifiers MAY reject a signature if the signer's choice of digest algorithm does not meet the security requirements of their choice of ML-DSA parameter set.
 {{ml-dsa-digest-algs}} shows appropriate SHA-2 and SHA-3 digest algorithms for each parameter set.
