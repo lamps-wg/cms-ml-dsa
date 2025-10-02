@@ -215,9 +215,9 @@ When using ML-DSA, the fields of a SignerInfo are used as follows:
 digestAlgorithm:
 
 : Per {{Section 5.3 of RFC5652}}, the digestAlgorithm field identifies the message digest algorithm used by the signer, and any associated parameters.
-Each ML-DSA parameter set has a collision strength parameter, represented by the lambda symbol in {{FIPS204}}.
+Each ML-DSA parameter set has a collision strength parameter, represented by the &lambda; (lambda) symbol in {{FIPS204}}.
 When signers utilise signed attributes, their choice of digest algorithm may impact the overall security level of their signature.
-Selecting a digest algorithm that offers lambda bits of security strength against second preimage attacks and collision attacks is sufficient to meet the security level offered by a given parameter set, so long as the digest algorithm produces at least 2 * lambda bits of output.
+Selecting a digest algorithm that offers &lambda; bits of security strength against second preimage attacks and collision attacks is sufficient to meet the security level offered by a given parameter set, so long as the digest algorithm produces at least 2 * &lambda; bits of output.
 The overall security strength offered by an ML-DSA signature calculated over signed attributes is the floor of the digest algorithm's strength and the strength of the ML-DSA parameter set.
 Verifiers MAY reject a signature if the signer's choice of digest algorithm does not meet the security requirements of their choice of ML-DSA parameter set.
 {{ml-dsa-digest-algs}} shows appropriate SHA-2 and SHA-3 digest algorithms for each parameter set.
@@ -284,9 +284,9 @@ To avoid algorithm substitution attacks, the CMSAlgorithmProtection attribute de
 If ML-DSA signing is implemented in a hardware device such as hardware security module (HSM) or portable cryptographic token, implementers might want to avoid sending the full content to the device for performance reasons.
 By including signed attributes, which necessarily include the message-digest attribute and the content-type attribute as described in Section 5.3 of {{RFC5652}}, the much smaller set of signed attributes are sent to the device for signing.
 
-Additionally, the pure variant of ML-DSA does support a form of pre-hash via external calculation of the mu "message representative" value described in Section 6.2 of {{FIPS204}}.
+Additionally, the pure variant of ML-DSA does support a form of pre-hash via external calculation of the &mu; (mu) "message representative" value described in Section 6.2 of {{FIPS204}}.
 This value may "optionally be computed in a different cryptographic module" and supplied to the hardware device, rather than requiring the entire message to be transmitted.
-Appendix D of {{?I-D.ietf-lamps-dilithium-certificates}} describes use of external mu calculations in further detail.
+Appendix D of {{?I-D.ietf-lamps-dilithium-certificates}} describes use of external &mu; calculations in further detail.
 
 # IANA Considerations
 
