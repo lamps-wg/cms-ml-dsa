@@ -1360,9 +1360,9 @@ When using ML-DSA as specified in this document, the context string is set to th
           <dt id="section-3.3-2.1">digestAlgorithm:</dt>
           <dd style="margin-left: 1.5em" id="section-3.3-2.2">
             <p id="section-3.3-2.2.1">Per <span><a href="https://rfc-editor.org/rfc/rfc5652#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>, the digestAlgorithm field identifies the message digest algorithm used by the signer, and any associated parameters.
-Each ML-DSA parameter set has a collision strength parameter, represented by the lambda symbol in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
+Each ML-DSA parameter set has a collision strength parameter, represented by the λ (lambda) symbol in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
 When signers utilise signed attributes, their choice of digest algorithm may impact the overall security level of their signature.
-Selecting a digest algorithm that offers lambda bits of security strength against second preimage attacks and collision attacks is sufficient to meet the security level offered by a given parameter set, so long as the digest algorithm produces at least 2 * lambda bits of output.
+Selecting a digest algorithm that offers λ bits of security strength against second preimage attacks and collision attacks is sufficient to meet the security level offered by a given parameter set, so long as the digest algorithm produces at least 2 * λ bits of output.
 The overall security strength offered by an ML-DSA signature calculated over signed attributes is the floor of the digest algorithm's strength and the strength of the ML-DSA parameter set.
 Verifiers <span class="bcp14">MAY</span> reject a signature if the signer's choice of digest algorithm does not meet the security requirements of their choice of ML-DSA parameter set.
 <a href="#ml-dsa-digest-algs" class="auto internal xref">Table 1</a> shows appropriate SHA-2 and SHA-3 digest algorithms for each parameter set.<a href="#section-3.3-2.2.1" class="pilcrow">¶</a></p>
