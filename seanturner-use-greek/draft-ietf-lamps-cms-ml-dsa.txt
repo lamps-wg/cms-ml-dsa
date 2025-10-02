@@ -5,9 +5,9 @@
 Limited Additional Mechanisms for PKIX and SMIME               B. Salter
 Internet-Draft                                                  A. Raine
 Intended status: Standards Track       UK National Cyber Security Centre
-Expires: 2 April 2026                                       D. Van Geest
+Expires: 5 April 2026                                       D. Van Geest
                                                      CryptoNext Security
-                                                       29 September 2025
+                                                          2 October 2025
 
 
    Use of the ML-DSA Signature Algorithm in the Cryptographic Message
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 April 2026.
+   This Internet-Draft will expire on 5 April 2026.
 
 Copyright Notice
 
@@ -390,12 +390,13 @@ Table of Contents
    signing.
 
    Additionally, the pure variant of ML-DSA does support a form of pre-
-   hash via external calculation of the μ "message representative" value
-   described in Section 6.2 of [FIPS204].  This value may "optionally be
-   computed in a different cryptographic module" and supplied to the
-   hardware device, rather than requiring the entire message to be
-   transmitted.  Appendix D of [I-D.ietf-lamps-dilithium-certificates]
-   describes use of external μ calculations in further detail.
+   hash via external calculation of the μ (mu) "message representative"
+   value described in Section 6.2 of [FIPS204].  This value may
+   "optionally be computed in a different cryptographic module" and
+   supplied to the hardware device, rather than requiring the entire
+   message to be transmitted.  Appendix D of
+   [I-D.ietf-lamps-dilithium-certificates] describes use of external μ
+   calculations in further detail.
 
 6.  IANA Considerations
 
@@ -435,9 +436,9 @@ Table of Contents
               Westerbaan, "Internet X.509 Public Key Infrastructure -
               Algorithm Identifiers for the Module-Lattice-Based Digital
               Signature Algorithm (ML-DSA)", Work in Progress, Internet-
-              Draft, draft-ietf-lamps-dilithium-certificates-12, 26 June
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              lamps-dilithium-certificates-12>.
+              Draft, draft-ietf-lamps-dilithium-certificates-13, 30
+              September 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-dilithium-certificates-13>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
