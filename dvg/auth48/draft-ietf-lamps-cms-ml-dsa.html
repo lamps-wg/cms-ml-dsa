@@ -11,27 +11,26 @@
 <meta content="
        The Module-Lattice-Based Digital Signature Algorithm (ML-DSA), as defined by NIST in FIPS 204, is a post-quantum digital signature scheme that aims to be secure against an adversary in possession of a Cryptographically Relevant Quantum Computer (CRQC).
 This document specifies the conventions for using the ML-DSA signature algorithm with the Cryptographic Message Syntax (CMS).
-In addition, the algorithm identifier and public key syntax are provided. 
+In addition, the algorithm identifier syntax is provided. 
     " name="description">
-<meta content="xml2rfc 3.30.2" name="generator">
+<meta content="xml2rfc 3.31.0" name="generator">
 <meta content="cms" name="keyword">
 <meta content="ml-dsa" name="keyword">
 <meta content="dilithium" name="keyword">
 <meta content="draft-ietf-lamps-cms-ml-dsa-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.2
-    Python 3.12.11
+  xml2rfc 3.31.0
+    Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.1
-    platformdirs 4.4.0
+    platformdirs 4.5.0
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.5
-    setuptools 80.9.0
-    wcwidth 0.2.13
+    wcwidth 0.2.14
 -->
 <link href="draft-ietf-lamps-cms-ml-dsa.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1050,11 +1049,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">ML-DSA in the CMS</td>
-<td class="right">October 2025</td>
+<td class="right">November 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salter, et al.</td>
-<td class="center">Expires 5 April 2026</td>
+<td class="center">Expires 7 May 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-cms-ml-dsa-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-02" class="published">2 October 2025</time>
+<time datetime="2025-11-03" class="published">3 November 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-05">5 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-05-07">7 May 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1095,7 +1094,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">The Module-Lattice-Based Digital Signature Algorithm (ML-DSA), as defined by NIST in FIPS 204, is a post-quantum digital signature scheme that aims to be secure against an adversary in possession of a Cryptographically Relevant Quantum Computer (CRQC).
 This document specifies the conventions for using the ML-DSA signature algorithm with the Cryptographic Message Syntax (CMS).
-In addition, the algorithm identifier and public key syntax are provided.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+In addition, the algorithm identifier syntax is provided.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1132,7 +1131,7 @@ In addition, the algorithm identifier and public key syntax are provided.<a href
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1173,16 +1172,16 @@ In addition, the algorithm identifier and public key syntax are provided.<a href
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-ml-dsa-algorithm-identifier" class="internal xref">ML-DSA Algorithm Identifiers</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-signed-data-conventions" class="internal xref">Signed-data Conventions</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-signed-data-conventions" class="internal xref">Signed-Data Conventions</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-pure-mode-vs-pre-hash-mode" class="internal xref">Pure mode vs pre-hash mode</a></p>
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-pure-mode-versus-pre-hash-m" class="internal xref">Pure Mode Versus Pre-Hash Mode</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-signature-generation-and-ve" class="internal xref">Signature generation and verification</a></p>
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-signature-generation-and-ve" class="internal xref">Signature Generation and Verification</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-signerinfo-content" class="internal xref">SignerInfo content</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-signerinfo-content" class="internal xref">SignerInfo Content</a></p>
 </li>
             </ul>
 </li>
@@ -1196,27 +1195,27 @@ In addition, the algorithm identifier and public key syntax are provided.<a href
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-references" class="internal xref">References</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-references" class="internal xref">References</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-asn1-module" class="internal xref">ASN.1 Module</a></p>
+</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-asn1-module" class="internal xref">ASN.1 Module</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1227,10 +1226,9 @@ In addition, the algorithm identifier and public key syntax are provided.<a href
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a digital signature algorithm standardised by the US National Institute of Standards and Technology (NIST) as part of their post-quantum cryptography standardisation process.
-It is intended to be secure against both "traditional" cryptographic attacks, as well as attacks utilising a quantum computer.
+<p id="section-1-1">The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a post-quantum digital signature algorithm standardised by the US National Institute of Standards and Technology (NIST) as part of their post-quantum cryptography standardisation process.
 It offers smaller signatures and significantly faster runtimes than SLH-DSA <span>[<a href="#FIPS205" class="cite xref">FIPS205</a>]</span>, an alternative post-quantum signature algorithm also standardised by NIST.
-This document specifies the use of the ML-DSA in the CMS at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-13#appendix-B" class="relref">Appendix B</a> of [<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> for more information on the security levels and key sizes of ML-DSA.<a href="#section-1-1" class="pilcrow">¶</a></p>
+This document specifies the use of ML-DSA in the CMS at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See <span><a href="https://rfc-editor.org/rfc/rfc9881#appendix-B" class="relref">Appendix B</a> of [<a href="#RFC9881" class="cite xref">RFC9881</a>]</span> for more information on the security levels and key sizes of ML-DSA.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and Dilithium are not compatible.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">For each of the ML-DSA parameter sets, an algorithm identifier OID has been specified.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4"><span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> also specifies a pre-hashed variant of ML-DSA, called HashML-DSA.
@@ -1258,7 +1256,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 In the CMS, AlgorithmIdentifiers are used to identify ML-DSA signatures in the signed-data content type.
 They may also appear in X.509 certificates used to verify those signatures.
 The same AlgorithmIdentifiers are used to identify ML-DSA public keys and signature algorithms.
-<span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> describes the use of ML-DSA in X.509 certificates.
+<span>[<a href="#RFC9881" class="cite xref">RFC9881</a>]</span> describes the use of ML-DSA in X.509 certificates.
 The AlgorithmIdentifier type is defined as follows:<a href="#section-2-1" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-2-2">
 <pre>
@@ -1309,19 +1307,19 @@ id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
 <div id="signed-data-conventions">
 <section id="section-3">
       <h2 id="name-signed-data-conventions">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-signed-data-conventions" class="section-name selfRef">Signed-data Conventions</a>
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-signed-data-conventions" class="section-name selfRef">Signed-Data Conventions</a>
       </h2>
 <div id="pure-vs-pre-hash">
 <section id="section-3.1">
-        <h3 id="name-pure-mode-vs-pre-hash-mode">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-pure-mode-vs-pre-hash-mode" class="section-name selfRef">Pure mode vs pre-hash mode</a>
+        <h3 id="name-pure-mode-versus-pre-hash-m">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-pure-mode-versus-pre-hash-m" class="section-name selfRef">Pure Mode Versus Pre-Hash Mode</a>
         </h3>
-<p id="section-3.1-1"><span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> specifies that digital signatures for CMS are produced using a digest of the message to be signed, and the signer's private key.
-At the time of publication of that RFC, all signature algorithms supported in the CMS required a message digest to be calculated externally to that algorithm, which would then be supplied to the algorithm implementation when calculating and verifying signatures.
+<p id="section-3.1-1"><span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> specifies that digital signatures for CMS are produced using a digest of the message to be signed and the signer's private key.
+At the time RFC 5652 was published, all signature algorithms supported in the CMS required a message digest to be calculated externally to that algorithm, which would then be supplied to the algorithm implementation when calculating and verifying signatures.
 Since then, EdDSA <span>[<a href="#RFC8032" class="cite xref">RFC8032</a>]</span>, SLH-DSA <span>[<a href="#FIPS205" class="cite xref">FIPS205</a>]</span> and ML-DSA have also been standardised, and these algorithms support both a "pure" and "pre-hash" mode.
 In the pre-hash mode, a message digest (the "pre-hash") is calculated separately and supplied to the signature algorithm as described above.
 In the pure mode, the message to be signed or verified is instead supplied directly to the signature algorithm.
-When EdDSA <span>[<a href="#RFC8419" class="cite xref">RFC8419</a>]</span> and SLH-DSA <span>[<a href="#I-D.ietf-lamps-cms-sphincs-plus" class="cite xref">I-D.ietf-lamps-cms-sphincs-plus</a>]</span> are used with CMS, only the pure mode of those algorithms is specified.
+When EdDSA <span>[<a href="#RFC8419" class="cite xref">RFC8419</a>]</span> and SLH-DSA <span>[<a href="#RFC9814" class="cite xref">RFC9814</a>]</span> are used with CMS, only the pure mode of those algorithms is specified.
 This is because in most situations, CMS signatures are computed over a set of signed attributes that contain a hash of the content, rather than being computed over the message content itself.
 Since signed attributes are typically small, use of pre-hash modes in the CMS wouldn't significantly reduce the size of the data to be signed, and hence offers no benefit.
 This document follows that convention and does not specify the use of ML-DSA's pre-hash mode ("HashML-DSA") in the CMS.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
@@ -1330,7 +1328,7 @@ This document follows that convention and does not specify the use of ML-DSA's p
 <div id="signature-generation-and-verification">
 <section id="section-3.2">
         <h3 id="name-signature-generation-and-ve">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-signature-generation-and-ve" class="section-name selfRef">Signature generation and verification</a>
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-signature-generation-and-ve" class="section-name selfRef">Signature Generation and Verification</a>
         </h3>
 <p id="section-3.2-1"><span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> describes the two methods that are used to calculate and verify signatures in the CMS.
 One method is used when signed attributes are present in the signedAttrs field of the relevant SignerInfo, and another is used when signed attributes are absent.
@@ -1341,10 +1339,10 @@ As described in <span><a href="https://rfc-editor.org/rfc/rfc5652#section-5.4" c
 The tag and length octets are not included.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">When signed attributes are included, ML-DSA (pure mode) signatures are computed over the complete DER encoding of the SignedAttrs value contained in the SignerInfo's signedAttrs field.
 As described in <span><a href="https://rfc-editor.org/rfc/rfc5652#section-5.4" class="relref">Section 5.4</a> of [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>, this encoding includes the tag and length octets, but an EXPLICIT SET OF tag is used rather than the IMPLICIT [0] tag that appears in the final message.
-The signedAttrs field <span class="bcp14">MUST</span> at minimum include a content-type attribute and a message-digest attribute.
+At a minimum, the signedAttrs field <span class="bcp14">MUST</span> include a content-type attribute and a message-digest attribute.
 The message-digest attribute contains a hash of the content of the signed-data, where the content is as described for the absent signed attributes case above.
 Recalculation of the hash value by the recipient is an important step in signature verification.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4"><span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-cms-sphincs-plus-19#section-4" class="relref">Section 4</a> of [<a href="#I-D.ietf-lamps-cms-sphincs-plus" class="cite xref">I-D.ietf-lamps-cms-sphincs-plus</a>]</span> describes how, when the content of a signed-data is large, performance may be improved by including signed attributes.
+<p id="section-3.2-4"><span><a href="https://rfc-editor.org/rfc/rfc9814#section-4" class="relref">Section 4</a> of [<a href="#RFC9814" class="cite xref">RFC9814</a>]</span> describes how, when the content of a signed-data is large, performance may be improved by including signed attributes.
 This is as true for ML-DSA as it is for SLH-DSA, although ML-DSA signature generation and verification is significantly faster than SLH-DSA.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <p id="section-3.2-5">ML-DSA has a context string input that can be used to ensure that different signatures are generated for different application contexts.
 When using ML-DSA as specified in this document, the context string is set to the empty string.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
@@ -1353,17 +1351,17 @@ When using ML-DSA as specified in this document, the context string is set to th
 <div id="signerinfo-content">
 <section id="section-3.3">
         <h3 id="name-signerinfo-content">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-signerinfo-content" class="section-name selfRef">SignerInfo content</a>
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-signerinfo-content" class="section-name selfRef">SignerInfo Content</a>
         </h3>
 <p id="section-3.3-1">When using ML-DSA, the fields of a SignerInfo are used as follows:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-3.3-2">
           <dt id="section-3.3-2.1">digestAlgorithm:</dt>
           <dd style="margin-left: 1.5em" id="section-3.3-2.2">
-            <p id="section-3.3-2.2.1">Per <span><a href="https://rfc-editor.org/rfc/rfc5652#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>, the digestAlgorithm field identifies the message digest algorithm used by the signer, and any associated parameters.
-Each ML-DSA parameter set has a collision strength parameter, represented by the λ (lambda) symbol in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
+            <p id="section-3.3-2.2.1">Per <span><a href="https://rfc-editor.org/rfc/rfc5652#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>, the digestAlgorithm field identifies the message digest algorithm used by the signer and any associated parameters.
+Each ML-DSA parameter set has a collision strength parameter, represented by the "λ" (GREEK SMALL LETTER LAMDA, U+03BB) symbol in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
 When signers utilise signed attributes, their choice of digest algorithm may impact the overall security level of their signature.
 Selecting a digest algorithm that offers λ bits of security strength against second preimage attacks and collision attacks is sufficient to meet the security level offered by a given parameter set, so long as the digest algorithm produces at least 2 * λ bits of output.
-The overall security strength offered by an ML-DSA signature calculated over signed attributes is the floor of the digest algorithm's strength and the strength of the ML-DSA parameter set.
+The overall security strength offered by an ML-DSA signature calculated over signed attributes is constrained by either the digest algorithm's strength or the strength of the ML-DSA parameter set, whichever is lower.
 Verifiers <span class="bcp14">MAY</span> reject a signature if the signer's choice of digest algorithm does not meet the security requirements of their choice of ML-DSA parameter set.
 <a href="#ml-dsa-digest-algs" class="auto internal xref">Table 1</a> shows appropriate SHA-2 and SHA-3 digest algorithms for each parameter set.<a href="#section-3.3-2.2.1" class="pilcrow">¶</a></p>
 </dd>
@@ -1391,11 +1389,11 @@ When processing a SignerInfo signed using ML-DSA, if no signed attributes are pr
 <table class="center" id="table-1">
           <caption>
 <a href="#table-1" class="selfRef">Table 1</a>:
-<a href="#name-suitable-digest-algorithms-" class="selfRef">Suitable digest algorithms for ML-DSA</a>
+<a href="#name-suitable-digest-algorithms-" class="selfRef">Suitable Digest Algorithms for ML-DSA</a>
           </caption>
 <thead>
             <tr>
-              <th class="text-left" rowspan="1" colspan="1">Signature algorithm</th>
+              <th class="text-left" rowspan="1" colspan="1">Signature Algorithm</th>
               <th class="text-left" rowspan="1" colspan="1">Digest Algorithms</th>
             </tr>
           </thead>
@@ -1426,7 +1424,7 @@ When processing a SignerInfo signed using ML-DSA, if no signed attributes are pr
 <table class="center" id="table-2">
           <caption>
 <a href="#table-2" class="selfRef">Table 2</a>:
-<a href="#name-signature-algorithm-identif" class="selfRef">Signature algorithm identifier OIDs for ML-DSA</a>
+<a href="#name-signature-algorithm-identif" class="selfRef">Signature Algorithm Identifier OIDs for ML-DSA</a>
           </caption>
 <thead>
             <tr>
@@ -1454,7 +1452,7 @@ When processing a SignerInfo signed using ML-DSA, if no signed attributes are pr
           <dt id="section-3.3-6.1">signature:</dt>
           <dd style="margin-left: 1.5em" id="section-3.3-6.2">
             <p id="section-3.3-6.2.1">The signature field contains the signature value resulting from the use of the ML-DSA signature algorithm identified by the signatureAlgorithm field.
- The ML-DSA (pure mode) signature generation operation is specified in Section 5.2 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>, and the signature verification operation is specified in Section 5.3 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
+ The ML-DSA (pure mode) signature-generation operation is specified in Section 5.2 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>, and the signature-verification operation is specified in Section 5.3 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
  Note that <span><a href="https://rfc-editor.org/rfc/rfc5652#section-5.6" class="relref">Section 5.6</a> of [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> places further requirements on the successful verification of a signature.<a href="#section-3.3-6.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
@@ -1468,20 +1466,20 @@ When processing a SignerInfo signed using ML-DSA, if no signed attributes are pr
       <h2 id="name-security-considerations">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-4-1">The security considerations in <span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> and <span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> apply to this specification.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">The security considerations in <span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> and <span>[<a href="#RFC9881" class="cite xref">RFC9881</a>]</span> apply to this specification.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">Security of the ML-DSA private key is critical.
 Compromise of the private key will enable an adversary to forge arbitrary signatures.<a href="#section-4-2" class="pilcrow">¶</a></p>
-<p id="section-4-3">ML-DSA depends on high quality random numbers that are suitable for use in cryptography.
+<p id="section-4-3">ML-DSA depends on high-quality random numbers that are suitable for use in cryptography.
 The use of inadequate pseudo-random number generators (PRNGs) to generate such values can significantly undermine the security properties offered by a cryptographic algorithm.
-For instance, an attacker may find it much easier to reproduce the PRNG environment that produced any private keys, searching the resulting small set of possibilities, rather than brute force searching the whole key space.
+For instance, an attacker may find it much easier to reproduce the PRNG environment that produced any private keys, searching the resulting small set of possibilities, rather than brute-force searching the whole key space.
 The generation of random numbers of a sufficient level of quality for use in cryptography is difficult; see Section 3.6.1 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> for some additional information.<a href="#section-4-3" class="pilcrow">¶</a></p>
 <p id="section-4-4">By default, ML-DSA signature generation uses randomness from two sources: fresh random data generated during signature generation, and precomputed random data included in the signer's private key.
 This is referred to as the "hedged" variant of ML-DSA.
-Inclusion of both sources of random can help mitigate against faulty random number generators, side-channel attacks and fault attacks.
+Inclusion of both sources of random data can help mitigate against faulty random number generators, side-channel attacks, and fault attacks.
 <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> also permits creating deterministic signatures using just the precomputed random data in the signer's private key.
 The same verification algorithm is used to verify both hedged and deterministic signatures, so this choice does not affect interoperability.
 The signer <span class="bcp14">SHOULD NOT</span> use the deterministic variant of ML-DSA on platforms where side-channel attacks or fault attacks are a concern.
-Side channel attacks and fault attacks against ML-DSA are an active area of research <span>[<a href="#WNGD2023" class="cite xref">WNGD2023</a>]</span> <span>[<a href="#KPLG2024" class="cite xref">KPLG2024</a>]</span>.
+Side-channel attacks and fault attacks against ML-DSA are an active area of research <span>[<a href="#WNGD2023" class="cite xref">WNGD2023</a>]</span> <span>[<a href="#KPLG2024" class="cite xref">KPLG2024</a>]</span>.
 Future protection against these styles of attack may involve interoperable changes to the implementation of ML-DSA's internal functions.
 Implementers <span class="bcp14">SHOULD</span> consider implementing such protection measures if it would be beneficial for their particular use cases.<a href="#section-4-4" class="pilcrow">¶</a></p>
 <p id="section-4-5">To avoid algorithm substitution attacks, the CMSAlgorithmProtection attribute defined in <span>[<a href="#RFC6211" class="cite xref">RFC6211</a>]</span> <span class="bcp14">SHOULD</span> be included in signed attributes.<a href="#section-4-5" class="pilcrow">¶</a></p>
@@ -1492,11 +1490,11 @@ Implementers <span class="bcp14">SHOULD</span> consider implementing such protec
       <h2 id="name-operational-considerations">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
       </h2>
-<p id="section-5-1">If ML-DSA signing is implemented in a hardware device such as hardware security module (HSM) or portable cryptographic token, implementers might want to avoid sending the full content to the device for performance reasons.
-By including signed attributes, which necessarily include the message-digest attribute and the content-type attribute as described in Section 5.3 of <span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>, the much smaller set of signed attributes are sent to the device for signing.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">Additionally, the pure variant of ML-DSA does support a form of pre-hash via external calculation of the μ (mu) "message representative" value described in Section 6.2 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
+<p id="section-5-1">If ML-DSA signing is implemented in a hardware device such as a hardware security module (HSM) or a portable cryptographic token, implementers might want to avoid sending the full content to the device for performance reasons.
+By including signed attributes, which necessarily includes the message-digest attribute and the content-type attribute as described in Section 5.3 of <span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>, the much smaller set of signed attributes are sent to the device for signing.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">Additionally, the pure variant of ML-DSA does support a form of pre-hash via external calculation of the "μ" (GREEK SMALL LETTER MU, U+03BC) "message representative" value described in Section 6.2 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
 This value may "optionally be computed in a different cryptographic module" and supplied to the hardware device, rather than requiring the entire message to be transmitted.
-Appendix D of <span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> describes use of external μ calculations in further detail.<a href="#section-5-2" class="pilcrow">¶</a></p>
+Appendix D of <span>[<a href="#RFC9881" class="cite xref">RFC9881</a>]</span> describes use of external μ calculations in further detail.<a href="#section-5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1504,42 +1502,49 @@ Appendix D of <span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cit
       <h2 id="name-iana-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-6-1">For the ASN.1 module found in <a href="#asn1" class="auto internal xref">Appendix A</a>, IANA is requested to assign an object identifier for the module identifier (TBD1) with a description of "id-mod-ml-dsa-2024".
-This should be allocated in the "SMI Security for S/MIME Module Identifier" registry (1.2.840.113549.1.9.16.0).<a href="#section-6-1" class="pilcrow">¶</a></p>
-</section>
+<p id="section-6-1">For the ASN.1 module in <a href="#asn1" class="auto internal xref">Appendix A</a>, IANA has assigned the following object identifier in the "SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)" registry.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<span id="name-object-identifier-assignmen"></span><div id="tab-asn1-oid">
+<table class="center" id="table-3">
+        <caption>
+<a href="#table-3" class="selfRef">Table 3</a>:
+<a href="#name-object-identifier-assignmen" class="selfRef">Object Identifier Assignments</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">Decimal</th>
+            <th class="text-left" rowspan="1" colspan="1">Description</th>
+            <th class="text-left" rowspan="1" colspan="1">Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">83</td>
+            <td class="text-left" rowspan="1" colspan="1">id-mod-ml-dsa-2024</td>
+            <td class="text-left" rowspan="1" colspan="1">RFC 9882</td>
+          </tr>
+        </tbody>
+      </table>
 </div>
-<div id="acknowledgments">
-<section id="section-7">
-      <h2 id="name-acknowledgments">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
-      </h2>
-<p id="section-7-1">The authors would like to thank the following people for their contributions and reviews that helped shape this document: Viktor Dukhovni, Russ Housley, Panos Kampanakis, Mike Ounsworth, Falko Strenzke, Sean Turner, and Wei-Jun Wang.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">This document was heavily influenced by <span>[<a href="#RFC8419" class="cite xref">RFC8419</a>]</span>, <span>[<a href="#I-D.ietf-lamps-cms-sphincs-plus" class="cite xref">I-D.ietf-lamps-cms-sphincs-plus</a>]</span>, and <span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span>.
-Thanks go to the authors of those documents.<a href="#section-7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-8">
+<section id="section-7">
       <h2 id="name-references">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-8.1">
+<section id="section-7.1">
         <h3 id="name-normative-references">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="CSOR">[CSOR]</dt>
         <dd>
-<span class="refAuthor">NIST</span>, <span class="refTitle">"Computer Security Objects Register"</span>, <time datetime="2024-08-20" class="refDate">20 August 2024</time>, <span>&lt;<a href="https://csrc.nist.gov/projects/computer-security-objects-register/algorithm-registration">https://csrc.nist.gov/projects/computer-security-objects-register/algorithm-registration</a>&gt;</span>. </dd>
+<span class="refAuthor">NIST</span>, <span class="refTitle">"Computer Security Objects Register (CSOR)"</span>, <time datetime="2025-06-13" class="refDate">13 June 2025</time>, <span>&lt;<a href="https://csrc.nist.gov/projects/computer-security-objects-register/algorithm-registration">https://csrc.nist.gov/projects/computer-security-objects-register/algorithm-registration</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="FIPS204">[FIPS204]</dt>
         <dd>
 <span class="refTitle">"Module-lattice-based digital signature standard"</span>, <span class="refContent">National Institute of Standards and Technology (U.S.)</span>, <span class="seriesInfo">DOI 10.6028/nist.fips.204</span>, <time datetime="2024-08" class="refDate">August 2024</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.fips.204">https://doi.org/10.6028/nist.fips.204</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="I-D.ietf-lamps-dilithium-certificates">[I-D.ietf-lamps-dilithium-certificates]</dt>
-        <dd>
-<span class="refAuthor">Massimo, J.</span>, <span class="refAuthor">Kampanakis, P.</span>, <span class="refAuthor">Turner, S.</span>, and <span class="refAuthor">B. Westerbaan</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the Module-Lattice-Based Digital Signature Algorithm (ML-DSA)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-dilithium-certificates-13</span>, <time datetime="2025-09-30" class="refDate">30 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-13">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-13</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -1562,16 +1567,20 @@ Thanks go to the authors of those documents.<a href="#section-7-2" class="pilcro
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8702">[RFC8702]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Kampanakis, P.</span> and <span class="refAuthor">Q. Dang</span>, <span class="refTitle">"Use of the SHAKE One-Way Hash Functions in the Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 8702</span>, <span class="seriesInfo">DOI 10.17487/RFC8702</span>, <time datetime="2020-01" class="refDate">January 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8702">https://www.rfc-editor.org/rfc/rfc8702</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9881">[RFC9881]</dt>
+      <dd>
+<span class="refAuthor">Massimo, J.</span>, <span class="refAuthor">Kampanakis, P.</span>, <span class="refAuthor">Turner, S.</span>, and <span class="refAuthor">B. E. Westerbaan</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure -- Algorithm Identifiers for the Module-Lattice-Based Digital Signature Algorithm (ML-DSA)"</span>, <span class="seriesInfo">RFC 9881</span>, <span class="seriesInfo">DOI 10.17487/RFC9881</span>, <time datetime="2025-10" class="refDate">October 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9881">https://www.rfc-editor.org/rfc/rfc9881</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-8.2">
+<section id="section-7.2">
         <h3 id="name-informative-references">
-<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
 <dt id="FIPS180">[FIPS180]</dt>
@@ -1582,13 +1591,9 @@ Thanks go to the authors of those documents.<a href="#section-7-2" class="pilcro
         <dd>
 <span class="refTitle">"Stateless hash-based digital signature standard"</span>, <span class="refContent">National Institute of Standards and Technology (U.S.)</span>, <span class="seriesInfo">DOI 10.6028/nist.fips.205</span>, <time datetime="2024-08" class="refDate">August 2024</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.fips.205">https://doi.org/10.6028/nist.fips.205</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.ietf-lamps-cms-sphincs-plus">[I-D.ietf-lamps-cms-sphincs-plus]</dt>
-        <dd>
-<span class="refAuthor">Housley, R.</span>, <span class="refAuthor">Fluhrer, S.</span>, <span class="refAuthor">Kampanakis, P.</span>, and <span class="refAuthor">B. Westerbaan</span>, <span class="refTitle">"Use of the SLH-DSA Signature Algorithm in the Cryptographic Message Syntax (CMS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-cms-sphincs-plus-19</span>, <time datetime="2025-01-13" class="refDate">13 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-cms-sphincs-plus-19">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-cms-sphincs-plus-19</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="KPLG2024">[KPLG2024]</dt>
         <dd>
-<span class="refAuthor">Krahmer, E.</span>, <span class="refAuthor">Pessl, P.</span>, <span class="refAuthor">Land, G.</span>, and <span class="refAuthor">T. Güneysu</span>, <span class="refTitle">"Correction Fault Attacks on Randomized CRYSTALS-Dilithium"</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://ia.cr/2024/138">https://ia.cr/2024/138</a>&gt;</span>. </dd>
+<span class="refAuthor">Krahmer, E.</span>, <span class="refAuthor">Pessl, P.</span>, <span class="refAuthor">Land, G.</span>, and <span class="refAuthor">T. Güneysu</span>, <span class="refTitle">"Correction Fault Attacks on Randomized CRYSTALS-Dilithium"</span>, <span class="seriesInfo">Cryptology ePrint Archive, Paper 2024/138 </span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://ia.cr/2024/138">https://ia.cr/2024/138</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5280">[RFC5280]</dt>
         <dd>
@@ -1606,13 +1611,17 @@ Thanks go to the authors of those documents.<a href="#section-7-2" class="pilcro
         <dd>
 <span class="refAuthor">Housley, R.</span>, <span class="refTitle">"Use of Edwards-Curve Digital Signature Algorithm (EdDSA) Signatures in the Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 8419</span>, <span class="seriesInfo">DOI 10.17487/RFC8419</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8419">https://www.rfc-editor.org/rfc/rfc8419</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC9814">[RFC9814]</dt>
+        <dd>
+<span class="refAuthor">Housley, R.</span>, <span class="refAuthor">Fluhrer, S.</span>, <span class="refAuthor">Kampanakis, P.</span>, and <span class="refAuthor">B. Westerbaan</span>, <span class="refTitle">"Use of the SLH-DSA Signature Algorithm in the Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 9814</span>, <span class="seriesInfo">DOI 10.17487/RFC9814</span>, <time datetime="2025-07" class="refDate">July 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9814">https://www.rfc-editor.org/rfc/rfc9814</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="WNGD2023">[WNGD2023]</dt>
         <dd>
-<span class="refAuthor">Wang, R.</span>, <span class="refAuthor">Ngo, K.</span>, <span class="refAuthor">Gärtner, J.</span>, and <span class="refAuthor">E. Dubrova</span>, <span class="refTitle">"Single-Trace Side-Channel Attacks on CRYSTALS-Dilithium: Myth or Reality?"</span>, <time datetime="2023" class="refDate">2023</time>, <span>&lt;<a href="https://ia.cr/2023/1931">https://ia.cr/2023/1931</a>&gt;</span>. </dd>
+<span class="refAuthor">Wang, R.</span>, <span class="refAuthor">Ngo, K.</span>, <span class="refAuthor">Gärtner, J.</span>, and <span class="refAuthor">E. Dubrova</span>, <span class="refTitle">"Single-Trace Side-Channel Attacks on CRYSTALS-Dilithium: Myth or Reality?"</span>, <span class="seriesInfo">Cryptology ePrint Archive, Paper 2023/1931 </span>, <time datetime="2023" class="refDate">2023</time>, <span>&lt;<a href="https://ia.cr/2023/1931">https://ia.cr/2023/1931</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="X680">[X680]</dt>
       <dd>
-<span class="refAuthor">ITU-T</span>, <span class="refTitle">"Information Technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation. ITU-T Recommendation X.680 (2021) | ISO/IEC 8824-1:2021."</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.itu.int/rec/T-REC-X.680">https://www.itu.int/rec/T-REC-X.680</a>&gt;</span>. </dd>
+<span class="refAuthor">ITU-T</span>, <span class="refTitle">"Information technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation"</span>, <span class="seriesInfo">ITU-T Recommendation X.680</span>, <span class="seriesInfo">ISO/IEC 8824-1:2021</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.itu.int/rec/T-REC-X.680">https://www.itu.int/rec/T-REC-X.680</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1624,16 +1633,12 @@ Thanks go to the authors of those documents.<a href="#section-7-2" class="pilcro
       <h2 id="name-asn1-module">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-asn1-module" class="section-name selfRef">ASN.1 Module</a>
       </h2>
-<aside id="appendix-A-1">
-        <p id="appendix-A-1.1">RFC EDITOR: Please replace the reference to <span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span>
-in the ASN.1 module below with a reference the corresponding published RFC.<a href="#appendix-A-1.1" class="pilcrow">¶</a></p>
-</aside>
-<div class="lang-asn.1 sourcecode" id="appendix-A-2">
+<div class="lang-asn.1 sourcecode" id="appendix-A-1">
 <pre>
 &lt;CODE BEGINS&gt;
 ML-DSA-Module-2024
   { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
-    id-smime(16) id-mod(0) id-mod-ml-dsa-2024(TBD1) }
+    id-smime(16) id-mod(0) id-mod-ml-dsa-2024(83) }
 
 DEFINITIONS IMPLICIT TAGS ::= BEGIN
 
@@ -1646,7 +1651,7 @@ IMPORTS SIGNATURE-ALGORITHM, SMIME-CAPS
     id-mod-algorithmInformation-02(58) }
 
 sa-ml-dsa-44, sa-ml-dsa-65, sa-ml-dsa-87
-  FROM X509-ML-DSA-2024 -- From [I-D.ietf-lamps-dilithium-certificates]
+  FROM X509-ML-DSA-2024 -- From [RFC9881]
   { iso(1) identified-organization(3) dod(6) internet(1)
     security(5) mechanisms(5) pkix(7) id-mod(0)
     id-mod-x509-ml-dsa-2024(119) } ;
@@ -1669,7 +1674,7 @@ SMimeCaps SMIME-CAPS ::= {
 
 END
 &lt;CODE ENDS&gt;
-</pre><a href="#appendix-A-2" class="pilcrow">¶</a>
+</pre><a href="#appendix-A-1" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1679,7 +1684,7 @@ END
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
       </h2>
 <p id="appendix-B-1">This appendix contains example signed-data encodings.
-They can be verified using the example public keys and certificates specified in Appendix C of <span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+They can be verified using the example public keys and certificates specified in Appendix C of <span>[<a href="#RFC9881" class="cite xref">RFC9881</a>]</span>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-2">The following is an example of a signed-data with a single ML-DSA-44 signer, with signed attributes included:<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-B-3">
 <pre>
@@ -2502,8 +2507,18 @@ a0afc5c68052dee288a45904719cd596782a835aa64888c097466fd7a1379e3a
 </div>
 </section>
 </div>
-<div id="authors-addresses">
+<div id="acknowledgments">
 <section id="appendix-C">
+      <h2 id="name-acknowledgments">
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="appendix-C-1">The authors would like to thank the following people for their contributions and reviews that helped shape this document: Viktor Dukhovni, Russ Housley, Panos Kampanakis, Mike Ounsworth, Falko Strenzke, Sean Turner, and Wei-Jun Wang.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<p id="appendix-C-2">This document was heavily influenced by <span>[<a href="#RFC8419" class="cite xref">RFC8419</a>]</span>, <span>[<a href="#RFC9814" class="cite xref">RFC9814</a>]</span>, and <span>[<a href="#RFC9881" class="cite xref">RFC9881</a>]</span>.
+Thanks go to the authors of those documents.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-D">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>

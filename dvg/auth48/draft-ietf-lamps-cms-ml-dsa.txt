@@ -5,9 +5,9 @@
 Limited Additional Mechanisms for PKIX and SMIME               B. Salter
 Internet-Draft                                                  A. Raine
 Intended status: Standards Track       UK National Cyber Security Centre
-Expires: 5 April 2026                                       D. Van Geest
+Expires: 7 May 2026                                         D. Van Geest
                                                      CryptoNext Security
-                                                          2 October 2025
+                                                         3 November 2025
 
 
    Use of the ML-DSA Signature Algorithm in the Cryptographic Message
@@ -22,7 +22,7 @@ Abstract
    Cryptographically Relevant Quantum Computer (CRQC).  This document
    specifies the conventions for using the ML-DSA signature algorithm
    with the Cryptographic Message Syntax (CMS).  In addition, the
-   algorithm identifier and public key syntax are provided.
+   algorithm identifier syntax is provided.
 
 About This Document
 
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 April 2026.
+   This Internet-Draft will expire on 7 May 2026.
 
 Copyright Notice
 
@@ -78,35 +78,33 @@ Table of Contents
    1.  Introduction
      1.1.  Conventions and Definitions
    2.  ML-DSA Algorithm Identifiers
-   3.  Signed-data Conventions
-     3.1.  Pure mode vs pre-hash mode
-     3.2.  Signature generation and verification
-     3.3.  SignerInfo content
+   3.  Signed-Data Conventions
+     3.1.  Pure Mode Versus Pre-Hash Mode
+     3.2.  Signature Generation and Verification
+     3.3.  SignerInfo Content
    4.  Security Considerations
    5.  Operational Considerations
    6.  IANA Considerations
-   7.  Acknowledgments
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
    Appendix A.  ASN.1 Module
    Appendix B.  Examples
+   Acknowledgments
    Authors' Addresses
 
 1.  Introduction
 
    The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a
-   digital signature algorithm standardised by the US National Institute
-   of Standards and Technology (NIST) as part of their post-quantum
-   cryptography standardisation process.  It is intended to be secure
-   against both "traditional" cryptographic attacks, as well as attacks
-   utilising a quantum computer.  It offers smaller signatures and
-   significantly faster runtimes than SLH-DSA [FIPS205], an alternative
-   post-quantum signature algorithm also standardised by NIST.  This
-   document specifies the use of the ML-DSA in the CMS at three security
-   levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  See Appendix B of
-   [I-D.ietf-lamps-dilithium-certificates] for more information on the
-   security levels and key sizes of ML-DSA.
+   post-quantum digital signature algorithm standardised by the US
+   National Institute of Standards and Technology (NIST) as part of
+   their post-quantum cryptography standardisation process.  It offers
+   smaller signatures and significantly faster runtimes than SLH-DSA
+   [FIPS205], an alternative post-quantum signature algorithm also
+   standardised by NIST.  This document specifies the use of ML-DSA in
+   the CMS at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-
+   87.  See Appendix B of [RFC9881] for more information on the security
+   levels and key sizes of ML-DSA.
 
    Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
    Dilithium are not compatible.
@@ -133,10 +131,9 @@ Table of Contents
    are used to identify ML-DSA signatures in the signed-data content
    type.  They may also appear in X.509 certificates used to verify
    those signatures.  The same AlgorithmIdentifiers are used to identify
-   ML-DSA public keys and signature algorithms.
-   [I-D.ietf-lamps-dilithium-certificates] describes the use of ML-DSA
-   in X.509 certificates.  The AlgorithmIdentifier type is defined as
-   follows:
+   ML-DSA public keys and signature algorithms.  [RFC9881] describes the
+   use of ML-DSA in X.509 certificates.  The AlgorithmIdentifier type is
+   defined as follows:
 
    AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
            SEQUENCE {
@@ -176,35 +173,34 @@ Table of Contents
 
    id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
 
-3.  Signed-data Conventions
+3.  Signed-Data Conventions
 
-3.1.  Pure mode vs pre-hash mode
+3.1.  Pure Mode Versus Pre-Hash Mode
 
    [RFC5652] specifies that digital signatures for CMS are produced
-   using a digest of the message to be signed, and the signer's private
-   key.  At the time of publication of that RFC, all signature
-   algorithms supported in the CMS required a message digest to be
-   calculated externally to that algorithm, which would then be supplied
-   to the algorithm implementation when calculating and verifying
-   signatures.  Since then, EdDSA [RFC8032], SLH-DSA [FIPS205] and ML-
-   DSA have also been standardised, and these algorithms support both a
-   "pure" and "pre-hash" mode.  In the pre-hash mode, a message digest
-   (the "pre-hash") is calculated separately and supplied to the
-   signature algorithm as described above.  In the pure mode, the
-   message to be signed or verified is instead supplied directly to the
-   signature algorithm.  When EdDSA [RFC8419] and SLH-DSA
-   [I-D.ietf-lamps-cms-sphincs-plus] are used with CMS, only the pure
-   mode of those algorithms is specified.  This is because in most
-   situations, CMS signatures are computed over a set of signed
-   attributes that contain a hash of the content, rather than being
-   computed over the message content itself.  Since signed attributes
-   are typically small, use of pre-hash modes in the CMS wouldn't
-   significantly reduce the size of the data to be signed, and hence
-   offers no benefit.  This document follows that convention and does
-   not specify the use of ML-DSA's pre-hash mode ("HashML-DSA") in the
-   CMS.
+   using a digest of the message to be signed and the signer's private
+   key.  At the time RFC 5652 was published, all signature algorithms
+   supported in the CMS required a message digest to be calculated
+   externally to that algorithm, which would then be supplied to the
+   algorithm implementation when calculating and verifying signatures.
+   Since then, EdDSA [RFC8032], SLH-DSA [FIPS205] and ML-DSA have also
+   been standardised, and these algorithms support both a "pure" and
+   "pre-hash" mode.  In the pre-hash mode, a message digest (the "pre-
+   hash") is calculated separately and supplied to the signature
+   algorithm as described above.  In the pure mode, the message to be
+   signed or verified is instead supplied directly to the signature
+   algorithm.  When EdDSA [RFC8419] and SLH-DSA [RFC9814] are used with
+   CMS, only the pure mode of those algorithms is specified.  This is
+   because in most situations, CMS signatures are computed over a set of
+   signed attributes that contain a hash of the content, rather than
+   being computed over the message content itself.  Since signed
+   attributes are typically small, use of pre-hash modes in the CMS
+   wouldn't significantly reduce the size of the data to be signed, and
+   hence offers no benefit.  This document follows that convention and
+   does not specify the use of ML-DSA's pre-hash mode ("HashML-DSA") in
+   the CMS.
 
-3.2.  Signature generation and verification
+3.2.  Signature Generation and Verification
 
    [RFC5652] describes the two methods that are used to calculate and
    verify signatures in the CMS.  One method is used when signed
@@ -228,17 +224,18 @@ Table of Contents
    contained in the SignerInfo's signedAttrs field.  As described in
    Section 5.4 of [RFC5652], this encoding includes the tag and length
    octets, but an EXPLICIT SET OF tag is used rather than the IMPLICIT
-   [0] tag that appears in the final message.  The signedAttrs field
-   MUST at minimum include a content-type attribute and a message-digest
-   attribute.  The message-digest attribute contains a hash of the
-   content of the signed-data, where the content is as described for the
-   absent signed attributes case above.  Recalculation of the hash value
-   by the recipient is an important step in signature verification.
+   [0] tag that appears in the final message.  At a minimum, the
+   signedAttrs field MUST include a content-type attribute and a
+   message-digest attribute.  The message-digest attribute contains a
+   hash of the content of the signed-data, where the content is as
+   described for the absent signed attributes case above.  Recalculation
+   of the hash value by the recipient is an important step in signature
+   verification.
 
-   Section 4 of [I-D.ietf-lamps-cms-sphincs-plus] describes how, when
-   the content of a signed-data is large, performance may be improved by
-   including signed attributes.  This is as true for ML-DSA as it is for
-   SLH-DSA, although ML-DSA signature generation and verification is
+   Section 4 of [RFC9814] describes how, when the content of a signed-
+   data is large, performance may be improved by including signed
+   attributes.  This is as true for ML-DSA as it is for SLH-DSA,
+   although ML-DSA signature generation and verification is
    significantly faster than SLH-DSA.
 
    ML-DSA has a context string input that can be used to ensure that
@@ -246,28 +243,29 @@ Table of Contents
    contexts.  When using ML-DSA as specified in this document, the
    context string is set to the empty string.
 
-3.3.  SignerInfo content
+3.3.  SignerInfo Content
 
    When using ML-DSA, the fields of a SignerInfo are used as follows:
 
    digestAlgorithm:  Per Section 5.3 of [RFC5652], the digestAlgorithm
-      field identifies the message digest algorithm used by the signer,
+      field identifies the message digest algorithm used by the signer
       and any associated parameters.  Each ML-DSA parameter set has a
-      collision strength parameter, represented by the λ (lambda) symbol
-      in [FIPS204].  When signers utilise signed attributes, their
-      choice of digest algorithm may impact the overall security level
-      of their signature.  Selecting a digest algorithm that offers λ
-      bits of security strength against second preimage attacks and
-      collision attacks is sufficient to meet the security level offered
-      by a given parameter set, so long as the digest algorithm produces
-      at least 2 * λ bits of output.  The overall security strength
-      offered by an ML-DSA signature calculated over signed attributes
-      is the floor of the digest algorithm's strength and the strength
-      of the ML-DSA parameter set.  Verifiers MAY reject a signature if
-      the signer's choice of digest algorithm does not meet the security
-      requirements of their choice of ML-DSA parameter set.  Table 1
-      shows appropriate SHA-2 and SHA-3 digest algorithms for each
-      parameter set.
+      collision strength parameter, represented by the "λ" (GREEK SMALL
+      LETTER LAMDA, U+03BB) symbol in [FIPS204].  When signers utilise
+      signed attributes, their choice of digest algorithm may impact the
+      overall security level of their signature.  Selecting a digest
+      algorithm that offers λ bits of security strength against second
+      preimage attacks and collision attacks is sufficient to meet the
+      security level offered by a given parameter set, so long as the
+      digest algorithm produces at least 2 * λ bits of output.  The
+      overall security strength offered by an ML-DSA signature
+      calculated over signed attributes is constrained by either the
+      digest algorithm's strength or the strength of the ML-DSA
+      parameter set, whichever is lower.  Verifiers MAY reject a
+      signature if the signer's choice of digest algorithm does not meet
+      the security requirements of their choice of ML-DSA parameter set.
+      Table 1 shows appropriate SHA-2 and SHA-3 digest algorithms for
+      each parameter set.
 
       SHA-512 [FIPS180] MUST be supported for use with the variants of
       ML-DSA in this document.  SHA-512 is suitable for all ML-DSA
@@ -295,7 +293,7 @@ Table of Contents
       the digestAlgorithm field.
 
      +=====================+========================================+
-     | Signature algorithm | Digest Algorithms                      |
+     | Signature Algorithm | Digest Algorithms                      |
      +=====================+========================================+
      | ML-DSA-44           | SHA-256, SHA-384, SHA-512, SHA3-256,   |
      |                     | SHA3-384, SHA3-512, SHAKE128, SHAKE256 |
@@ -306,7 +304,7 @@ Table of Contents
      | ML-DSA-87           | SHA-512, SHA3-512, SHAKE256            |
      +---------------------+----------------------------------------+
 
-              Table 1: Suitable digest algorithms for ML-DSA
+              Table 1: Suitable Digest Algorithms for ML-DSA
 
    signatureAlgorithm:  The signatureAlgorithm field MUST contain one of
       the ML-DSA signature algorithm OIDs, and the parameters field MUST
@@ -323,34 +321,34 @@ Table of Contents
             | ML-DSA-87           | id-ml-dsa-87             |
             +---------------------+--------------------------+
 
-               Table 2: Signature algorithm identifier OIDs
+               Table 2: Signature Algorithm Identifier OIDs
                                 for ML-DSA
 
    signature:  The signature field contains the signature value
       resulting from the use of the ML-DSA signature algorithm
       identified by the signatureAlgorithm field.  The ML-DSA (pure
-      mode) signature generation operation is specified in Section 5.2
-      of [FIPS204], and the signature verification operation is
+      mode) signature-generation operation is specified in Section 5.2
+      of [FIPS204], and the signature-verification operation is
       specified in Section 5.3 of [FIPS204].  Note that Section 5.6 of
       [RFC5652] places further requirements on the successful
       verification of a signature.
 
 4.  Security Considerations
 
-   The security considerations in [RFC5652] and
-   [I-D.ietf-lamps-dilithium-certificates] apply to this specification.
+   The security considerations in [RFC5652] and [RFC9881] apply to this
+   specification.
 
    Security of the ML-DSA private key is critical.  Compromise of the
    private key will enable an adversary to forge arbitrary signatures.
 
-   ML-DSA depends on high quality random numbers that are suitable for
+   ML-DSA depends on high-quality random numbers that are suitable for
    use in cryptography.  The use of inadequate pseudo-random number
    generators (PRNGs) to generate such values can significantly
    undermine the security properties offered by a cryptographic
    algorithm.  For instance, an attacker may find it much easier to
    reproduce the PRNG environment that produced any private keys,
-   searching the resulting small set of possibilities, rather than brute
-   force searching the whole key space.  The generation of random
+   searching the resulting small set of possibilities, rather than
+   brute-force searching the whole key space.  The generation of random
    numbers of a sufficient level of quality for use in cryptography is
    difficult; see Section 3.6.1 of [FIPS204] for some additional
    information.
@@ -359,14 +357,14 @@ Table of Contents
    sources: fresh random data generated during signature generation, and
    precomputed random data included in the signer's private key.  This
    is referred to as the "hedged" variant of ML-DSA.  Inclusion of both
-   sources of random can help mitigate against faulty random number
-   generators, side-channel attacks and fault attacks.  [FIPS204] also
+   sources of random data can help mitigate against faulty random number
+   generators, side-channel attacks, and fault attacks.  [FIPS204] also
    permits creating deterministic signatures using just the precomputed
    random data in the signer's private key.  The same verification
    algorithm is used to verify both hedged and deterministic signatures,
    so this choice does not affect interoperability.  The signer SHOULD
    NOT use the deterministic variant of ML-DSA on platforms where side-
-   channel attacks or fault attacks are a concern.  Side channel attacks
+   channel attacks or fault attacks are a concern.  Side-channel attacks
    and fault attacks against ML-DSA are an active area of research
    [WNGD2023] [KPLG2024].  Future protection against these styles of
    attack may involve interoperable changes to the implementation of ML-
@@ -380,65 +378,49 @@ Table of Contents
 
 5.  Operational Considerations
 
-   If ML-DSA signing is implemented in a hardware device such as
-   hardware security module (HSM) or portable cryptographic token,
+   If ML-DSA signing is implemented in a hardware device such as a
+   hardware security module (HSM) or a portable cryptographic token,
    implementers might want to avoid sending the full content to the
    device for performance reasons.  By including signed attributes,
-   which necessarily include the message-digest attribute and the
+   which necessarily includes the message-digest attribute and the
    content-type attribute as described in Section 5.3 of [RFC5652], the
    much smaller set of signed attributes are sent to the device for
    signing.
 
    Additionally, the pure variant of ML-DSA does support a form of pre-
-   hash via external calculation of the μ (mu) "message representative"
-   value described in Section 6.2 of [FIPS204].  This value may
-   "optionally be computed in a different cryptographic module" and
-   supplied to the hardware device, rather than requiring the entire
-   message to be transmitted.  Appendix D of
-   [I-D.ietf-lamps-dilithium-certificates] describes use of external μ
-   calculations in further detail.
+   hash via external calculation of the "μ" (GREEK SMALL LETTER MU,
+   U+03BC) "message representative" value described in Section 6.2 of
+   [FIPS204].  This value may "optionally be computed in a different
+   cryptographic module" and supplied to the hardware device, rather
+   than requiring the entire message to be transmitted.  Appendix D of
+   [RFC9881] describes use of external μ calculations in further detail.
 
 6.  IANA Considerations
 
-   For the ASN.1 module found in Appendix A, IANA is requested to assign
-   an object identifier for the module identifier (TBD1) with a
-   description of "id-mod-ml-dsa-2024".  This should be allocated in the
-   "SMI Security for S/MIME Module Identifier" registry
-   (1.2.840.113549.1.9.16.0).
+   For the ASN.1 module in Appendix A, IANA has assigned the following
+   object identifier in the "SMI Security for S/MIME Module Identifier
+   (1.2.840.113549.1.9.16.0)" registry.
 
-7.  Acknowledgments
+               +=========+====================+===========+
+               | Decimal | Description        | Reference |
+               +=========+====================+===========+
+               | 83      | id-mod-ml-dsa-2024 | RFC 9882  |
+               +---------+--------------------+-----------+
 
-   The authors would like to thank the following people for their
-   contributions and reviews that helped shape this document: Viktor
-   Dukhovni, Russ Housley, Panos Kampanakis, Mike Ounsworth, Falko
-   Strenzke, Sean Turner, and Wei-Jun Wang.
+                  Table 3: Object Identifier Assignments
 
-   This document was heavily influenced by [RFC8419],
-   [I-D.ietf-lamps-cms-sphincs-plus], and
-   [I-D.ietf-lamps-dilithium-certificates].  Thanks go to the authors of
-   those documents.
+7.  References
 
-8.  References
+7.1.  Normative References
 
-8.1.  Normative References
-
-   [CSOR]     NIST, "Computer Security Objects Register", 20 August
-              2024, <https://csrc.nist.gov/projects/computer-security-
+   [CSOR]     NIST, "Computer Security Objects Register (CSOR)", 13 June
+              2025, <https://csrc.nist.gov/projects/computer-security-
               objects-register/algorithm-registration>.
 
    [FIPS204]  "Module-lattice-based digital signature standard",
               National Institute of Standards and Technology (U.S.),
               DOI 10.6028/nist.fips.204, August 2024,
               <https://doi.org/10.6028/nist.fips.204>.
-
-   [I-D.ietf-lamps-dilithium-certificates]
-              Massimo, J., Kampanakis, P., Turner, S., and B.
-              Westerbaan, "Internet X.509 Public Key Infrastructure -
-              Algorithm Identifiers for the Module-Lattice-Based Digital
-              Signature Algorithm (ML-DSA)", Work in Progress, Internet-
-              Draft, draft-ietf-lamps-dilithium-certificates-13, 30
-              September 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-lamps-dilithium-certificates-13>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -467,7 +449,14 @@ Table of Contents
               RFC 8702, DOI 10.17487/RFC8702, January 2020,
               <https://www.rfc-editor.org/rfc/rfc8702>.
 
-8.2.  Informative References
+   [RFC9881]  Massimo, J., Kampanakis, P., Turner, S., and B. E.
+              Westerbaan, "Internet X.509 Public Key Infrastructure --
+              Algorithm Identifiers for the Module-Lattice-Based Digital
+              Signature Algorithm (ML-DSA)", RFC 9881,
+              DOI 10.17487/RFC9881, October 2025,
+              <https://www.rfc-editor.org/rfc/rfc9881>.
+
+7.2.  Informative References
 
    [FIPS180]  "Secure hash standard", National Institute of Standards
               and Technology (U.S.), DOI 10.6028/nist.fips.180-4, 2015,
@@ -478,17 +467,10 @@ Table of Contents
               DOI 10.6028/nist.fips.205, August 2024,
               <https://doi.org/10.6028/nist.fips.205>.
 
-   [I-D.ietf-lamps-cms-sphincs-plus]
-              Housley, R., Fluhrer, S., Kampanakis, P., and B.
-              Westerbaan, "Use of the SLH-DSA Signature Algorithm in the
-              Cryptographic Message Syntax (CMS)", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-cms-sphincs-plus-19, 13
-              January 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-lamps-cms-sphincs-plus-19>.
-
    [KPLG2024] Krahmer, E., Pessl, P., Land, G., and T. Güneysu,
               "Correction Fault Attacks on Randomized CRYSTALS-
-              Dilithium", 2024, <https://ia.cr/2024/138>.
+              Dilithium", Cryptology ePrint Archive, Paper 2024/138 ,
+              2024, <https://ia.cr/2024/138>.
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
@@ -511,25 +493,28 @@ Table of Contents
               Syntax (CMS)", RFC 8419, DOI 10.17487/RFC8419, August
               2018, <https://www.rfc-editor.org/rfc/rfc8419>.
 
+   [RFC9814]  Housley, R., Fluhrer, S., Kampanakis, P., and B.
+              Westerbaan, "Use of the SLH-DSA Signature Algorithm in the
+              Cryptographic Message Syntax (CMS)", RFC 9814,
+              DOI 10.17487/RFC9814, July 2025,
+              <https://www.rfc-editor.org/rfc/rfc9814>.
+
    [WNGD2023] Wang, R., Ngo, K., Gärtner, J., and E. Dubrova, "Single-
               Trace Side-Channel Attacks on CRYSTALS-Dilithium: Myth or
-              Reality?", 2023, <https://ia.cr/2023/1931>.
+              Reality?", Cryptology ePrint Archive, Paper 2023/1931 ,
+              2023, <https://ia.cr/2023/1931>.
 
-   [X680]     ITU-T, "Information Technology - Abstract Syntax Notation
-              One (ASN.1): Specification of basic notation. ITU-T
-              Recommendation X.680 (2021) | ISO/IEC 8824-1:2021.",
-              February 2021, <https://www.itu.int/rec/T-REC-X.680>.
+   [X680]     ITU-T, "Information technology - Abstract Syntax Notation
+              One (ASN.1): Specification of basic notation", ITU-T
+              Recommendation X.680, ISO/IEC 8824-1:2021, February 2021,
+              <https://www.itu.int/rec/T-REC-X.680>.
 
 Appendix A.  ASN.1 Module
-
-      |  RFC EDITOR: Please replace the reference to
-      |  [I-D.ietf-lamps-dilithium-certificates] in the ASN.1 module
-      |  below with a reference the corresponding published RFC.
 
    <CODE BEGINS>
    ML-DSA-Module-2024
      { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
-       id-smime(16) id-mod(0) id-mod-ml-dsa-2024(TBD1) }
+       id-smime(16) id-mod(0) id-mod-ml-dsa-2024(83) }
 
    DEFINITIONS IMPLICIT TAGS ::= BEGIN
 
@@ -542,7 +527,7 @@ Appendix A.  ASN.1 Module
        id-mod-algorithmInformation-02(58) }
 
    sa-ml-dsa-44, sa-ml-dsa-65, sa-ml-dsa-87
-     FROM X509-ML-DSA-2024 -- From [I-D.ietf-lamps-dilithium-certificates]
+     FROM X509-ML-DSA-2024 -- From [RFC9881]
      { iso(1) identified-organization(3) dod(6) internet(1)
        security(5) mechanisms(5) pkix(7) id-mod(0)
        id-mod-x509-ml-dsa-2024(119) } ;
@@ -570,7 +555,7 @@ Appendix B.  Examples
 
    This appendix contains example signed-data encodings.  They can be
    verified using the example public keys and certificates specified in
-   Appendix C of [I-D.ietf-lamps-dilithium-certificates].
+   Appendix C of [RFC9881].
 
    The following is an example of a signed-data with a single ML-DSA-44
    signer, with signed attributes included:
@@ -1379,6 +1364,16 @@ Appendix B.  Examples
        }
      }
    }
+
+Acknowledgments
+
+   The authors would like to thank the following people for their
+   contributions and reviews that helped shape this document: Viktor
+   Dukhovni, Russ Housley, Panos Kampanakis, Mike Ounsworth, Falko
+   Strenzke, Sean Turner, and Wei-Jun Wang.
+
+   This document was heavily influenced by [RFC8419], [RFC9814], and
+   [RFC9881].  Thanks go to the authors of those documents.
 
 Authors' Addresses
 
